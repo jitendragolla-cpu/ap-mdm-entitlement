@@ -2,1342 +2,850 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>AP SCM MDM School Entitlement Checker</title>
 
 <style>
+*{box-sizing:border-box}
 
-/* =========================================================
-   BASIC
-========================================================= */
-
-* {
-    box-sizing: border-box;
+body{
+margin:0;
+padding:20px 10px;
+background:#f4f7fb;
+font-family:Arial,Helvetica,sans-serif;
+color:#222
 }
 
-body {
-    margin: 0;
-    padding: 20px 10px;
-    background: #f4f7fb;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #222;
+.scm-wrapper{
+width:100%;
+max-width:520px;
+margin:0 auto
 }
 
-
-/* =========================================================
-   MAIN CONTAINER
-========================================================= */
-
-.scm-wrapper {
-    width: 100%;
-    max-width: 520px;
-    margin: 0 auto;
+.scm-header{
+background:linear-gradient(135deg,#1746d1,#2878ff,#00a6ff);
+border-radius:14px 14px 0 0;
+padding:16px 14px;
+text-align:center;
+color:white;
+box-shadow:0 4px 12px rgba(0,0,0,.12)
 }
 
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-.scm-header {
-    background: linear-gradient(
-        135deg,
-        #1746d1,
-        #2878ff,
-        #00a6ff
-    );
-
-    border-radius: 14px 14px 0 0;
-    padding: 16px 14px;
-    text-align: center;
-    color: white;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+.scm-header h1{
+margin:0;
+font-size:20px;
+font-weight:800
 }
 
-.scm-header h1 {
-    margin: 0;
-    font-size: 20px;
-    font-weight: 800;
+.scm-header p{
+margin:5px 0 0;
+font-size:12px;
+opacity:.95
 }
 
-.scm-header p {
-    margin: 5px 0 0;
-    font-size: 12px;
-    opacity: 0.95;
+.scm-search-card{
+background:white;
+padding:16px;
+border-radius:0 0 14px 14px;
+box-shadow:0 4px 15px rgba(0,0,0,.08)
 }
 
-
-/* =========================================================
-   SEARCH CARD
-========================================================= */
-
-.scm-search-card {
-    background: white;
-    padding: 16px;
-    border-radius: 0 0 14px 14px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+.scm-label{
+display:block;
+margin-bottom:5px;
+font-size:12px;
+font-weight:700;
+color:#333
 }
 
-
-/* =========================================================
-   LABELS
-========================================================= */
-
-.scm-label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 12px;
-    font-weight: 700;
-    color: #333;
+.scm-input{
+width:100%;
+height:42px;
+border:2px solid #dce3ef;
+border-radius:8px;
+padding:0 12px;
+font-size:14px;
+outline:none
 }
 
-
-/* =========================================================
-   INPUT
-========================================================= */
-
-.scm-input {
-    width: 100%;
-    height: 42px;
-    border: 2px solid #dce3ef;
-    border-radius: 8px;
-    padding: 0 12px;
-    font-size: 14px;
-    outline: none;
-    transition: 0.2s;
+.scm-input:focus{
+border-color:#2878ff;
+box-shadow:0 0 0 3px rgba(40,120,255,.1)
 }
 
-.scm-input:focus {
-    border-color: #2878ff;
-    box-shadow: 0 0 0 3px rgba(40,120,255,0.10);
+.scm-row{
+display:flex;
+gap:10px;
+margin-top:12px
 }
 
+.scm-col{flex:1}
 
-/* =========================================================
-   MONTH YEAR
-========================================================= */
-
-.scm-row {
-    display: flex;
-    gap: 10px;
-    margin-top: 12px;
+.scm-select{
+width:100%;
+height:40px;
+border:2px solid #dce3ef;
+border-radius:8px;
+padding:0 10px;
+font-size:13px;
+background:white;
+outline:none
 }
 
-.scm-col {
-    flex: 1;
+.scm-search-btn{
+width:100%;
+height:43px;
+margin-top:14px;
+border:none;
+border-radius:8px;
+background:linear-gradient(90deg,#ff1744,#ff8a00,#00b84a,#087cff,#8e24aa);
+background-size:300% 100%;
+color:white;
+font-size:14px;
+font-weight:800;
+cursor:pointer;
+animation:rgbMove 5s linear infinite;
+box-shadow:0 4px 10px rgba(0,0,0,.15)
 }
 
-.scm-select {
-    width: 100%;
-    height: 40px;
-    border: 2px solid #dce3ef;
-    border-radius: 8px;
-    padding: 0 10px;
-    font-size: 13px;
-    background: white;
-    outline: none;
+.scm-search-btn:disabled{
+opacity:.6;
+cursor:not-allowed
 }
 
-
-/* =========================================================
-   SEARCH BUTTON
-========================================================= */
-
-.scm-search-btn {
-    width: 100%;
-    height: 43px;
-    margin-top: 14px;
-
-    border: none;
-    border-radius: 8px;
-
-    background: linear-gradient(
-        90deg,
-        #ff1744,
-        #ff8a00,
-        #00b84a,
-        #087cff,
-        #8e24aa
-    );
-
-    background-size: 300% 100%;
-
-    color: white;
-    font-size: 14px;
-    font-weight: 800;
-
-    cursor: pointer;
-
-    animation: rgbMove 5s linear infinite;
-
-    box-shadow:
-        0 4px 10px rgba(0,0,0,0.15);
+@keyframes rgbMove{
+0%{background-position:0 50%}
+50%{background-position:100% 50%}
+100%{background-position:0 50%}
 }
 
-.scm-search-btn:hover {
-    transform: translateY(-1px);
+.scm-loading{
+display:none;
+text-align:center;
+padding:14px 5px;
+font-size:13px;
+font-weight:700;
+color:#2878ff
 }
 
-.scm-search-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+.scm-spinner{
+display:inline-block;
+width:15px;
+height:15px;
+border:2px solid #d8e3ff;
+border-top-color:#2878ff;
+border-radius:50%;
+animation:spin .7s linear infinite;
+vertical-align:-3px;
+margin-right:5px
 }
 
-
-@keyframes rgbMove {
-
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
+@keyframes spin{
+to{transform:rotate(360deg)}
 }
 
-
-/* =========================================================
-   LOADING
-========================================================= */
-
-.scm-loading {
-    display: none;
-    text-align: center;
-    padding: 14px 5px;
-    font-size: 13px;
-    font-weight: 700;
-    color: #2878ff;
+.scm-error{
+display:none;
+margin-top:12px;
+padding:11px;
+background:#fff1f1;
+border:1px solid #ffb4b4;
+border-left:4px solid #ef233c;
+border-radius:7px;
+color:#c1121f;
+font-size:12px;
+line-height:1.5
 }
 
-.scm-spinner {
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-
-    border: 2px solid #d8e3ff;
-    border-top-color: #2878ff;
-
-    border-radius: 50%;
-
-    animation: spin 0.7s linear infinite;
-
-    vertical-align: -3px;
-    margin-right: 5px;
+.scm-result{
+display:none;
+margin-top:14px;
+background:white;
+border-radius:14px;
+overflow:hidden;
+box-shadow:0 5px 18px rgba(0,0,0,.1)
 }
 
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+.result-header{
+background:linear-gradient(135deg,#087f23,#00a83b,#00b86b);
+color:white;
+padding:13px 14px;
+text-align:center
 }
 
-
-/* =========================================================
-   ERROR
-========================================================= */
-
-.scm-error {
-    display: none;
-
-    margin-top: 12px;
-    padding: 11px;
-
-    background: #fff1f1;
-    border: 1px solid #ffb4b4;
-    border-left: 4px solid #ef233c;
-
-    border-radius: 7px;
-
-    color: #c1121f;
-    font-size: 12px;
-    line-height: 1.5;
+.result-header .success{
+font-size:11px;
+font-weight:700;
+letter-spacing:.5px
 }
 
-
-/* =========================================================
-   RESULT
-========================================================= */
-
-.scm-result {
-    display: none;
-
-    margin-top: 14px;
-
-    background: white;
-
-    border-radius: 14px;
-
-    overflow: hidden;
-
-    box-shadow:
-        0 5px 18px rgba(0,0,0,0.10);
+.result-header h2{
+margin:3px 0 0;
+font-size:18px
 }
 
-
-/* =========================================================
-   RESULT HEADER
-========================================================= */
-
-.result-header {
-    background: linear-gradient(
-        135deg,
-        #087f23,
-        #00a83b,
-        #00b86b
-    );
-
-    color: white;
-
-    padding: 13px 14px;
-
-    text-align: center;
+.school-info{
+padding:12px 14px 5px
 }
 
-.result-header .success {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
+.info-line{
+display:flex;
+justify-content:space-between;
+gap:10px;
+padding:6px 0;
+border-bottom:1px solid #edf0f5;
+font-size:12px
 }
 
-.result-header h2 {
-    margin: 3px 0 0;
-    font-size: 18px;
+.info-line:last-child{
+border-bottom:none
 }
 
-
-/* =========================================================
-   SCHOOL INFORMATION
-========================================================= */
-
-.school-info {
-    padding: 12px 14px 5px;
+.info-label{
+color:#6b7280;
+font-weight:600
 }
 
-.info-line {
-    display: flex;
-    justify-content: space-between;
-
-    gap: 10px;
-
-    padding: 6px 0;
-
-    border-bottom: 1px solid #edf0f5;
-
-    font-size: 12px;
+.info-value{
+color:#172033;
+font-weight:700;
+text-align:right
 }
 
-.info-line:last-child {
-    border-bottom: none;
+.commodities{
+padding:10px 12px 4px
 }
 
-.info-label {
-    color: #6b7280;
-    font-weight: 600;
+.commodity{
+display:flex;
+align-items:center;
+min-height:62px;
+margin-bottom:9px;
+border-radius:10px;
+overflow:hidden;
+border:1px solid #e7eaf0
 }
 
-.info-value {
-    color: #172033;
-    font-weight: 700;
-    text-align: right;
+.commodity-icon{
+width:56px;
+min-width:56px;
+align-self:stretch;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
+background:#f2f5ff
 }
 
-
-/* =========================================================
-   COMMODITIES
-========================================================= */
-
-.commodities {
-    padding: 10px 12px 4px;
+.commodity-content{
+flex:1;
+padding:8px 10px
 }
 
-.commodity {
-    display: flex;
-    align-items: center;
-
-    min-height: 62px;
-
-    margin-bottom: 9px;
-
-    border-radius: 10px;
-
-    overflow: hidden;
-
-    border: 1px solid #e7eaf0;
+.commodity-title{
+font-size:12px;
+color:#596273;
+font-weight:700
 }
 
-.commodity-icon {
-    width: 56px;
-    min-width: 56px;
-
-    align-self: stretch;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 24px;
-
-    background: #f2f5ff;
+.commodity-value{
+margin-top:2px;
+font-size:18px;
+font-weight:900
 }
 
-.commodity-content {
-    flex: 1;
-    padding: 8px 10px;
+.commodity-sub{
+font-size:10px;
+color:#777
 }
 
-.commodity-title {
-    font-size: 12px;
-    color: #596273;
-    font-weight: 700;
+.rice{
+border-left:4px solid #1687ff
 }
 
-.commodity-value {
-    margin-top: 2px;
-
-    font-size: 18px;
-    font-weight: 900;
+.rice .commodity-icon{
+background:#eaf5ff
 }
 
-.commodity-sub {
-    font-size: 10px;
-    color: #777;
+.rice .commodity-value{
+color:#0878e8
 }
 
-
-/* Rice */
-
-.rice {
-    border-left: 4px solid #1687ff;
+.jaggery{
+border-left:4px solid #ff9f00
 }
 
-.rice .commodity-icon {
-    background: #eaf5ff;
+.jaggery .commodity-icon{
+background:#fff6df
 }
 
-.rice .commodity-value {
-    color: #0878e8;
+.jaggery .commodity-value{
+color:#e78600
 }
 
-
-/* Jaggery */
-
-.jaggery {
-    border-left: 4px solid #ff9f00;
+.ragi{
+border-left:4px solid #9b51e0
 }
 
-.jaggery .commodity-icon {
-    background: #fff6df;
+.ragi .commodity-icon{
+background:#f6edff
 }
 
-.jaggery .commodity-value {
-    color: #e78600;
+.ragi .commodity-value{
+color:#8b3fd0
 }
 
-
-/* Ragi */
-
-.ragi {
-    border-left: 4px solid #9b51e0;
+.result-buttons{
+display:flex;
+gap:8px;
+padding:8px 12px 13px
 }
 
-.ragi .commodity-icon {
-    background: #f6edff;
+.small-btn{
+flex:1;
+height:36px;
+border:none;
+border-radius:7px;
+font-size:11px;
+font-weight:800;
+cursor:pointer
 }
 
-.ragi .commodity-value {
-    color: #8b3fd0;
+.print-btn{
+background:#172033;
+color:white
 }
 
-
-/* =========================================================
-   BUTTONS
-========================================================= */
-
-.result-buttons {
-    display: flex;
-    gap: 8px;
-
-    padding: 8px 12px 13px;
+.another-btn{
+background:#eaf1ff;
+color:#1757d8
 }
 
-.small-btn {
-    flex: 1;
-
-    height: 36px;
-
-    border: none;
-
-    border-radius: 7px;
-
-    font-size: 11px;
-    font-weight: 800;
-
-    cursor: pointer;
+.disclaimer{
+margin:0 12px 13px;
+padding:9px;
+background:#f8f9fb;
+border:1px solid #e2e6ed;
+border-radius:7px;
+font-size:9px;
+line-height:1.45;
+color:#6b7280;
+text-align:center
 }
 
-.print-btn {
-    background: #172033;
-    color: white;
+.scm-footer{
+text-align:center;
+margin-top:8px;
+font-size:10px;
+color:#7b8494
 }
 
-.another-btn {
-    background: #eaf1ff;
-    color: #1757d8;
+@media(max-width:480px){
+body{padding:10px 7px}
+.scm-wrapper{max-width:100%}
+.scm-header h1{font-size:18px}
+.scm-search-card{padding:13px}
+.commodity-value{font-size:17px}
 }
 
-
-/* =========================================================
-   DISCLAIMER
-========================================================= */
-
-.disclaimer {
-    margin: 0 12px 13px;
-
-    padding: 9px;
-
-    background: #f8f9fb;
-
-    border: 1px solid #e2e6ed;
-
-    border-radius: 7px;
-
-    font-size: 9px;
-
-    line-height: 1.45;
-
-    color: #6b7280;
-
-    text-align: center;
+@media print{
+body{
+background:white;
+padding:0
 }
 
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-.scm-footer {
-    text-align: center;
-
-    margin-top: 8px;
-
-    font-size: 10px;
-
-    color: #7b8494;
+.scm-search-card,
+.scm-footer,
+.result-buttons{
+display:none!important
 }
 
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 480px) {
-
-    body {
-        padding: 10px 7px;
-    }
-
-    .scm-wrapper {
-        max-width: 100%;
-    }
-
-    .scm-header h1 {
-        font-size: 18px;
-    }
-
-    .scm-search-card {
-        padding: 13px;
-    }
-
-    .commodity-value {
-        font-size: 17px;
-    }
+.scm-wrapper{
+max-width:600px
 }
 
-
-/* =========================================================
-   PRINT
-========================================================= */
-
-@media print {
-
-    body {
-        background: white;
-        padding: 0;
-    }
-
-    .scm-search-card,
-    .scm-footer,
-    .result-buttons {
-        display: none !important;
-    }
-
-    .scm-wrapper {
-        max-width: 600px;
-    }
-
-    .scm-result {
-        display: block !important;
-        box-shadow: none;
-        border: 1px solid #ddd;
-    }
-
-    .disclaimer {
-        font-size: 9px;
-    }
-
+.scm-result{
+display:block!important;
+box-shadow:none;
+border:1px solid #ddd
+}
 }
 
-
-/* =========================================================
-   DESKTOP COMPACT WIDTH
-========================================================= */
-
-@media (min-width: 700px) {
-
-    .scm-wrapper {
-        max-width: 500px;
-    }
-
+@media(min-width:700px){
+.scm-wrapper{
+max-width:500px
 }
-
+}
 </style>
 </head>
 
-
 <body>
-
 
 <div class="scm-wrapper">
 
-
-    <!-- HEADER -->
-
-    <div class="scm-header">
-
-        <h1>AP SCM MDM School Checker</h1>
-
-        <p>
-            School-wise MDM entitlement details
-        </p>
-
-    </div>
-
-
-    <!-- SEARCH -->
-
-    <div class="scm-search-card">
-
-        <label class="scm-label">
-            Enter School UDISE Code
-        </label>
-
-        <input
-            type="text"
-            id="schoolCode"
-            class="scm-input"
-            placeholder="Example: 28152100403"
-            maxlength="20"
-            inputmode="numeric"
-        >
-
-
-        <div class="scm-row">
-
-            <div class="scm-col">
-
-                <label class="scm-label">
-                    Month
-                </label>
-
-                <select
-                    id="month"
-                    class="scm-select"
-                >
-
-                    <option value="1">January</option>
-                    <option value="2">February</option>
-                    <option value="3">March</option>
-                    <option value="4">April</option>
-                    <option value="5">May</option>
-                    <option value="6">June</option>
-                    <option value="7">July</option>
-                    <option value="8" selected>August</option>
-                    <option value="9">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
-
-                </select>
-
-            </div>
-
-
-            <div class="scm-col">
-
-                <label class="scm-label">
-                    Year
-                </label>
-
-                <select
-                    id="year"
-                    class="scm-select"
-                >
-
-                    <option value="2026" selected>
-                        2026
-                    </option>
-
-                    <option value="2025">
-                        2025
-                    </option>
-
-                    <option value="2027">
-                        2027
-                    </option>
-
-                </select>
-
-            </div>
-
-        </div>
-
-
-        <button
-            id="searchBtn"
-            class="scm-search-btn"
-            onclick="searchSchool()"
-        >
-            🔍 CHECK SCHOOL
-        </button>
-
-
-        <div
-            id="loading"
-            class="scm-loading"
-        >
-            <span class="scm-spinner"></span>
-            Reading official SCM data...
-        </div>
-
-
-        <div
-            id="error"
-            class="scm-error"
-        ></div>
-
-    </div>
-
-
-    <!-- RESULT -->
-
-    <div
-        id="result"
-        class="scm-result"
-    >
-
-        <div class="result-header">
-
-            <div class="success">
-                ✓ OFFICIAL SCM DATA FOUND
-            </div>
-
-            <h2 id="resultSchoolName">
-                -
-            </h2>
-
-        </div>
-
-
-        <div class="school-info">
-
-            <div class="info-line">
-
-                <span class="info-label">
-                    School Code
-                </span>
-
-                <span
-                    class="info-value"
-                    id="resultSchoolCode"
-                >
-                    -
-                </span>
-
-            </div>
-
-
-            <div class="info-line">
-
-                <span class="info-label">
-                    District
-                </span>
-
-                <span
-                    class="info-value"
-                    id="resultDistrict"
-                >
-                    -
-                </span>
-
-            </div>
-
-
-            <div class="info-line">
-
-                <span class="info-label">
-                    Depot
-                </span>
-
-                <span
-                    class="info-value"
-                    id="resultDepot"
-                >
-                    -
-                </span>
-
-            </div>
-
-
-            <div class="info-line">
-
-                <span class="info-label">
-                    Month / Year
-                </span>
-
-                <span
-                    class="info-value"
-                    id="resultMonth"
-                >
-                    -
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <!-- COMMODITIES -->
-
-        <div class="commodities">
-
-
-            <!-- RICE -->
-
-            <div class="commodity rice">
-
-                <div class="commodity-icon">
-                    🍚
-                </div>
-
-                <div class="commodity-content">
-
-                    <div class="commodity-title">
-                        Fine Rice
-                    </div>
-
-                    <div
-                        class="commodity-value"
-                        id="riceKg"
-                    >
-                        0 KG
-                    </div>
-
-                    <div
-                        class="commodity-sub"
-                        id="riceBags"
-                    >
-                        0 bags × 25 KG
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- JAGGERY -->
-
-            <div class="commodity jaggery">
-
-                <div class="commodity-icon">
-                    🟤
-                </div>
-
-                <div class="commodity-content">
-
-                    <div class="commodity-title">
-                        Jaggery
-                    </div>
-
-                    <div
-                        class="commodity-value"
-                        id="jaggeryValue"
-                    >
-                        0
-                    </div>
-
-                    <div class="commodity-sub">
-                        1 KG packets
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- RAGI -->
-
-            <div class="commodity ragi">
-
-                <div class="commodity-icon">
-                    🌾
-                </div>
-
-                <div class="commodity-content">
-
-                    <div class="commodity-title">
-                        Ragi Powder
-                    </div>
-
-                    <div
-                        class="commodity-value"
-                        id="ragiValue"
-                    >
-                        0
-                    </div>
-
-                    <div class="commodity-sub">
-                        1 KG packets
-                    </div>
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-
-        <!-- BUTTONS -->
-
-        <div class="result-buttons">
-
-            <button
-                class="small-btn print-btn"
-                onclick="window.print()"
-            >
-                🖨 PRINT / PDF
-            </button>
-
-            <button
-                class="small-btn another-btn"
-                onclick="resetChecker()"
-            >
-                🔄 CHECK ANOTHER
-            </button>
-
-        </div>
-
-
-        <!-- DISCLAIMER -->
-
-        <div class="disclaimer">
-
-            <strong>Disclaimer:</strong>
-
-            This report is provided for information purposes
-            using data available through the official Andhra
-            Pradesh SCM system. TeachersBook.in does not
-            guarantee the accuracy, completeness or availability
-            of the information. Please verify important
-            information with the official SCM portal before
-            taking any official action.
-
-        </div>
-
-    </div>
-
-
-    <div class="scm-footer">
-        Powered by TeachersBook.in
-    </div>
-
+<div class="scm-header">
+<h1>AP SCM MDM School Checker</h1>
+<p>School-wise MDM entitlement details</p>
+</div>
+
+<div class="scm-search-card">
+
+<label class="scm-label">Enter School UDISE Code</label>
+
+<input
+type="text"
+id="schoolCode"
+class="scm-input"
+placeholder="Example: 28152100403"
+maxlength="20"
+inputmode="numeric">
+
+<div class="scm-row">
+
+<div class="scm-col">
+<label class="scm-label">Month</label>
+
+<select id="month" class="scm-select">
+<option value="1">January</option>
+<option value="2">February</option>
+<option value="3">March</option>
+<option value="4">April</option>
+<option value="5">May</option>
+<option value="6">June</option>
+<option value="7">July</option>
+<option value="8" selected>August</option>
+<option value="9">September</option>
+<option value="10">October</option>
+<option value="11">November</option>
+<option value="12">December</option>
+</select>
+</div>
+
+<div class="scm-col">
+<label class="scm-label">Year</label>
+
+<select id="year" class="scm-select">
+<option value="2026" selected>2026</option>
+<option value="2025">2025</option>
+<option value="2027">2027</option>
+</select>
+</div>
 
 </div>
 
+<button
+id="searchBtn"
+class="scm-search-btn"
+onclick="searchSchool()">
+🔍 CHECK SCHOOL
+</button>
+
+<div id="loading" class="scm-loading">
+<span class="scm-spinner"></span>
+Reading official SCM data...
+</div>
+
+<div id="error" class="scm-error"></div>
+
+</div>
+
+<div id="result" class="scm-result">
+
+<div class="result-header">
+<div class="success">✓ OFFICIAL SCM DATA FOUND</div>
+<h2 id="resultSchoolName">-</h2>
+</div>
+
+<div class="school-info">
+
+<div class="info-line">
+<span class="info-label">School Code</span>
+<span class="info-value" id="resultSchoolCode">-</span>
+</div>
+
+<div class="info-line">
+<span class="info-label">District</span>
+<span class="info-value" id="resultDistrict">-</span>
+</div>
+
+<div class="info-line">
+<span class="info-label">Depot</span>
+<span class="info-value" id="resultDepot">-</span>
+</div>
+
+<div class="info-line">
+<span class="info-label">Month / Year</span>
+<span class="info-value" id="resultMonth">-</span>
+</div>
+
+</div>
+
+<div class="commodities">
+
+<div class="commodity rice">
+<div class="commodity-icon">🍚</div>
+
+<div class="commodity-content">
+<div class="commodity-title">Fine Rice</div>
+
+<div class="commodity-value" id="riceKg">
+0 KG
+</div>
+
+<div class="commodity-sub" id="riceBags">
+0 bags × 25 KG
+</div>
+</div>
+</div>
+
+<div class="commodity jaggery">
+<div class="commodity-icon">🟤</div>
+
+<div class="commodity-content">
+<div class="commodity-title">Jaggery</div>
+
+<div class="commodity-value" id="jaggeryValue">
+0 KG
+</div>
+
+<div class="commodity-sub">
+1 KG packets
+</div>
+</div>
+</div>
+
+<div class="commodity ragi">
+<div class="commodity-icon">🌾</div>
+
+<div class="commodity-content">
+<div class="commodity-title">Ragi Powder</div>
+
+<div class="commodity-value" id="ragiValue">
+0 KG
+</div>
+
+<div class="commodity-sub">
+1 KG packets
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="result-buttons">
+
+<button
+class="small-btn print-btn"
+onclick="window.print()">
+🖨 PRINT / PDF
+</button>
+
+<button
+class="small-btn another-btn"
+onclick="resetChecker()">
+🔄 CHECK ANOTHER
+</button>
+
+</div>
+
+<div class="disclaimer">
+
+<strong>Disclaimer:</strong>
+
+This report is provided for information purposes using data available through the official Andhra Pradesh SCM system. TeachersBook.in does not guarantee the accuracy, completeness or availability of the information. Please verify important information with the official SCM portal before taking any official action.
+
+</div>
+
+</div>
+
+<div class="scm-footer">
+Powered by TeachersBook.in
+</div>
+
+</div>
 
 <script>
 
-/* =========================================================
-   AP SCM APPS SCRIPT BACKEND
-========================================================= */
+/* =====================================================
+   OFFICIAL APPS SCRIPT BACKEND
+===================================================== */
 
 const API_URL =
 "https://script.google.com/macros/s/AKfycbw3OiS5VGG3J40uGoSsQJrnwqyKN5veUOCe3vdG0AoqsMlsm36Ny-E0FEd2fX6QGvVIVA/exec";
 
 
-/* =========================================================
-   SEARCH SCHOOL
-========================================================= */
+/* =====================================================
+   SEARCH
+===================================================== */
 
-async function searchSchool() {
+async function searchSchool(){
 
-    const schoolCode =
-        document.getElementById("schoolCode")
-        .value
-        .trim();
+const schoolCode =
+document.getElementById("schoolCode").value.trim();
 
-    const month =
-        document.getElementById("month")
-        .value;
+const month =
+document.getElementById("month").value;
 
-    const year =
-        document.getElementById("year")
-        .value;
+const year =
+document.getElementById("year").value;
 
+document.getElementById("result").style.display="none";
+document.getElementById("error").style.display="none";
 
-    /* Hide old result/error */
+if(!schoolCode){
 
-    document.getElementById("result").style.display =
-        "none";
+showError("Please enter the School UDISE Code.");
 
-    document.getElementById("error").style.display =
-        "none";
+return;
+}
 
+if(!/^[0-9]+$/.test(schoolCode)){
 
-    /* Validate */
+showError("Please enter a valid numeric School UDISE Code.");
 
-    if (!schoolCode) {
+return;
+}
 
-        showError(
-            "Please enter the School UDISE Code."
-        );
+const button =
+document.getElementById("searchBtn");
 
-        return;
-    }
+const loading =
+document.getElementById("loading");
 
+button.disabled=true;
+button.innerHTML="⏳ CHECKING...";
+loading.style.display="block";
 
-    if (!/^[0-9]+$/.test(schoolCode)) {
+try{
 
-        showError(
-            "Please enter a valid numeric School UDISE Code."
-        );
+/*
+ IMPORTANT:
+ URLSearchParams creates the query string correctly.
+*/
 
-        return;
-    }
+const params=new URLSearchParams();
 
+params.append("action","search");
+params.append("school",schoolCode);
+params.append("month",month);
+params.append("year",year);
 
-    /* Loading */
+const url=API_URL+"?"+params.toString();
 
-    const button =
-        document.getElementById("searchBtn");
+console.log("SCM REQUEST:",url);
 
-    const loading =
-        document.getElementById("loading");
+const response=await fetch(url,{
+method:"GET",
+cache:"no-store",
+redirect:"follow"
+});
 
+if(!response.ok){
 
-    button.disabled = true;
+throw new Error(
+"Server returned HTTP "+response.status
+);
 
-    button.innerHTML =
-        "⏳ CHECKING...";
+}
 
-    loading.style.display =
-        "block";
+const text=await response.text();
 
+console.log("SCM RESPONSE:",text);
 
-    try {
+let data;
 
-        const url =
-            API_URL +
-            "?action=search" +
-            "&school=" +
-            encodeURIComponent(schoolCode) +
-            "&month=" +
-            encodeURIComponent(month) +
-            "&year=" +
-            encodeURIComponent(year);
+try{
 
+data=JSON.parse(text);
 
-        const response =
-            await fetch(url, {
-                method: "GET",
-                cache: "no-cache"
-            });
+}catch(e){
 
+throw new Error(
+"Invalid response received from SCM backend."
+);
 
-        if (!response.ok) {
+}
 
-            throw new Error(
-                "Server returned HTTP " +
-                response.status
-            );
+if(data.status!=="SUCCESS"){
 
-        }
+throw new Error(
+data.message ||
+"School information could not be found."
+);
 
+}
 
-        const data =
-            await response.json();
+displayResult(data);
 
+}catch(error){
 
-        if (data.status !== "SUCCESS") {
+console.error("SCM ERROR:",error);
 
-            throw new Error(
-                data.message ||
-                "School information could not be found."
-            );
+showError(
+error.message ||
+"Unable to connect to the SCM server."
+);
 
-        }
+}finally{
 
+button.disabled=false;
+button.innerHTML="🔍 CHECK SCHOOL";
+loading.style.display="none";
 
-        displayResult(data);
-
-
-    } catch (error) {
-
-        console.error(error);
-
-        showError(
-            error.message ||
-            "Unable to connect to the SCM server. Please try again."
-        );
-
-    } finally {
-
-        button.disabled = false;
-
-        button.innerHTML =
-            "🔍 CHECK SCHOOL";
-
-        loading.style.display =
-            "none";
-
-    }
+}
 
 }
 
 
-/* =========================================================
+/* =====================================================
    DISPLAY RESULT
-========================================================= */
+===================================================== */
 
-function displayResult(data) {
+function displayResult(data){
 
-    document.getElementById(
-        "resultSchoolName"
-    ).textContent =
-        data.school_name || "-";
+document.getElementById("resultSchoolName").textContent=
+data.school_name || "-";
 
+document.getElementById("resultSchoolCode").textContent=
+data.school_code || "-";
 
-    document.getElementById(
-        "resultSchoolCode"
-    ).textContent =
-        data.school_code || "-";
+document.getElementById("resultDistrict").textContent=
+data.district || "-";
 
+document.getElementById("resultDepot").textContent=
+data.depot || "-";
 
-    document.getElementById(
-        "resultDistrict"
-    ).textContent =
-        data.district || "-";
+document.getElementById("resultMonth").textContent=
+getMonthName(Number(data.month))+" "+data.year;
 
 
-    document.getElementById(
-        "resultDepot"
-    ).textContent =
-        data.depot || "-";
+/* RICE */
+
+const rice=
+data.commodities &&
+data.commodities.rice
+?data.commodities.rice:{};
+
+document.getElementById("riceKg").textContent=
+Number(rice.kg||0)+" KG";
+
+document.getElementById("riceBags").textContent=
+Number(rice.bags||0)+" bags × 25 KG";
 
 
-    const monthName =
-        getMonthName(
-            Number(data.month)
-        );
+/* JAGGERY */
+
+const jaggery=
+data.commodities &&
+data.commodities.jaggery
+?data.commodities.jaggery:{};
+
+document.getElementById("jaggeryValue").textContent=
+Number(jaggery.packets||0)+" KG";
 
 
-    document.getElementById(
-        "resultMonth"
-    ).textContent =
-        monthName +
-        " " +
-        data.year;
+/* RAGI */
+
+const ragi=
+data.commodities &&
+data.commodities.ragi
+?data.commodities.ragi:{};
+
+document.getElementById("ragiValue").textContent=
+Number(ragi.packets||0)+" KG";
 
 
-    /* Rice */
+document.getElementById("result").style.display="block";
 
-    const rice =
-        data.commodities &&
-        data.commodities.rice
-            ? data.commodities.rice
-            : {};
+setTimeout(function(){
 
+document.getElementById("result").scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
 
-    document.getElementById(
-        "riceKg"
-    ).textContent =
-        Number(rice.kg || 0) +
-        " KG";
-
-
-    document.getElementById(
-        "riceBags"
-    ).textContent =
-        Number(rice.bags || 0) +
-        " bags × 25 KG";
-
-
-    /* Jaggery */
-
-    const jaggery =
-        data.commodities &&
-        data.commodities.jaggery
-            ? data.commodities.jaggery
-            : {};
-
-
-    document.getElementById(
-        "jaggeryValue"
-    ).textContent =
-        Number(jaggery.packets || 0) +
-        " KG";
-
-
-    /* Ragi */
-
-    const ragi =
-        data.commodities &&
-        data.commodities.ragi
-            ? data.commodities.ragi
-            : {};
-
-
-    document.getElementById(
-        "ragiValue"
-    ).textContent =
-        Number(ragi.packets || 0) +
-        " KG";
-
-
-    /* Show */
-
-    document.getElementById(
-        "result"
-    ).style.display =
-        "block";
-
-
-    /* Scroll */
-
-    setTimeout(function() {
-
-        document.getElementById(
-            "result"
-        ).scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-
-    }, 100);
+},100);
 
 }
 
 
-/* =========================================================
+/* =====================================================
    ERROR
-========================================================= */
+===================================================== */
 
-function showError(message) {
+function showError(message){
 
-    const error =
-        document.getElementById("error");
+const error=
+document.getElementById("error");
 
-    error.textContent =
-        "⚠️ " + message;
+error.textContent="⚠️ "+message;
 
-    error.style.display =
-        "block";
+error.style.display="block";
 
 }
 
 
-/* =========================================================
+/* =====================================================
    RESET
-========================================================= */
+===================================================== */
 
-function resetChecker() {
+function resetChecker(){
 
-    document.getElementById(
-        "schoolCode"
-    ).value = "";
+document.getElementById("schoolCode").value="";
 
-    document.getElementById(
-        "result"
-    ).style.display =
-        "none";
+document.getElementById("result").style.display="none";
 
-    document.getElementById(
-        "error"
-    ).style.display =
-        "none";
+document.getElementById("error").style.display="none";
 
-    document.getElementById(
-        "schoolCode"
-    ).focus();
+document.getElementById("schoolCode").focus();
 
 }
 
 
-/* =========================================================
-   MONTH NAME
-========================================================= */
+/* =====================================================
+   MONTH
+===================================================== */
 
-function getMonthName(month) {
+function getMonthName(month){
 
-    const months = [
-        "",
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-    ];
+const months=[
+"",
+"January",
+"February",
+"March",
+"April",
+"May",
+"June",
+"July",
+"August",
+"September",
+"October",
+"November",
+"December"
+];
 
-    return months[month] || month;
+return months[month]||month;
 
 }
 
 
-/* =========================================================
+/* =====================================================
    ENTER KEY
-========================================================= */
+===================================================== */
 
-document
-    .getElementById("schoolCode")
-    .addEventListener(
-        "keydown",
-        function(event) {
+document.getElementById("schoolCode")
+.addEventListener("keydown",function(event){
 
-            if (event.key === "Enter") {
+if(event.key==="Enter"){
 
-                searchSchool();
+searchSchool();
 
-            }
+}
 
-        }
-    );
+});
 
 </script>
-
 
 </body>
 </html>
