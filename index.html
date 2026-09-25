@@ -107,6 +107,7 @@ select:focus{
         opacity:.25;
         transform:scale(.8);
     }
+
     50%{
         opacity:1;
         transform:scale(1);
@@ -194,9 +195,7 @@ select:focus{
 }
 
 
-/* =========================================================
-   PRINT
-========================================================= */
+/* PRINT */
 
 @media print{
 
@@ -339,6 +338,8 @@ select:focus{
     </div>
 
 
+    <!-- DOWNLOAD / PRINT -->
+
     <button
         class="download-btn"
         id="downloadBtn"
@@ -354,7 +355,7 @@ select:focus{
 <script>
 
 /* =========================================================
-   CONFIRMED WORKING APPS SCRIPT URL
+   APPS SCRIPT - WORKING DEPLOYMENT
 ========================================================= */
 
 const API_URL =
@@ -362,7 +363,7 @@ const API_URL =
 
 
 /* =========================================================
-   NUMBER
+   NUMBER HELPER
 ========================================================= */
 
 function num(value){
@@ -376,7 +377,7 @@ function num(value){
 
 /* =========================================================
    FINE RICE
-   API value = number of 25 KG units
+   API returns number of 25 KG units
 ========================================================= */
 
 function calculateRice(data){
@@ -425,7 +426,7 @@ function calculateRagi(data){
 
 
 /* =========================================================
-   SEARCH
+   SEARCH SCHOOL
 ========================================================= */
 
 async function searchSchool(){
@@ -478,7 +479,7 @@ async function searchSchool(){
 
 
     /* =====================================================
-       VALIDATE UDISE
+       UDISE VALIDATION
     ===================================================== */
 
     if(!/^\d{8,15}$/.test(school)){
@@ -500,7 +501,7 @@ async function searchSchool(){
 
 
     /* =====================================================
-       START
+       START SEARCH
     ===================================================== */
 
     searchBtn.disabled=true;
@@ -521,7 +522,7 @@ async function searchSchool(){
     try{
 
         /* =================================================
-           CREATE URL
+           CREATE API URL
         ================================================= */
 
         const url =
@@ -542,25 +543,7 @@ async function searchSchool(){
 
 
         /* =================================================
-           45 SECOND TIMEOUT
-        ================================================= */
-
-        const controller =
-            new AbortController();
-
-        const timeout =
-            setTimeout(
-                function(){
-
-                    controller.abort();
-
-                },
-                45000
-            );
-
-
-        /* =================================================
-           FETCH
+           UPDATE STATUS
         ================================================= */
 
         status.innerHTML =
@@ -568,61 +551,81 @@ async function searchSchool(){
             '<span class="loading-dot"></span>';
 
 
+        /* =================================================
+           FETCH
+           IMPORTANT:
+           No response.ok check.
+           Google Apps Script can redirect.
+        ================================================= */
+
         const response =
             await fetch(
                 url,
                 {
                     method:"GET",
                     cache:"no-store",
-                    signal:controller.signal
+                    redirect:"follow"
                 }
             );
 
 
-        clearTimeout(timeout);
+        /* =================================================
+           READ RESPONSE AS TEXT FIRST
+        ================================================= */
+
+        const text =
+            await response.text();
+
+
+        console.log(
+            "RAW MDM RESPONSE:",
+            text
+        );
 
 
         /* =================================================
-           HTTP ERROR
+           CONVERT TEXT TO JSON
         ================================================= */
 
-        if(!response.ok){
+        let data;
+
+        try{
+
+            data =
+                JSON.parse(text);
+
+        }
+        catch(jsonError){
+
+            console.error(
+                "JSON PARSE ERROR:",
+                jsonError
+            );
 
             throw new Error(
-                "Server error: " +
-                response.status
+                "Unable to read response from MDM server."
             );
 
         }
 
 
-        /* =================================================
-           READ JSON
-        ================================================= */
-
-        status.innerHTML =
-            "Preparing result" +
-            '<span class="loading-dot"></span>';
-
-
-        const data =
-            await response.json();
-
-
         console.log(
-            "MDM RESPONSE:",
+            "MDM JSON RESPONSE:",
             data
         );
 
 
         /* =================================================
-           API ERROR
+           API STATUS
         ================================================= */
 
-        if(data.status !== "SUCCESS"){
+        if(
+            !data ||
+            data.status !== "SUCCESS"
+        ){
 
             throw new Error(
-                data.message ||
+                data?.message ||
                 "School details not found."
             );
 
@@ -703,19 +706,9 @@ async function searchSchool(){
         status.style.color="#dc2626";
 
 
-        if(error.name === "AbortError"){
-
-            status.textContent =
-                "Search timed out. Please try again.";
-
-        }
-        else{
-
-            status.textContent =
-                error.message ||
-                "Unable to retrieve school details.";
-
-        }
+        status.textContent =
+            error.message ||
+            "Unable to retrieve school details.";
 
     }
     finally{
@@ -731,7 +724,7 @@ async function searchSchool(){
 
 
 /* =========================================================
-   ENTER KEY
+   ENTER KEY SEARCH
 ========================================================= */
 
 document
