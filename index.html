@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>AP MDM School Entitlement Search</title>
+<title>AP MDM School Entitlement</title>
 
 <style>
 *{
@@ -14,50 +14,57 @@
 body{
     margin:0;
     padding:12px;
-    font-family:Arial,sans-serif;
-    background:#f1f5f9;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f7fb;
 }
 
+/* MAIN BOX */
 .mdm-container{
     width:100%;
-    max-width:620px;
-    margin:auto;
-    background:#fff;
-    border:2px solid #2563eb;
-    border-radius:13px;
+    max-width:580px;
+    margin:20px auto;
+    background:#ffffff;
+    border:1px solid #dbe4f0;
+    border-radius:12px;
     overflow:hidden;
-    box-shadow:0 4px 16px rgba(0,0,0,.10);
+    box-shadow:0 4px 15px rgba(15,23,42,.08);
 }
 
+/* HEADER */
 .header{
-    padding:12px 10px;
+    padding:13px 10px;
     text-align:center;
-    color:#fff;
-    font-size:20px;
-    font-weight:bold;
-    background:linear-gradient(90deg,#2563eb,#7c3aed,#db2777);
+    color:#ffffff;
+    font-size:19px;
+    font-weight:700;
+    letter-spacing:.2px;
+    background:linear-gradient(90deg,#1d4ed8,#2563eb);
 }
 
+/* FORM */
 .form-area{
-    padding:15px;
+    padding:16px;
 }
 
 label{
     display:block;
-    font-weight:bold;
-    margin:7px 0 4px;
-    color:#1e293b;
+    margin:7px 0 5px;
+    color:#334155;
+    font-size:14px;
+    font-weight:700;
 }
 
 input,
 select{
     width:100%;
-    padding:10px;
+    height:42px;
+    padding:9px 11px;
     border:1px solid #cbd5e1;
     border-radius:7px;
-    font-size:15px;
+    background:#ffffff;
+    color:#0f172a;
+    font-size:14px;
     outline:none;
-    background:#fff;
 }
 
 input:focus,
@@ -66,82 +73,94 @@ select:focus{
     box-shadow:0 0 0 2px rgba(37,99,235,.10);
 }
 
+/* SEARCH BUTTON */
 .search-btn{
     width:100%;
-    margin-top:13px;
-    padding:11px;
+    height:42px;
+    margin-top:14px;
     border:0;
-    border-radius:8px;
-    color:#fff;
-    font-size:15px;
-    font-weight:bold;
+    border-radius:7px;
+    background:#2563eb;
+    color:#ffffff;
+    font-size:14px;
+    font-weight:700;
     cursor:pointer;
-    background:linear-gradient(90deg,#2563eb,#059669);
+    transition:.2s;
+}
+
+.search-btn:hover{
+    background:#1d4ed8;
 }
 
 .search-btn:disabled{
-    opacity:.65;
+    background:#94a3b8;
     cursor:not-allowed;
 }
 
+/* STATUS */
 .status{
     min-height:20px;
-    text-align:center;
     margin-top:10px;
-    font-size:14px;
-    font-weight:bold;
+    text-align:center;
+    font-size:13px;
+    font-weight:600;
 }
 
 .loading-dot{
     display:inline-block;
-    width:7px;
-    height:7px;
+    width:6px;
+    height:6px;
     margin-left:4px;
     border-radius:50%;
     background:#2563eb;
-    animation:pulse 1s infinite;
+    animation:loading 1s infinite;
 }
 
-@keyframes pulse{
+@keyframes loading{
     0%,100%{
         opacity:.25;
-        transform:scale(.8);
     }
-
     50%{
         opacity:1;
-        transform:scale(1);
     }
 }
 
+
+/* RESULT BOX */
 .result{
     display:none;
-    margin:0 15px 15px;
-    border:2px solid #16a34a;
+    margin:0 16px 14px;
+    border:1px solid #dbe4f0;
     border-radius:10px;
     overflow:hidden;
+    background:#ffffff;
 }
 
+/* SCHOOL NAME */
 .school-name{
-    padding:11px;
+    padding:12px 10px;
     text-align:center;
-    color:#fff;
+    color:#ffffff;
+    background:#059669;
     font-size:17px;
-    font-weight:bold;
-    background:linear-gradient(90deg,#16a34a,#0ea5e9);
+    font-weight:700;
 }
 
+/* RESULT ROW */
 .item{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:11px 13px;
-    border-top:1px solid #e2e8f0;
-    font-weight:bold;
+    min-height:45px;
+    padding:10px 13px;
+    border-top:1px solid #e5e7eb;
+    font-size:14px;
+    font-weight:700;
 }
 
 .item span:last-child{
     font-size:16px;
+    font-weight:800;
 }
 
 .rice span:last-child{
@@ -153,59 +172,94 @@ select:focus{
 }
 
 .ragi span:last-child{
-    color:#16a34a;
+    color:#059669;
 }
 
+
+/* CHECK ANOTHER SCHOOL */
+.another-btn{
+    display:none;
+    width:calc(100% - 32px);
+    height:40px;
+    margin:0 16px 16px;
+    border:1px solid #2563eb;
+    border-radius:7px;
+    background:#ffffff;
+    color:#2563eb;
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.another-btn:hover{
+    background:#eff6ff;
+}
+
+
+/* PDF BUTTON */
 .download-btn{
     display:none;
-    width:calc(100% - 30px);
-    margin:0 15px 15px;
-    padding:10px;
+    width:calc(100% - 32px);
+    height:40px;
+    margin:0 16px 10px;
     border:0;
     border-radius:7px;
     background:#111827;
-    color:#fff;
-    font-weight:bold;
+    color:#ffffff;
+    font-size:13px;
+    font-weight:700;
     cursor:pointer;
-    font-size:14px;
 }
 
+
+/* MOBILE */
 @media(max-width:500px){
 
     body{
         padding:7px;
     }
 
-    .form-area{
-        padding:12px;
-    }
-
-    .result{
-        margin:0 12px 12px;
-    }
-
-    .download-btn{
-        width:calc(100% - 24px);
-        margin:0 12px 12px;
+    .mdm-container{
+        margin:8px auto;
+        border-radius:10px;
     }
 
     .header{
-        font-size:18px;
+        font-size:17px;
+        padding:12px 8px;
+    }
+
+    .form-area{
+        padding:13px;
+    }
+
+    .result{
+        margin:0 13px 12px;
+    }
+
+    .another-btn{
+        width:calc(100% - 26px);
+        margin:0 13px 13px;
+    }
+
+    .download-btn{
+        width:calc(100% - 26px);
+        margin:0 13px 9px;
     }
 }
 
 
 /* PRINT */
-
 @media print{
 
     body{
-        background:#fff;
         padding:0;
+        background:#ffffff;
     }
 
     .mdm-container{
         max-width:650px;
+        margin:20px auto;
         border:0;
         box-shadow:none;
     }
@@ -213,13 +267,14 @@ select:focus{
     .header,
     .form-area,
     .status,
+    .another-btn,
     .download-btn{
         display:none !important;
     }
 
     .result{
         display:block !important;
-        margin:30px auto;
+        margin:20px auto;
         border:2px solid #000;
     }
 
@@ -227,13 +282,19 @@ select:focus{
 </style>
 </head>
 
+
 <body>
 
 <div class="mdm-container">
 
+    <!-- HEADER -->
+
     <div class="header">
         AP MDM SCHOOL ENTITLEMENT
     </div>
+
+
+    <!-- FORM -->
 
     <div class="form-area">
 
@@ -246,6 +307,7 @@ select:focus{
             inputmode="numeric"
             autocomplete="off"
         >
+
 
         <label>Month</label>
 
@@ -266,6 +328,7 @@ select:focus{
 
         </select>
 
+
         <label>Year</label>
 
         <select id="year">
@@ -277,6 +340,9 @@ select:focus{
 
         </select>
 
+
+        <!-- SEARCH -->
+
         <button
             class="search-btn"
             id="searchBtn"
@@ -285,6 +351,7 @@ select:focus{
             🔍 SEARCH DETAILS
 
         </button>
+
 
         <div
             class="status"
@@ -305,6 +372,7 @@ select:focus{
             id="schoolName">
         </div>
 
+
         <div class="item rice">
 
             <span>🍚 Fine Rice</span>
@@ -315,6 +383,7 @@ select:focus{
 
         </div>
 
+
         <div class="item jaggery">
 
             <span>🟠 Jaggery</span>
@@ -324,6 +393,7 @@ select:focus{
             </span>
 
         </div>
+
 
         <div class="item ragi">
 
@@ -338,7 +408,19 @@ select:focus{
     </div>
 
 
-    <!-- DOWNLOAD / PRINT -->
+    <!-- CHECK ANOTHER SCHOOL -->
+
+    <button
+        class="another-btn"
+        id="anotherBtn"
+        onclick="checkAnotherSchool()">
+
+        🔄 CHECK ANOTHER SCHOOL
+
+    </button>
+
+
+    <!-- PDF -->
 
     <button
         class="download-btn"
@@ -355,7 +437,7 @@ select:focus{
 <script>
 
 /* =========================================================
-   APPS SCRIPT - WORKING DEPLOYMENT
+   WORKING APPS SCRIPT URL
 ========================================================= */
 
 const API_URL =
@@ -363,7 +445,7 @@ const API_URL =
 
 
 /* =========================================================
-   NUMBER HELPER
+   NUMBER
 ========================================================= */
 
 function num(value){
@@ -377,18 +459,42 @@ function num(value){
 
 /* =========================================================
    FINE RICE
-   API returns number of 25 KG units
+   API gives 25 KG units
 ========================================================= */
 
 function calculateRice(data){
 
-    const units =
-        num(data?.rice?.["01_05"]) +
-        num(data?.rice?.["06_08"]) +
-        num(data?.rice?.["09_10"]) +
-        num(data?.rice?.["11_12"]);
+    /* Normal backend response */
 
-    return units * 25;
+    if(data && data.rice){
+
+        return (
+            num(data.rice["01_05"]) +
+            num(data.rice["06_08"]) +
+            num(data.rice["09_10"]) +
+            num(data.rice["11_12"])
+        ) * 25;
+
+    }
+
+
+    /* Fallback if raw dynamicFields are returned */
+
+    const rice =
+        data?.dynamicFields?.f_fine_rice_25_kg;
+
+    if(rice){
+
+        return (
+            num(rice.requirement_01_5) +
+            num(rice.requirement_06_08) +
+            num(rice.requirement_09_10) +
+            num(rice.requirement_11_12)
+        ) * 25;
+
+    }
+
+    return 0;
 
 }
 
@@ -399,12 +505,37 @@ function calculateRice(data){
 
 function calculateJaggery(data){
 
-    return (
-        num(data?.jaggery?.["01_05"]) +
-        num(data?.jaggery?.["06_08"]) +
-        num(data?.jaggery?.["09_10"]) +
-        num(data?.jaggery?.["11_12"])
-    );
+    /* Normal backend response */
+
+    if(data && data.jaggery){
+
+        return (
+            num(data.jaggery["01_05"]) +
+            num(data.jaggery["06_08"]) +
+            num(data.jaggery["09_10"]) +
+            num(data.jaggery["11_12"])
+        );
+
+    }
+
+
+    /* Fallback */
+
+    const jaggery =
+        data?.dynamicFields?.jaggery_1_kg;
+
+    if(jaggery){
+
+        return (
+            num(jaggery.requirement_01_5) +
+            num(jaggery.requirement_06_08) +
+            num(jaggery.requirement_09_10) +
+            num(jaggery.requirement_11_12)
+        );
+
+    }
+
+    return 0;
 
 }
 
@@ -415,12 +546,74 @@ function calculateJaggery(data){
 
 function calculateRagi(data){
 
-    return (
-        num(data?.ragi?.["01_05"]) +
-        num(data?.ragi?.["06_08"]) +
-        num(data?.ragi?.["09_10"]) +
-        num(data?.ragi?.["11_12"])
-    );
+    /*
+       FIRST:
+       Read the normal simplified Apps Script response.
+    */
+
+    if(data && data.ragi){
+
+        const value =
+            num(data.ragi["01_05"]) +
+            num(data.ragi["06_08"]) +
+            num(data.ragi["09_10"]) +
+            num(data.ragi["11_12"]);
+
+        /*
+           If a real value exists, use it.
+        */
+
+        if(value > 0){
+
+            return value;
+
+        }
+
+    }
+
+
+    /*
+       SECOND:
+       Read the original official API structure
+       if it is available.
+    */
+
+    const ragi =
+        data?.dynamicFields?.ragipowder_1kg;
+
+    if(ragi){
+
+        return (
+            num(ragi.requirement_01_5) +
+            num(ragi.requirement_06_08) +
+            num(ragi.requirement_09_10) +
+            num(ragi.requirement_11_12)
+        );
+
+    }
+
+
+    /*
+       THIRD:
+       Support alternate spelling if returned.
+    */
+
+    const alternate =
+        data?.dynamicFields?.ragi_powder_1kg;
+
+    if(alternate){
+
+        return (
+            num(alternate.requirement_01_5) +
+            num(alternate.requirement_06_08) +
+            num(alternate.requirement_09_10) +
+            num(alternate.requirement_11_12)
+        );
+
+    }
+
+
+    return 0;
 
 }
 
@@ -452,6 +645,9 @@ async function searchSchool(){
     const downloadBtn =
         document.getElementById("downloadBtn");
 
+    const anotherBtn =
+        document.getElementById("anotherBtn");
+
     const school =
         schoolInput.value.trim();
 
@@ -467,10 +663,6 @@ async function searchSchool(){
         status.textContent =
             "Please enter UDISE / Institute Code.";
 
-        result.style.display="none";
-
-        downloadBtn.style.display="none";
-
         schoolInput.focus();
 
         return;
@@ -478,20 +670,12 @@ async function searchSchool(){
     }
 
 
-    /* =====================================================
-       UDISE VALIDATION
-    ===================================================== */
-
     if(!/^\d{8,15}$/.test(school)){
 
         status.style.color="#dc2626";
 
         status.textContent =
             "Please enter a valid UDISE / Institute Code.";
-
-        result.style.display="none";
-
-        downloadBtn.style.display="none";
 
         schoolInput.focus();
 
@@ -506,23 +690,26 @@ async function searchSchool(){
 
     searchBtn.disabled=true;
 
-    searchBtn.textContent="⏳ SEARCHING...";
+    searchBtn.textContent =
+        "⏳ SEARCHING...";
 
     result.style.display="none";
 
     downloadBtn.style.display="none";
 
+    anotherBtn.style.display="none";
+
     status.style.color="#2563eb";
 
     status.innerHTML =
-        "Connecting to official MDM data" +
+        "Reading official MDM data" +
         '<span class="loading-dot"></span>';
 
 
     try{
 
         /* =================================================
-           CREATE API URL
+           API URL
         ================================================= */
 
         const url =
@@ -543,19 +730,7 @@ async function searchSchool(){
 
 
         /* =================================================
-           UPDATE STATUS
-        ================================================= */
-
-        status.innerHTML =
-            "Reading official MDM data" +
-            '<span class="loading-dot"></span>';
-
-
-        /* =================================================
            FETCH
-           IMPORTANT:
-           No response.ok check.
-           Google Apps Script can redirect.
         ================================================= */
 
         const response =
@@ -570,7 +745,7 @@ async function searchSchool(){
 
 
         /* =================================================
-           READ RESPONSE AS TEXT FIRST
+           READ TEXT
         ================================================= */
 
         const text =
@@ -584,7 +759,7 @@ async function searchSchool(){
 
 
         /* =================================================
-           CONVERT TEXT TO JSON
+           JSON
         ================================================= */
 
         let data;
@@ -595,12 +770,7 @@ async function searchSchool(){
                 JSON.parse(text);
 
         }
-        catch(jsonError){
-
-            console.error(
-                "JSON PARSE ERROR:",
-                jsonError
-            );
+        catch(error){
 
             throw new Error(
                 "Unable to read response from MDM server."
@@ -610,13 +780,13 @@ async function searchSchool(){
 
 
         console.log(
-            "MDM JSON RESPONSE:",
+            "MDM DATA:",
             data
         );
 
 
         /* =================================================
-           API STATUS
+           SUCCESS CHECK
         ================================================= */
 
         if(
@@ -666,13 +836,16 @@ async function searchSchool(){
 
 
         /* =================================================
-           RAGI
+           RAGI POWDER
         ================================================= */
+
+        const ragiAmount =
+            calculateRagi(data);
 
         document
             .getElementById("ragiValue")
             .textContent =
-                calculateRagi(data) +
+                ragiAmount +
                 " KG";
 
 
@@ -684,7 +857,9 @@ async function searchSchool(){
 
         downloadBtn.style.display="block";
 
-        status.style.color="#16a34a";
+        anotherBtn.style.display="block";
+
+        status.style.color="#059669";
 
         status.textContent =
             "✓ Details found successfully.";
@@ -703,8 +878,9 @@ async function searchSchool(){
 
         downloadBtn.style.display="none";
 
-        status.style.color="#dc2626";
+        anotherBtn.style.display="none";
 
+        status.style.color="#dc2626";
 
         status.textContent =
             error.message ||
@@ -724,7 +900,51 @@ async function searchSchool(){
 
 
 /* =========================================================
-   ENTER KEY SEARCH
+   CHECK ANOTHER SCHOOL
+========================================================= */
+
+function checkAnotherSchool(){
+
+    const schoolInput =
+        document.getElementById("school");
+
+    const result =
+        document.getElementById("result");
+
+    const status =
+        document.getElementById("status");
+
+    const downloadBtn =
+        document.getElementById("downloadBtn");
+
+    const anotherBtn =
+        document.getElementById("anotherBtn");
+
+
+    /* CLEAR OLD RESULT */
+
+    schoolInput.value="";
+
+    result.style.display="none";
+
+    downloadBtn.style.display="none";
+
+    anotherBtn.style.display="none";
+
+    status.textContent="";
+
+    status.style.color="#2563eb";
+
+
+    /* FOCUS NEW SEARCH */
+
+    schoolInput.focus();
+
+}
+
+
+/* =========================================================
+   ENTER KEY
 ========================================================= */
 
 document
