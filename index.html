@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>AP MDM Entitlement Search</title>
+<title>AP MDM School Entitlement Search</title>
 
 <style>
 *{
@@ -13,95 +13,119 @@
 
 body{
     margin:0;
-    padding:15px;
+    padding:12px;
     font-family:Arial,sans-serif;
     background:#f1f5f9;
 }
 
 .mdm-container{
     width:100%;
-    max-width:650px;
+    max-width:620px;
     margin:auto;
     background:#fff;
     border:2px solid #2563eb;
-    border-radius:14px;
+    border-radius:13px;
     overflow:hidden;
-    box-shadow:0 5px 20px rgba(0,0,0,.12);
+    box-shadow:0 4px 16px rgba(0,0,0,.10);
 }
 
 .header{
-    padding:14px 12px;
+    padding:12px 10px;
     text-align:center;
     color:#fff;
-    font-size:21px;
+    font-size:20px;
     font-weight:bold;
     background:linear-gradient(90deg,#2563eb,#7c3aed,#db2777);
 }
 
 .form-area{
-    padding:18px;
+    padding:15px;
 }
 
 label{
     display:block;
     font-weight:bold;
-    margin:8px 0 5px;
+    margin:7px 0 4px;
     color:#1e293b;
 }
 
 input,
 select{
     width:100%;
-    padding:11px;
+    padding:10px;
     border:1px solid #cbd5e1;
-    border-radius:8px;
+    border-radius:7px;
     font-size:15px;
     outline:none;
+    background:#fff;
 }
 
 input:focus,
 select:focus{
     border-color:#2563eb;
-    box-shadow:0 0 0 2px rgba(37,99,235,.12);
+    box-shadow:0 0 0 2px rgba(37,99,235,.10);
 }
 
 .search-btn{
     width:100%;
-    margin-top:15px;
-    padding:12px;
+    margin-top:13px;
+    padding:11px;
     border:0;
-    border-radius:9px;
+    border-radius:8px;
     color:#fff;
-    font-size:16px;
+    font-size:15px;
     font-weight:bold;
     cursor:pointer;
     background:linear-gradient(90deg,#2563eb,#059669);
 }
 
 .search-btn:disabled{
-    opacity:.6;
+    opacity:.65;
     cursor:not-allowed;
 }
 
 .status{
+    min-height:20px;
     text-align:center;
-    margin-top:12px;
+    margin-top:10px;
+    font-size:14px;
     font-weight:bold;
+}
+
+.loading-dot{
+    display:inline-block;
+    width:7px;
+    height:7px;
+    margin-left:4px;
+    border-radius:50%;
+    background:#2563eb;
+    animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+    0%,100%{
+        opacity:.25;
+        transform:scale(.8);
+    }
+    50%{
+        opacity:1;
+        transform:scale(1);
+    }
 }
 
 .result{
     display:none;
-    margin:0 18px 18px;
+    margin:0 15px 15px;
     border:2px solid #16a34a;
-    border-radius:12px;
+    border-radius:10px;
     overflow:hidden;
 }
 
 .school-name{
-    padding:13px;
+    padding:11px;
     text-align:center;
     color:#fff;
-    font-size:18px;
+    font-size:17px;
     font-weight:bold;
     background:linear-gradient(90deg,#16a34a,#0ea5e9);
 }
@@ -110,13 +134,13 @@ select:focus{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:13px 15px;
+    padding:11px 13px;
     border-top:1px solid #e2e8f0;
     font-weight:bold;
 }
 
 .item span:last-child{
-    font-size:17px;
+    font-size:16px;
 }
 
 .rice span:last-child{
@@ -132,35 +156,72 @@ select:focus{
 }
 
 .download-btn{
-    display:block;
-    width:calc(100% - 36px);
-    margin:0 18px 18px;
-    padding:11px;
+    display:none;
+    width:calc(100% - 30px);
+    margin:0 15px 15px;
+    padding:10px;
     border:0;
-    border-radius:8px;
+    border-radius:7px;
     background:#111827;
-    color:white;
+    color:#fff;
     font-weight:bold;
     cursor:pointer;
+    font-size:14px;
 }
 
 @media(max-width:500px){
 
     body{
-        padding:8px;
+        padding:7px;
     }
 
     .form-area{
-        padding:13px;
+        padding:12px;
     }
 
     .result{
-        margin:0 13px 13px;
+        margin:0 12px 12px;
     }
 
     .download-btn{
-        width:calc(100% - 26px);
-        margin:0 13px 13px;
+        width:calc(100% - 24px);
+        margin:0 12px 12px;
+    }
+
+    .header{
+        font-size:18px;
+    }
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print{
+
+    body{
+        background:#fff;
+        padding:0;
+    }
+
+    .mdm-container{
+        max-width:650px;
+        border:0;
+        box-shadow:none;
+    }
+
+    .header,
+    .form-area,
+    .status,
+    .download-btn{
+        display:none !important;
+    }
+
+    .result{
+        display:block !important;
+        margin:30px auto;
+        border:2px solid #000;
     }
 
 }
@@ -183,12 +244,14 @@ select:focus{
             type="text"
             id="school"
             placeholder="Enter UDISE Code"
+            inputmode="numeric"
             autocomplete="off"
         >
 
         <label>Month</label>
 
         <select id="month">
+
             <option value="0">January</option>
             <option value="1">February</option>
             <option value="2">March</option>
@@ -201,15 +264,18 @@ select:focus{
             <option value="9">October</option>
             <option value="10">November</option>
             <option value="11">December</option>
+
         </select>
 
         <label>Year</label>
 
         <select id="year">
+
             <option value="2023">2023</option>
             <option value="2024">2024</option>
             <option value="2025">2025</option>
             <option value="2026" selected>2026</option>
+
         </select>
 
         <button
@@ -273,13 +339,10 @@ select:focus{
     </div>
 
 
-    <!-- PRINT / PDF -->
-
     <button
         class="download-btn"
         id="downloadBtn"
-        onclick="window.print()"
-        style="display:none;">
+        onclick="window.print()">
 
         📄 DOWNLOAD / PRINT PDF
 
@@ -291,7 +354,7 @@ select:focus{
 <script>
 
 /* =========================================================
-   AP MDM APPS SCRIPT - VERSION 16
+   CONFIRMED WORKING APPS SCRIPT URL
 ========================================================= */
 
 const API_URL =
@@ -313,6 +376,7 @@ function num(value){
 
 /* =========================================================
    FINE RICE
+   API value = number of 25 KG units
 ========================================================= */
 
 function calculateRice(data){
@@ -361,7 +425,7 @@ function calculateRagi(data){
 
 
 /* =========================================================
-   SEARCH SCHOOL
+   SEARCH
 ========================================================= */
 
 async function searchSchool(){
@@ -391,9 +455,9 @@ async function searchSchool(){
         schoolInput.value.trim();
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        VALIDATION
-    ----------------------------------------------------- */
+    ===================================================== */
 
     if(!school){
 
@@ -406,31 +470,59 @@ async function searchSchool(){
 
         downloadBtn.style.display="none";
 
+        schoolInput.focus();
+
         return;
+
     }
 
 
-    /* -----------------------------------------------------
-       START SEARCH
-    ----------------------------------------------------- */
+    /* =====================================================
+       VALIDATE UDISE
+    ===================================================== */
+
+    if(!/^\d{8,15}$/.test(school)){
+
+        status.style.color="#dc2626";
+
+        status.textContent =
+            "Please enter a valid UDISE / Institute Code.";
+
+        result.style.display="none";
+
+        downloadBtn.style.display="none";
+
+        schoolInput.focus();
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       START
+    ===================================================== */
 
     searchBtn.disabled=true;
 
-    status.style.color="#2563eb";
-
-    status.textContent =
-        "Searching official MDM data...";
+    searchBtn.textContent="⏳ SEARCHING...";
 
     result.style.display="none";
 
     downloadBtn.style.display="none";
 
+    status.style.color="#2563eb";
+
+    status.innerHTML =
+        "Connecting to official MDM data" +
+        '<span class="loading-dot"></span>';
+
 
     try{
 
-        /* -------------------------------------------------
-           API URL
-        ------------------------------------------------- */
+        /* =================================================
+           CREATE URL
+        ================================================= */
 
         const url =
             API_URL +
@@ -440,9 +532,7 @@ async function searchSchool(){
             "&month=" +
             encodeURIComponent(month) +
             "&year=" +
-            encodeURIComponent(year) +
-            "&_=" +
-            Date.now();
+            encodeURIComponent(year);
 
 
         console.log(
@@ -451,19 +541,50 @@ async function searchSchool(){
         );
 
 
-        /* -------------------------------------------------
+        /* =================================================
+           45 SECOND TIMEOUT
+        ================================================= */
+
+        const controller =
+            new AbortController();
+
+        const timeout =
+            setTimeout(
+                function(){
+
+                    controller.abort();
+
+                },
+                45000
+            );
+
+
+        /* =================================================
            FETCH
-        ------------------------------------------------- */
+        ================================================= */
+
+        status.innerHTML =
+            "Reading official MDM data" +
+            '<span class="loading-dot"></span>';
+
 
         const response =
             await fetch(
                 url,
                 {
                     method:"GET",
-                    cache:"no-store"
+                    cache:"no-store",
+                    signal:controller.signal
                 }
             );
 
+
+        clearTimeout(timeout);
+
+
+        /* =================================================
+           HTTP ERROR
+        ================================================= */
 
         if(!response.ok){
 
@@ -475,9 +596,14 @@ async function searchSchool(){
         }
 
 
-        /* -------------------------------------------------
-           JSON
-        ------------------------------------------------- */
+        /* =================================================
+           READ JSON
+        ================================================= */
+
+        status.innerHTML =
+            "Preparing result" +
+            '<span class="loading-dot"></span>';
+
 
         const data =
             await response.json();
@@ -489,9 +615,9 @@ async function searchSchool(){
         );
 
 
-        /* -------------------------------------------------
-           CHECK SUCCESS
-        ------------------------------------------------- */
+        /* =================================================
+           API ERROR
+        ================================================= */
 
         if(data.status !== "SUCCESS"){
 
@@ -503,9 +629,9 @@ async function searchSchool(){
         }
 
 
-        /* -------------------------------------------------
+        /* =================================================
            SCHOOL NAME
-        ------------------------------------------------- */
+        ================================================= */
 
         document
             .getElementById("schoolName")
@@ -514,9 +640,9 @@ async function searchSchool(){
                 "School";
 
 
-        /* -------------------------------------------------
+        /* =================================================
            FINE RICE
-        ------------------------------------------------- */
+        ================================================= */
 
         document
             .getElementById("riceValue")
@@ -525,9 +651,9 @@ async function searchSchool(){
                 " KG";
 
 
-        /* -------------------------------------------------
+        /* =================================================
            JAGGERY
-        ------------------------------------------------- */
+        ================================================= */
 
         document
             .getElementById("jaggeryValue")
@@ -536,9 +662,9 @@ async function searchSchool(){
                 " KG";
 
 
-        /* -------------------------------------------------
+        /* =================================================
            RAGI
-        ------------------------------------------------- */
+        ================================================= */
 
         document
             .getElementById("ragiValue")
@@ -547,9 +673,9 @@ async function searchSchool(){
                 " KG";
 
 
-        /* -------------------------------------------------
+        /* =================================================
            SHOW RESULT
-        ------------------------------------------------- */
+        ================================================= */
 
         result.style.display="block";
 
@@ -558,15 +684,17 @@ async function searchSchool(){
         status.style.color="#16a34a";
 
         status.textContent =
-            "Details found successfully.";
+            "✓ Details found successfully.";
 
 
-    }catch(error){
+    }
+    catch(error){
 
         console.error(
             "MDM SEARCH ERROR:",
             error
         );
+
 
         result.style.display="none";
 
@@ -574,13 +702,28 @@ async function searchSchool(){
 
         status.style.color="#dc2626";
 
-        status.textContent =
-            error.message ||
-            "Unable to retrieve school details.";
 
-    }finally{
+        if(error.name === "AbortError"){
+
+            status.textContent =
+                "Search timed out. Please try again.";
+
+        }
+        else{
+
+            status.textContent =
+                error.message ||
+                "Unable to retrieve school details.";
+
+        }
+
+    }
+    finally{
 
         searchBtn.disabled=false;
+
+        searchBtn.textContent =
+            "🔍 SEARCH DETAILS";
 
     }
 
@@ -607,43 +750,6 @@ document
     );
 
 </script>
-
-
-<style>
-
-/* =========================================================
-   PRINT
-========================================================= */
-
-@media print{
-
-    body{
-        background:white;
-        padding:0;
-    }
-
-    .mdm-container{
-        max-width:650px;
-        border:0;
-        box-shadow:none;
-    }
-
-    .header,
-    .form-area,
-    .status,
-    .download-btn{
-        display:none !important;
-    }
-
-    .result{
-        display:block !important;
-        margin:20px auto;
-        border:2px solid #000;
-    }
-
-}
-
-</style>
 
 </body>
 </html>
