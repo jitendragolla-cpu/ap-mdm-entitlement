@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>AP MDM School Entitlement</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    padding:20px 10px;
+    background:#f3f6fb;
+    font-family:Arial,sans-serif;
+}
+
+.box{
+    width:100%;
+    max-width:650px;
+    margin:auto;
+    background:#fff;
+    border:2px solid #1f48ff;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,.10);
+}
+
+.header{
+    padding:15px 10px;
+    text-align:center;
+    color:white;
+    background:linear-gradient(90deg,#ff1744,#1f48ff,#00a651);
+}
+
+.header h2{
+    margin:0;
+    font-size:20px;
+}
+
+.header p{
+    margin:5px 0 0;
+    font-size:12px;
+}
+
+.form{
+    padding:16px;
+}
+
+label{
+    display:block;
+    margin:0 0 5px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+input,select{
+    width:100%;
+    height:42px;
+    margin-bottom:12px;
+    padding:0 10px;
+    border:1px solid #b8c2d1;
+    border-radius:8px;
+    font-size:14px;
+}
+
+button{
+    width:100%;
+    height:43px;
+    border:0;
+    border-radius:8px;
+    background:linear-gradient(90deg,#1f48ff,#00a651);
+    color:white;
+    font-size:14px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:disabled{
+    opacity:.5;
+}
+
+#status{
+    margin-top:12px;
+    padding:10px;
+    text-align:center;
+    border-radius:7px;
+    font-size:13px;
+    font-weight:bold;
+    display:none;
+}
+
+.loading{
+    display:block!important;
+    background:#eef3ff;
+    color:#1f48ff;
+}
+
+.error{
+    display:block!important;
+    background:#fff0f0;
+    color:#d00000;
+}
+
+.result{
+    display:none;
+    margin:0 15px 15px;
+    border:2px solid #1f48ff;
+    border-radius:12px;
+    overflow:hidden;
+}
+
+.school{
+    padding:13px 8px;
+    text-align:center;
+    color:#fff;
+    background:linear-gradient(90deg,#1f48ff,#7b1fff,#ff1744);
+    font-size:18px;
+    font-weight:900;
+}
+
+.row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 14px;
+    border-bottom:1px solid #e4e8ef;
+}
+
+.row:last-child{
+    border-bottom:0;
+}
+
+.name{
+    font-size:14px;
+    font-weight:bold;
+}
+
+.value{
+    min-width:70px;
+    padding:7px 10px;
+    text-align:center;
+    border-radius:6px;
+    background:#1f48ff;
+    color:white;
+    font-weight:900;
+}
+
+.row:nth-child(3) .value{
+    background:#00a651;
+}
+
+.row:nth-child(4) .value{
+    background:#ff1744;
+}
+
+@media(max-width:480px){
+    body{padding:10px 5px}
+
+    .header h2{font-size:18px}
+
+    .form{padding:13px}
+
+    .result{margin:0 12px 12px}
+
+    .school{font-size:16px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <div class="header">
+        <h2>AP MDM SCHOOL ENTITLEMENT</h2>
+        <p>School Wise Entitlement Details</p>
+    </div>
+
+    <div class="form">
+
+        <label>UDISE / Institute Code</label>
+
+        <input
+            id="school"
+            type="text"
+            inputmode="numeric"
+            placeholder="Enter UDISE Code"
+        >
+
+        <label>Month</label>
+
+        <select id="month">
+            <option value="0">January</option>
+            <option value="1">February</option>
+            <option value="2">March</option>
+            <option value="3">April</option>
+            <option value="4">May</option>
+            <option value="5">June</option>
+            <option value="6">July</option>
+            <option value="7">August</option>
+            <option value="8" selected>September</option>
+            <option value="9">October</option>
+            <option value="10">November</option>
+            <option value="11">December</option>
+        </select>
+
+        <label>Year</label>
+
+        <select id="year">
+            <option>2023</option>
+            <option>2024</option>
+            <option>2025</option>
+            <option selected>2026</option>
+        </select>
+
+        <button id="search" onclick="searchSchool()">
+            SEARCH DETAILS
+        </button>
+
+        <div id="status"></div>
+
+    </div>
+
+    <div class="result" id="result">
+
+        <div class="school" id="schoolName"></div>
+
+        <div class="row">
+            <span class="name">Fine Rice</span>
+            <span class="value" id="rice">-</span>
+        </div>
+
+        <div class="row">
+            <span class="name">Jaggery</span>
+            <span class="value" id="jaggery">-</span>
+        </div>
+
+        <div class="row">
+            <span class="name">Ragi Powder</span>
+            <span class="value" id="ragi">-</span>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const API =
+"https://script.google.com/macros/s/AKfycbzc0Y7OLlQIQfXOG4Y0BB0D1hfvDEdYxudUfugeCvXI_v4fk_m2nexJZufiefdRGMLk6A/exec";
+
+
+function status(message,type){
+
+    const box=document.getElementById("status");
+
+    box.className=type;
+    box.textContent=message;
+}
+
+
+function total(obj){
+
+    if(!obj) return 0;
+
+    return Number(obj["06_08"] || 0)
+         + Number(obj["09_10"] || 0);
+}
+
+
+async function searchSchool(){
+
+    const school=
+        document.getElementById("school").value.trim();
+
+    const month=
+        document.getElementById("month").value;
+
+    const year=
+        document.getElementById("year").value;
+
+    const btn=
+        document.getElementById("search");
+
+    const result=
+        document.getElementById("result");
+
+
+    if(!school){
+
+        status(
+            "Please enter UDISE / Institute Code.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    result.style.display="none";
+
+    btn.disabled=true;
+
+    status(
+        "Searching SCM data...",
+        "loading"
+    );
+
+
+    try{
+
+        const url=
+            API+
+            "?action=search"+
+            "&school="+encodeURIComponent(school)+
+            "&month="+encodeURIComponent(month)+
+            "&year="+encodeURIComponent(year)+
+            "&_="+Date.now();
+
+
+        const response=
+            await fetch(url);
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "HTTP Error "+response.status
+            );
+
+        }
+
+
+        const data=
+            await response.json();
+
+
+        console.log("SCM RESPONSE:",data);
+
+
+        if(data.status!=="SUCCESS"){
+
+            throw new Error(
+                data.message ||
+                "School not found."
+            );
+
+        }
+
+
+        document.getElementById("schoolName")
+            .textContent=
+            data.school_name;
+
+
+        /*
+          IMPORTANT:
+          We are displaying the API requirement totals.
+          We are NOT multiplying by 25.
+        */
+
+        document.getElementById("rice")
+            .textContent=
+            total(data.rice);
+
+
+        document.getElementById("jaggery")
+            .textContent=
+            total(data.jaggery);
+
+
+        document.getElementById("ragi")
+            .textContent=
+            total(data.ragi);
+
+
+        result.style.display="block";
+
+        document.getElementById("status")
+            .style.display="none";
+
+
+    }catch(error){
+
+        console.error(error);
+
+        status(
+            "Unable to fetch result: "+
+            error.message,
+            "error"
+        );
+
+    }
+
+
+    btn.disabled=false;
+
+}
+
+</script>
+
+</body>
+</html>
