@@ -3,10 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <title>AP MDM Entitlement Search</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+    box-sizing:border-box;
+}
 
 body{
     margin:0;
@@ -46,7 +49,8 @@ label{
     color:#1e293b;
 }
 
-input,select{
+input,
+select{
     width:100%;
     padding:11px;
     border:1px solid #cbd5e1;
@@ -55,7 +59,8 @@ input,select{
     outline:none;
 }
 
-input:focus,select:focus{
+input:focus,
+select:focus{
     border-color:#2563eb;
     box-shadow:0 0 0 2px rgba(37,99,235,.12);
 }
@@ -114,9 +119,17 @@ input:focus,select:focus{
     font-size:17px;
 }
 
-.rice span:last-child{color:#2563eb}
-.jaggery span:last-child{color:#dc2626}
-.ragi span:last-child{color:#16a34a}
+.rice span:last-child{
+    color:#2563eb;
+}
+
+.jaggery span:last-child{
+    color:#dc2626;
+}
+
+.ragi span:last-child{
+    color:#16a34a;
+}
 
 .download-btn{
     display:block;
@@ -132,13 +145,24 @@ input:focus,select:focus{
 }
 
 @media(max-width:500px){
-    body{padding:8px}
-    .form-area{padding:13px}
-    .result{margin:0 13px 13px}
+
+    body{
+        padding:8px;
+    }
+
+    .form-area{
+        padding:13px;
+    }
+
+    .result{
+        margin:0 13px 13px;
+    }
+
     .download-btn{
         width:calc(100% - 26px);
         margin:0 13px 13px;
     }
+
 }
 </style>
 </head>
@@ -154,6 +178,7 @@ input:focus,select:focus{
     <div class="form-area">
 
         <label>UDISE / Institute Code</label>
+
         <input
             type="text"
             id="school"
@@ -162,6 +187,7 @@ input:focus,select:focus{
         >
 
         <label>Month</label>
+
         <select id="month">
             <option value="0">January</option>
             <option value="1">February</option>
@@ -178,6 +204,7 @@ input:focus,select:focus{
         </select>
 
         <label>Year</label>
+
         <select id="year">
             <option value="2023">2023</option>
             <option value="2024">2024</option>
@@ -185,41 +212,77 @@ input:focus,select:focus{
             <option value="2026" selected>2026</option>
         </select>
 
-        <button class="search-btn" id="searchBtn" onclick="searchSchool()">
+        <button
+            class="search-btn"
+            id="searchBtn"
+            onclick="searchSchool()">
+
             🔍 SEARCH DETAILS
+
         </button>
 
-        <div class="status" id="status"></div>
+        <div
+            class="status"
+            id="status">
+        </div>
 
     </div>
 
-    <div class="result" id="result">
 
-        <div class="school-name" id="schoolName"></div>
+    <!-- RESULT -->
+
+    <div
+        class="result"
+        id="result">
+
+        <div
+            class="school-name"
+            id="schoolName">
+        </div>
 
         <div class="item rice">
+
             <span>🍚 Fine Rice</span>
-            <span id="riceValue">0 KG</span>
+
+            <span id="riceValue">
+                0 KG
+            </span>
+
         </div>
 
         <div class="item jaggery">
+
             <span>🟠 Jaggery</span>
-            <span id="jaggeryValue">0 KG</span>
+
+            <span id="jaggeryValue">
+                0 KG
+            </span>
+
         </div>
 
         <div class="item ragi">
+
             <span>🟢 Ragi Powder</span>
-            <span id="ragiValue">0 KG</span>
+
+            <span id="ragiValue">
+                0 KG
+            </span>
+
         </div>
 
     </div>
+
+
+    <!-- PRINT / PDF -->
 
     <button
         class="download-btn"
         id="downloadBtn"
         onclick="window.print()"
         style="display:none;">
+
         📄 DOWNLOAD / PRINT PDF
+
     </button>
 
 </div>
@@ -227,51 +290,79 @@ input:focus,select:focus{
 
 <script>
 
-const API_URL =
-"https://script.google.com/macros/s/AKfycbzc0Y7OLlQIQfXOG4Y0BB0D1hfvDEdYxudUfugeCvXI_v4fk_m2nexJZufiefdRGMLk6A/exec";
+/* =========================================================
+   AP MDM APPS SCRIPT - VERSION 16
+========================================================= */
 
+const API_URL =
+"https://script.google.com/macros/s/AKfycbw3OiS5VGG3J40uGoSsQJrnwqyKN5veUOCe3vdG0AoqsMlsm36Ny-E0FEd2fX6QGvVIVA/exec";
+
+
+/* =========================================================
+   NUMBER
+========================================================= */
 
 function num(value){
+
     const n = Number(value);
+
     return Number.isFinite(n) ? n : 0;
+
 }
 
 
-/* -----------------------------
-   CALCULATIONS
------------------------------ */
+/* =========================================================
+   FINE RICE
+========================================================= */
 
 function calculateRice(data){
 
     const units =
+        num(data?.rice?.["01_05"]) +
         num(data?.rice?.["06_08"]) +
-        num(data?.rice?.["09_10"]);
+        num(data?.rice?.["09_10"]) +
+        num(data?.rice?.["11_12"]);
 
     return units * 25;
+
 }
 
+
+/* =========================================================
+   JAGGERY
+========================================================= */
 
 function calculateJaggery(data){
 
     return (
+        num(data?.jaggery?.["01_05"]) +
         num(data?.jaggery?.["06_08"]) +
-        num(data?.jaggery?.["09_10"])
+        num(data?.jaggery?.["09_10"]) +
+        num(data?.jaggery?.["11_12"])
     );
+
 }
 
+
+/* =========================================================
+   RAGI POWDER
+========================================================= */
 
 function calculateRagi(data){
 
     return (
+        num(data?.ragi?.["01_05"]) +
         num(data?.ragi?.["06_08"]) +
-        num(data?.ragi?.["09_10"])
+        num(data?.ragi?.["09_10"]) +
+        num(data?.ragi?.["11_12"])
     );
+
 }
 
 
-/* -----------------------------
-   SEARCH
------------------------------ */
+/* =========================================================
+   SEARCH SCHOOL
+========================================================= */
 
 async function searchSchool(){
 
@@ -296,38 +387,50 @@ async function searchSchool(){
     const downloadBtn =
         document.getElementById("downloadBtn");
 
-
-    /* IMPORTANT:
-       Read exactly what the user entered.
-       No school code is hard-coded here.
-    */
-
     const school =
         schoolInput.value.trim();
 
 
+    /* -----------------------------------------------------
+       VALIDATION
+    ----------------------------------------------------- */
+
     if(!school){
 
         status.style.color="#dc2626";
-        status.textContent="Please enter UDISE / Institute Code.";
+
+        status.textContent =
+            "Please enter UDISE / Institute Code.";
 
         result.style.display="none";
+
         downloadBtn.style.display="none";
 
         return;
     }
 
 
+    /* -----------------------------------------------------
+       START SEARCH
+    ----------------------------------------------------- */
+
     searchBtn.disabled=true;
 
     status.style.color="#2563eb";
-    status.textContent="Searching official MDM data...";
+
+    status.textContent =
+        "Searching official MDM data...";
 
     result.style.display="none";
+
     downloadBtn.style.display="none";
 
 
     try{
+
+        /* -------------------------------------------------
+           API URL
+        ------------------------------------------------- */
 
         const url =
             API_URL +
@@ -342,24 +445,53 @@ async function searchSchool(){
             Date.now();
 
 
+        console.log(
+            "MDM SEARCH URL:",
+            url
+        );
+
+
+        /* -------------------------------------------------
+           FETCH
+        ------------------------------------------------- */
+
         const response =
-            await fetch(url,{
-                method:"GET",
-                cache:"no-store"
-            });
+            await fetch(
+                url,
+                {
+                    method:"GET",
+                    cache:"no-store"
+                }
+            );
 
 
         if(!response.ok){
-            throw new Error("Server error: " + response.status);
+
+            throw new Error(
+                "Server error: " +
+                response.status
+            );
+
         }
 
+
+        /* -------------------------------------------------
+           JSON
+        ------------------------------------------------- */
 
         const data =
             await response.json();
 
 
-        console.log("MDM RESPONSE:",data);
+        console.log(
+            "MDM RESPONSE:",
+            data
+        );
 
+
+        /* -------------------------------------------------
+           CHECK SUCCESS
+        ------------------------------------------------- */
 
         if(data.status !== "SUCCESS"){
 
@@ -367,46 +499,77 @@ async function searchSchool(){
                 data.message ||
                 "School details not found."
             );
+
         }
 
 
-        /* -----------------------------
-           DISPLAY ONLY RETURNED SCHOOL
-        ----------------------------- */
+        /* -------------------------------------------------
+           SCHOOL NAME
+        ------------------------------------------------- */
 
-        document.getElementById("schoolName")
+        document
+            .getElementById("schoolName")
             .textContent =
-            data.school_name || "School";
+                data.school_name ||
+                "School";
 
 
-        document.getElementById("riceValue")
+        /* -------------------------------------------------
+           FINE RICE
+        ------------------------------------------------- */
+
+        document
+            .getElementById("riceValue")
             .textContent =
-            calculateRice(data) + " KG";
+                calculateRice(data) +
+                " KG";
 
 
-        document.getElementById("jaggeryValue")
+        /* -------------------------------------------------
+           JAGGERY
+        ------------------------------------------------- */
+
+        document
+            .getElementById("jaggeryValue")
             .textContent =
-            calculateJaggery(data) + " KG";
+                calculateJaggery(data) +
+                " KG";
 
 
-        document.getElementById("ragiValue")
+        /* -------------------------------------------------
+           RAGI
+        ------------------------------------------------- */
+
+        document
+            .getElementById("ragiValue")
             .textContent =
-            calculateRagi(data) + " KG";
+                calculateRagi(data) +
+                " KG";
 
+
+        /* -------------------------------------------------
+           SHOW RESULT
+        ------------------------------------------------- */
 
         result.style.display="block";
 
         downloadBtn.style.display="block";
 
         status.style.color="#16a34a";
-        status.textContent="Details found successfully.";
+
+        status.textContent =
+            "Details found successfully.";
 
 
     }catch(error){
 
-        console.error(error);
+        console.error(
+            "MDM SEARCH ERROR:",
+            error
+        );
 
         result.style.display="none";
+
         downloadBtn.style.display="none";
 
         status.style.color="#dc2626";
@@ -420,24 +583,37 @@ async function searchSchool(){
         searchBtn.disabled=false;
 
     }
+
 }
 
 
-/* Allow ENTER key */
+/* =========================================================
+   ENTER KEY
+========================================================= */
 
-document.getElementById("school")
-.addEventListener("keydown",function(e){
+document
+    .getElementById("school")
+    .addEventListener(
+        "keydown",
+        function(e){
 
-    if(e.key==="Enter"){
-        searchSchool();
-    }
+            if(e.key === "Enter"){
 
-});
+                searchSchool();
+
+            }
+
+        }
+    );
 
 </script>
 
 
 <style>
+
+/* =========================================================
+   PRINT
+========================================================= */
 
 @media print{
 
