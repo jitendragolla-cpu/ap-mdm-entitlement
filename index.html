@@ -1,718 +1,1733 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>AP SCM MDM School Wise Data Checker</title>
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>
+AP SCM MDM School Wise Allotment Checker
+</title>
+
 
 <style>
+
+/* =====================================================
+   BASIC
+===================================================== */
+
 *{
-  box-sizing:border-box;
+box-sizing:border-box;
 }
 
 body{
-  margin:0;
-  padding:15px;
-  background:#f4f7fb;
-  font-family:Arial,Helvetica,sans-serif;
-  color:#172033;
+
+margin:0;
+
+padding:12px;
+
+font-family:
+Arial,
+Helvetica,
+sans-serif;
+
+background:
+linear-gradient(
+135deg,
+#eef6ff 0%,
+#ffffff 45%,
+#effff7 100%
+);
+
+color:#172033;
+
 }
+
+
+/* =====================================================
+   MAIN WIDTH
+===================================================== */
 
 .container{
-  max-width:920px;
-  margin:auto;
+
+width:100%;
+
+max-width:860px;
+
+margin:auto;
+
 }
+
+
+/* =====================================================
+   HEADER
+===================================================== */
 
 .header{
-  background:linear-gradient(135deg,#075bff,#12a8ff);
-  color:#fff;
-  padding:16px 20px;
-  border-radius:12px;
-  text-align:center;
-  box-shadow:0 5px 18px rgba(0,0,0,.12);
+
+padding:16px 18px;
+
+border-radius:14px;
+
+text-align:center;
+
+color:#ffffff;
+
+background:
+linear-gradient(
+135deg,
+#073bce,
+#087cf0,
+#00a88f
+);
+
+box-shadow:
+0 7px 20px
+rgba(0,70,180,.22);
+
 }
 
-.header .brand{
-  font-size:15px;
-  font-weight:bold;
-  margin-bottom:4px;
+.brand{
+
+font-size:14px;
+
+font-weight:900;
+
+letter-spacing:.3px;
+
 }
 
 .header h1{
-  margin:0;
-  font-size:22px;
+
+margin:4px 0 0;
+
+font-size:21px;
+
+font-weight:900;
+
 }
 
 .header p{
-  margin:5px 0 0;
-  font-size:12px;
-  opacity:.95;
+
+margin:5px 0 0;
+
+font-size:11px;
+
 }
 
+
+/* =====================================================
+   SEARCH CARD
+===================================================== */
+
 .card{
-  background:#fff;
-  margin-top:12px;
-  padding:15px;
-  border-radius:12px;
-  box-shadow:0 3px 12px rgba(0,0,0,.08);
+
+background:#ffffff;
+
+margin-top:11px;
+
+padding:14px;
+
+border-radius:14px;
+
+box-shadow:
+0 5px 18px
+rgba(15,23,42,.09);
+
 }
 
 .title{
-  font-size:15px;
-  font-weight:bold;
-  color:#075bff;
-  margin-bottom:10px;
+
+font-size:14px;
+
+font-weight:900;
+
+color:#1746d1;
+
+margin-bottom:9px;
+
 }
+
 
 .grid{
-  display:grid;
-  grid-template-columns:1.5fr 1fr 1fr;
-  gap:10px;
+
+display:grid;
+
+grid-template-columns:
+1.55fr 1fr 1fr;
+
+gap:9px;
+
 }
 
+
 .field label{
-  display:block;
-  font-size:12px;
-  font-weight:bold;
-  margin-bottom:5px;
-  color:#475569;
+
+display:block;
+
+margin-bottom:4px;
+
+font-size:11px;
+
+font-weight:800;
+
+color:#475569;
+
 }
+
 
 input,
 select{
-  width:100%;
-  height:42px;
-  border:1px solid #ccd5e1;
-  border-radius:8px;
-  padding:0 10px;
-  font-size:14px;
-  background:#fff;
-  outline:none;
+
+width:100%;
+
+height:41px;
+
+padding:0 10px;
+
+border-radius:8px;
+
+border:1px solid #cbd5e1;
+
+background:#ffffff;
+
+font-size:13px;
+
+outline:none;
+
 }
+
 
 input:focus,
 select:focus{
-  border-color:#075bff;
-  box-shadow:0 0 0 2px rgba(7,91,255,.08);
+
+border-color:#1463e6;
+
+box-shadow:
+0 0 0 3px
+rgba(20,99,230,.10);
+
 }
 
-button{
-  width:100%;
-  border:0;
-  border-radius:8px;
-  height:42px;
-  margin-top:11px;
-  background:linear-gradient(90deg,#075bff,#00a8ff);
-  color:#fff;
-  font-size:14px;
-  font-weight:bold;
-  cursor:pointer;
+
+/* =====================================================
+   SEARCH BUTTON
+===================================================== */
+
+.main-btn{
+
+width:100%;
+
+height:42px;
+
+margin-top:10px;
+
+border:0;
+
+border-radius:9px;
+
+color:#ffffff;
+
+font-size:13px;
+
+font-weight:900;
+
+cursor:pointer;
+
+background:
+linear-gradient(
+90deg,
+#0846dc,
+#008cf0,
+#00a589
+);
+
+box-shadow:
+0 5px 13px
+rgba(0,100,220,.20);
+
 }
 
-button:hover{
-  opacity:.92;
+.main-btn:hover{
+
+transform:translateY(-1px);
+
 }
 
-button:disabled{
-  opacity:.55;
-  cursor:not-allowed;
+.main-btn:disabled{
+
+opacity:.55;
+
+cursor:not-allowed;
+
 }
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.loading{
+
+display:none;
+
+text-align:center;
+
+padding:10px;
+
+font-size:12px;
+
+font-weight:900;
+
+color:#0757d5;
+
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
 
 .status{
-  display:none;
-  margin-top:12px;
-  padding:9px 12px;
-  border-radius:8px;
-  font-size:13px;
-  font-weight:bold;
-  text-align:center;
+
+display:none;
+
+margin-top:9px;
+
+padding:9px;
+
+border-radius:9px;
+
+text-align:center;
+
+font-size:12px;
+
+font-weight:900;
+
 }
 
 .status.success{
-  display:block;
-  background:#dcfce7;
-  color:#15803d;
-  border:1px solid #86efac;
+
+display:block;
+
+color:#047857;
+
+background:#dcfce7;
+
+border:1px solid #86efac;
+
 }
 
 .status.error{
-  display:block;
-  background:#fee2e2;
-  color:#b91c1c;
-  border:1px solid #fca5a5;
+
+display:block;
+
+color:#b91c1c;
+
+background:#fee2e2;
+
+border:1px solid #fca5a5;
+
 }
 
-.loading{
-  display:none;
-  text-align:center;
-  padding:14px;
-  font-size:13px;
-  color:#075bff;
-  font-weight:bold;
-}
+
+/* =====================================================
+   REPORT
+===================================================== */
 
 .report{
-  display:none;
+
+display:none;
+
 }
 
-.report-head{
-  background:linear-gradient(135deg,#075bff,#087fdd);
-  color:#fff;
-  padding:12px 14px;
-  border-radius:9px;
-  font-weight:bold;
-  font-size:15px;
-  margin-bottom:10px;
+
+.report-title{
+
+padding:11px;
+
+border-radius:10px;
+
+text-align:center;
+
+color:#ffffff;
+
+font-size:15px;
+
+font-weight:900;
+
+background:
+linear-gradient(
+90deg,
+#073bc9,
+#006ee8,
+#00a68a
+);
+
+box-shadow:
+0 4px 12px
+rgba(0,80,180,.18);
+
 }
+
+
+.school-name{
+
+margin:10px 0;
+
+text-align:center;
+
+font-size:18px;
+
+font-weight:900;
+
+color:#123fca;
+
+}
+
+
+/* =====================================================
+   SCHOOL INFORMATION
+===================================================== */
 
 .info-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:8px;
+
+display:grid;
+
+grid-template-columns:
+repeat(4,1fr);
+
+gap:7px;
+
 }
+
 
 .info{
-  background:#f8fafc;
-  border:1px solid #e2e8f0;
-  border-radius:8px;
-  padding:9px 10px;
+
+padding:9px;
+
+border-radius:8px;
+
+background:
+linear-gradient(
+135deg,
+#f8fbff,
+#ffffff
+);
+
+border:1px solid #dbeafe;
+
 }
+
 
 .info .label{
-  font-size:10px;
-  color:#64748b;
-  font-weight:bold;
-  text-transform:uppercase;
+
+margin:0;
+
+font-size:9px;
+
+font-weight:900;
+
+color:#64748b;
+
+text-transform:uppercase;
+
 }
+
 
 .info .value{
-  margin-top:3px;
-  font-size:13px;
-  font-weight:bold;
-  word-break:break-word;
+
+margin-top:3px;
+
+font-size:12px;
+
+font-weight:900;
+
+color:#172033;
+
+word-break:break-word;
+
 }
+
+
+/* =====================================================
+   COMMODITY CARDS
+===================================================== */
 
 .commodities{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:9px;
-  margin-top:10px;
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:12px;
+
+margin-top:13px;
+
 }
+
+
+/* =====================================================
+   COMMON COMMODITY
+===================================================== */
 
 .commodity{
-  border-radius:9px;
-  padding:12px 9px;
-  text-align:center;
-  border:1px solid #dbeafe;
-  background:#f8fbff;
+
+position:relative;
+
+overflow:hidden;
+
+min-height:190px;
+
+padding:12px 8px;
+
+text-align:center;
+
+border-radius:16px;
+
+box-shadow:
+0 7px 16px
+rgba(0,0,0,.12);
+
+transition:
+transform .2s,
+box-shadow .2s;
+
 }
+
+
+.commodity:hover{
+
+transform:
+translateY(-3px);
+
+box-shadow:
+0 11px 22px
+rgba(0,0,0,.17);
+
+}
+
+
+/* =====================================================
+   JAGGERY
+===================================================== */
+
+.jaggery{
+
+background:
+linear-gradient(
+145deg,
+#fff8d8,
+#ffd166,
+#f59e0b
+);
+
+border:
+2px solid #f59e0b;
+
+}
+
+
+.jaggery h3{
+
+color:#874700;
+
+}
+
+
+/* =====================================================
+   RAGI
+===================================================== */
+
+.ragi{
+
+background:
+linear-gradient(
+145deg,
+#f5eaff,
+#d8b4fe,
+#a855f7
+);
+
+border:
+2px solid #9333ea;
+
+}
+
+
+.ragi h3{
+
+color:#5b21b6;
+
+}
+
+
+/* =====================================================
+   RICE
+===================================================== */
+
+.rice{
+
+background:
+linear-gradient(
+145deg,
+#e0f8ff,
+#7dd3fc,
+#06b6d4
+);
+
+border:
+2px solid #0284c7;
+
+}
+
+
+.rice h3{
+
+color:#075985;
+
+}
+
+
+/* =====================================================
+   DECORATIVE CIRCLES
+===================================================== */
+
+.commodity::before{
+
+content:"";
+
+position:absolute;
+
+width:110px;
+
+height:110px;
+
+right:-50px;
+
+top:-50px;
+
+border-radius:50%;
+
+background:
+rgba(255,255,255,.25);
+
+}
+
+
+.commodity::after{
+
+content:"";
+
+position:absolute;
+
+width:75px;
+
+height:75px;
+
+left:-38px;
+
+bottom:-38px;
+
+border-radius:50%;
+
+background:
+rgba(255,255,255,.18);
+
+}
+
+
+/* =====================================================
+   PRODUCT IMAGE
+===================================================== */
+
+.product-image{
+
+width:66px;
+
+height:66px;
+
+margin:0 auto 6px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+border-radius:50%;
+
+background:
+rgba(255,255,255,.86);
+
+box-shadow:
+0 4px 10px
+rgba(0,0,0,.13);
+
+position:relative;
+
+z-index:3;
+
+}
+
+
+.product-image svg{
+
+width:49px;
+
+height:49px;
+
+}
+
+
+/* =====================================================
+   PRODUCT TITLE
+===================================================== */
 
 .commodity h3{
-  margin:0 0 7px;
-  font-size:12px;
-  color:#075bff;
+
+position:relative;
+
+z-index:3;
+
+margin:4px 0 6px;
+
+font-size:12px;
+
+font-weight:900;
+
 }
 
-.quantity{
-  font-size:20px;
-  font-weight:bold;
-  color:#111827;
+
+/* =====================================================
+   QUANTITY
+===================================================== */
+
+.qty{
+
+position:relative;
+
+z-index:3;
+
+font-size:29px;
+
+line-height:1;
+
+font-weight:900;
+
+color:#111827;
+
 }
+
+
+/* =====================================================
+   PACKETS / BAGS
+===================================================== */
 
 .unit{
-  font-size:11px;
-  color:#64748b;
-  margin-top:3px;
+
+position:relative;
+
+z-index:3;
+
+margin-top:4px;
+
+font-size:10px;
+
+font-weight:800;
+
+color:#334155;
+
 }
+
+
+/* =====================================================
+   WEIGHT
+===================================================== */
 
 .weight{
-  font-size:12px;
-  font-weight:bold;
-  margin-top:7px;
-  color:#334155;
+
+position:relative;
+
+z-index:3;
+
+display:inline-block;
+
+margin-top:8px;
+
+padding:5px 13px;
+
+border-radius:20px;
+
+background:
+rgba(255,255,255,.90);
+
+color:#111827;
+
+font-size:12px;
+
+font-weight:900;
+
+box-shadow:
+0 2px 5px
+rgba(0,0,0,.10);
+
 }
+
+
+/* =====================================================
+   ALLOTMENT LABEL
+===================================================== */
+
+.allotted{
+
+position:relative;
+
+z-index:3;
+
+margin-top:7px;
+
+font-size:9px;
+
+font-weight:900;
+
+letter-spacing:.7px;
+
+color:#334155;
+
+}
+
+
+/* =====================================================
+   OFFICIAL STATUS
+===================================================== */
 
 .official{
-  margin-top:10px;
-  background:#ecfdf5;
-  border:1px solid #86efac;
-  color:#15803d;
-  padding:10px;
-  border-radius:8px;
-  text-align:center;
-  font-size:12px;
-  font-weight:bold;
+
+margin-top:11px;
+
+padding:10px;
+
+border-radius:9px;
+
+text-align:center;
+
+font-size:11px;
+
+font-weight:900;
+
+color:#047857;
+
+background:
+linear-gradient(
+90deg,
+#dcfce7,
+#ecfdf5
+);
+
+border:
+1px solid #86efac;
+
 }
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
 
 .actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-top:10px;
+
+display:grid;
+
+grid-template-columns:
+1fr 1fr;
+
+gap:8px;
+
+margin-top:10px;
+
 }
+
 
 .actions button{
-  margin:0;
+
+height:40px;
+
+border:0;
+
+border-radius:8px;
+
+color:#ffffff;
+
+font-size:12px;
+
+font-weight:900;
+
+cursor:pointer;
+
 }
+
 
 .print{
-  background:#334155;
+
+background:
+linear-gradient(
+90deg,
+#334155,
+#0f172a
+);
+
 }
+
 
 .reset{
-  background:#0f766e;
+
+background:
+linear-gradient(
+90deg,
+#0f766e,
+#059669
+);
+
 }
+
+
+/* =====================================================
+   NOTE
+===================================================== */
 
 .note{
-  text-align:center;
-  color:#64748b;
-  font-size:10px;
-  margin:12px 0 2px;
-  line-height:1.5;
+
+margin-top:9px;
+
+text-align:center;
+
+font-size:9px;
+
+line-height:1.5;
+
+color:#64748b;
+
 }
 
-@media(max-width:650px){
 
-  body{
-    padding:8px;
-  }
+/* =====================================================
+   MOBILE
+===================================================== */
 
-  .header{
-    padding:13px 10px;
-  }
+@media(max-width:700px){
 
-  .header h1{
-    font-size:18px;
-  }
+body{
 
-  .grid{
-    grid-template-columns:1fr;
-  }
+padding:7px;
 
-  .info-grid{
-    grid-template-columns:1fr;
-  }
-
-  .commodities{
-    grid-template-columns:1fr;
-  }
-
-  .card{
-    padding:11px;
-  }
 }
+
+
+.header{
+
+padding:13px 10px;
+
+}
+
+
+.header h1{
+
+font-size:18px;
+
+}
+
+
+.grid{
+
+grid-template-columns:1fr;
+
+}
+
+
+.info-grid{
+
+grid-template-columns:
+repeat(2,1fr);
+
+}
+
+
+.commodities{
+
+grid-template-columns:1fr;
+
+gap:10px;
+
+}
+
+
+.commodity{
+
+min-height:170px;
+
+}
+
+}
+
+
+/* =====================================================
+   PRINT
+===================================================== */
 
 @media print{
 
-  body{
-    background:#fff;
-    padding:0;
-  }
+body{
 
-  .search-card,
-  .actions,
-  .note{
-    display:none!important;
-  }
+padding:0;
 
-  .card{
-    box-shadow:none;
-    margin:0;
-  }
+background:#ffffff;
 
-  .report{
-    display:block!important;
-  }
 }
+
+
+.search-card,
+.actions,
+.note,
+.status,
+.loading{
+
+display:none!important;
+
+}
+
+
+.report{
+
+display:block!important;
+
+box-shadow:none;
+
+margin:0;
+
+}
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <div class="container">
 
-  <!-- HEADER -->
 
-  <div class="header">
+<!-- =================================================
+     HEADER
+================================================== -->
 
-    <div class="brand">
-      TeachersBook.in
-    </div>
+<div class="header">
 
-    <h1>
-      AP SCM MDM – School Wise Data Checker
-    </h1>
+<div class="brand">
+TeachersBook.in
+</div>
 
-    <p>
-      Check school MDM data using DISE / UDISE Code
-    </p>
+<h1>
+AP SCM MDM – School Wise Allotment Checker
+</h1>
 
-  </div>
-
-
-  <!-- SEARCH CARD -->
-
-  <div class="card search-card">
-
-    <div class="title">
-      Enter School Details
-    </div>
-
-    <div class="grid">
-
-      <!-- UDISE -->
-
-      <div class="field">
-
-        <label>
-          DISE / UDISE Code
-        </label>
-
-        <input
-          type="text"
-          id="udise"
-          maxlength="11"
-          inputmode="numeric"
-          placeholder="Enter 11-digit UDISE code"
-          autocomplete="off"
-        >
-
-      </div>
-
-
-      <!-- MONTH -->
-
-      <div class="field">
-
-        <label>
-          Month
-        </label>
-
-        <select id="month">
-
-          <option value="1">January</option>
-          <option value="2">February</option>
-          <option value="3">March</option>
-          <option value="4">April</option>
-          <option value="5">May</option>
-          <option value="6">June</option>
-          <option value="7">July</option>
-          <option value="8">August</option>
-          <option value="9">September</option>
-          <option value="10" selected>October</option>
-          <option value="11">November</option>
-          <option value="12">December</option>
-
-        </select>
-
-      </div>
-
-
-      <!-- YEAR -->
-
-      <div class="field">
-
-        <label>
-          Year
-        </label>
-
-        <select id="year">
-
-          <option value="2026" selected>
-            2026
-          </option>
-
-          <option value="2027">
-            2027
-          </option>
-
-          <option value="2028">
-            2028
-          </option>
-
-        </select>
-
-      </div>
-
-    </div>
-
-
-    <button id="checkBtn">
-      Check MDM Data
-    </button>
-
-
-    <div id="loading" class="loading">
-      Searching official SCM MDM data...
-    </div>
-
-
-    <div id="status" class="status"></div>
-
-  </div>
-
-
-  <!-- REPORT -->
-
-  <div id="report" class="card report">
-
-    <div class="report-head">
-      ✓ MDM Data Found
-    </div>
-
-
-    <div class="info-grid">
-
-      <div class="info">
-
-        <div class="label">
-          School Name
-        </div>
-
-        <div class="value" id="rSchool">
-          -
-        </div>
-
-      </div>
-
-
-      <div class="info">
-
-        <div class="label">
-          School Code
-        </div>
-
-        <div class="value" id="rSchoolCode">
-          -
-        </div>
-
-      </div>
-
-
-      <div class="info">
-
-        <div class="label">
-          District
-        </div>
-
-        <div class="value" id="rDistrict">
-          -
-        </div>
-
-      </div>
-
-
-      <div class="info">
-
-        <div class="label">
-          District Code
-        </div>
-
-        <div class="value" id="rDistrictCode">
-          -
-        </div>
-
-      </div>
-
-
-      <div class="info">
-
-        <div class="label">
-          Mandal / Depot
-        </div>
-
-        <div class="value" id="rMandal">
-          -
-        </div>
-
-      </div>
-
-
-      <div class="info">
-
-        <div class="label">
-          Depot Code
-        </div>
-
-        <div class="value" id="rDepotCode">
-          -
-        </div>
-
-      </div>
-
-
-      <div class="info">
-
-        <div class="label">
-          Allotment Month
-        </div>
-
-        <div class="value" id="rMonth">
-          -
-        </div>
-
-      </div>
-
-
-      <div class="info">
-
-        <div class="label">
-          Allotment Year
-        </div>
-
-        <div class="value" id="rYear">
-          -
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- COMMODITIES -->
-
-    <div class="commodities">
-
-
-      <!-- JAGGERY -->
-
-      <div class="commodity">
-
-        <h3>
-          JAGGERY
-        </h3>
-
-        <div
-          class="quantity"
-          id="rJaggery"
-        >
-          0
-        </div>
-
-        <div class="unit">
-          Packets
-        </div>
-
-        <div
-          class="weight"
-          id="rJaggeryWeight"
-        >
-          0 Kg
-        </div>
-
-      </div>
-
-
-      <!-- RAGI -->
-
-      <div class="commodity">
-
-        <h3>
-          RAGI POWDER
-        </h3>
-
-        <div
-          class="quantity"
-          id="rRagi"
-        >
-          0
-        </div>
-
-        <div class="unit">
-          Packets
-        </div>
-
-        <div
-          class="weight"
-          id="rRagiWeight"
-        >
-          0 Kg
-        </div>
-
-      </div>
-
-
-      <!-- RICE -->
-
-      <div class="commodity">
-
-        <h3>
-          F FINE RICE
-        </h3>
-
-        <div
-          class="quantity"
-          id="rRice"
-        >
-          0
-        </div>
-
-        <div class="unit">
-          Bags
-        </div>
-
-        <div
-          class="weight"
-          id="rRiceWeight"
-        >
-          0 Kg
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- OFFICIAL STATUS -->
-
-    <div class="official">
-      ✓ OFFICIAL SCM STATUS — SUCCESS
-    </div>
-
-
-    <!-- ACTIONS -->
-
-    <div class="actions">
-
-      <button
-        class="print"
-        onclick="window.print()"
-      >
-        Print / PDF
-      </button>
-
-      <button
-        class="reset"
-        onclick="resetChecker()"
-      >
-        Check Another
-      </button>
-
-    </div>
-
-
-    <div class="note">
-
-      Data displayed from the Andhra Pradesh SCM MDM system.
-      This website is an independent information utility and is
-      not an official Government of Andhra Pradesh website.
-
-    </div>
-
-  </div>
+<p>
+Official MDM allotted quantity using DISE / UDISE Code
+</p>
 
 </div>
 
 
+
+<!-- =================================================
+     SEARCH
+================================================== -->
+
+<div class="card search-card">
+
+
+<div class="title">
+Enter School Details
+</div>
+
+
+<div class="grid">
+
+
+<div class="field">
+
+<label>
+DISE / UDISE Code
+</label>
+
+<input
+type="text"
+id="udise"
+maxlength="11"
+inputmode="numeric"
+autocomplete="off"
+placeholder="Enter 11-digit UDISE code"
+>
+
+</div>
+
+
+
+<div class="field">
+
+<label>
+Month
+</label>
+
+<select id="month">
+
+<option value="1">
+January
+</option>
+
+<option value="2">
+February
+</option>
+
+<option value="3">
+March
+</option>
+
+<option value="4">
+April
+</option>
+
+<option value="5">
+May
+</option>
+
+<option value="6">
+June
+</option>
+
+<option value="7">
+July
+</option>
+
+<option value="8">
+August
+</option>
+
+<option value="9">
+September
+</option>
+
+<option value="10" selected>
+October
+</option>
+
+<option value="11">
+November
+</option>
+
+<option value="12">
+December
+</option>
+
+</select>
+
+</div>
+
+
+
+<div class="field">
+
+<label>
+Year
+</label>
+
+<select id="year">
+
+<option value="2026" selected>
+2026
+</option>
+
+<option value="2027">
+2027
+</option>
+
+<option value="2028">
+2028
+</option>
+
+<option value="2029">
+2029
+</option>
+
+<option value="2030">
+2030
+</option>
+
+</select>
+
+</div>
+
+
+</div>
+
+
+
+<button
+class="main-btn"
+id="checkBtn"
+>
+
+CHECK MDM ALLOTMENT
+
+</button>
+
+
+
+<div
+class="loading"
+id="loading"
+>
+
+Searching official SCM allotment data...
+
+</div>
+
+
+
+<div
+class="status"
+id="status"
+></div>
+
+
+</div>
+
+
+
+<!-- =================================================
+     REPORT
+================================================== -->
+
+<div
+class="card report"
+id="report"
+>
+
+
+<div class="report-title">
+
+✓ MDM ALLOTMENT DATA FOUND
+
+</div>
+
+
+
+<div
+class="school-name"
+id="rSchool"
+>
+-
+</div>
+
+
+
+<!-- SCHOOL INFORMATION -->
+
+<div class="info-grid">
+
+
+<div class="info">
+
+<div class="label">
+School Code
+</div>
+
+<div
+class="value"
+id="rSchoolCode"
+>
+-
+</div>
+
+</div>
+
+
+
+<div class="info">
+
+<div class="label">
+District
+</div>
+
+<div
+class="value"
+id="rDistrict"
+>
+-
+</div>
+
+</div>
+
+
+
+<div class="info">
+
+<div class="label">
+District Code
+</div>
+
+<div
+class="value"
+id="rDistrictCode"
+>
+-
+</div>
+
+</div>
+
+
+
+<div class="info">
+
+<div class="label">
+Depot / Mandal
+</div>
+
+<div
+class="value"
+id="rDepot"
+>
+-
+</div>
+
+</div>
+
+
+
+<div class="info">
+
+<div class="label">
+Depot Code
+</div>
+
+<div
+class="value"
+id="rDepotCode"
+>
+-
+</div>
+
+</div>
+
+
+
+<div class="info">
+
+<div class="label">
+Allotment Month
+</div>
+
+<div
+class="value"
+id="rMonth"
+>
+-
+</div>
+
+</div>
+
+
+
+<div class="info">
+
+<div class="label">
+Allotment Year
+</div>
+
+<div
+class="value"
+id="rYear"
+>
+-
+</div>
+
+</div>
+
+
+
+<div class="info">
+
+<div class="label">
+Source
+</div>
+
+<div class="value">
+SCM MDM
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- =================================================
+     COMMODITY CARDS
+================================================== -->
+
+<div class="commodities">
+
+
+
+<!-- ================= JAGGERY ================= -->
+
+<div class="commodity jaggery">
+
+
+<div class="product-image">
+
+
+<svg viewBox="0 0 64 64">
+
+<path
+d="M18 20h28l5 8-5 24H18l-5-24z"
+fill="#b96910"
+stroke="#713f12"
+stroke-width="3"
+/>
+
+<path
+d="M18 20h28v9H18z"
+fill="#f59e0b"
+stroke="#713f12"
+stroke-width="3"
+/>
+
+<path
+d="M24 36h16"
+stroke="#ffe7a3"
+stroke-width="4"
+stroke-linecap="round"
+/>
+
+<path
+d="M23 43h18"
+stroke="#ffe7a3"
+stroke-width="4"
+stroke-linecap="round"
+/>
+
+</svg>
+
+
+</div>
+
+
+<h3>
+JAGGERY 1 KG
+</h3>
+
+
+<div
+class="qty"
+id="rJaggery"
+>
+0
+</div>
+
+
+<div class="unit">
+PACKETS
+</div>
+
+
+<div
+class="weight"
+id="rJaggeryWeight"
+>
+0 Kg
+</div>
+
+
+<div class="allotted">
+✓ OFFICIAL ALLOTMENT
+</div>
+
+
+</div>
+
+
+
+<!-- ================= RAGI ================= -->
+
+<div class="commodity ragi">
+
+
+<div class="product-image">
+
+
+<svg viewBox="0 0 64 64">
+
+<path
+d="M32 54V17"
+stroke="#166534"
+stroke-width="4"
+stroke-linecap="round"
+/>
+
+<path
+d="M32 27
+C23 19 16 20 13 24
+C17 32 24 35 32 33"
+fill="#7c3aed"
+stroke="#4c1d95"
+stroke-width="2"
+/>
+
+<path
+d="M32 36
+C41 28 48 29 51 33
+C47 41 40 44 32 42"
+fill="#9333ea"
+stroke="#4c1d95"
+stroke-width="2"
+/>
+
+<circle
+cx="22"
+cy="25"
+r="3"
+fill="#c4b5fd"
+/>
+
+<circle
+cx="18"
+cy="29"
+r="3"
+fill="#c4b5fd"
+/>
+
+<circle
+cx="42"
+cy="34"
+r="3"
+fill="#c4b5fd"
+/>
+
+<circle
+cx="46"
+cy="38"
+r="3"
+fill="#c4b5fd"
+/>
+
+</svg>
+
+
+</div>
+
+
+<h3>
+RAGI POWDER 1 KG
+</h3>
+
+
+<div
+class="qty"
+id="rRagi"
+>
+0
+</div>
+
+
+<div class="unit">
+PACKETS
+</div>
+
+
+<div
+class="weight"
+id="rRagiWeight"
+>
+0 Kg
+</div>
+
+
+<div class="allotted">
+✓ OFFICIAL ALLOTMENT
+</div>
+
+
+</div>
+
+
+
+<!-- ================= RICE ================= -->
+
+<div class="commodity rice">
+
+
+<div class="product-image">
+
+
+<svg viewBox="0 0 64 64">
+
+<path
+d="M20 14h24l4 9H16z"
+fill="#dbeafe"
+stroke="#0369a1"
+stroke-width="3"
+/>
+
+<path
+d="M17 23h30v29H17z"
+fill="#ffffff"
+stroke="#0369a1"
+stroke-width="3"
+/>
+
+<path
+d="M23 32
+C27 27 30 37 34 32
+C38 27 41 37 45 32"
+fill="none"
+stroke="#0ea5e9"
+stroke-width="3"
+/>
+
+<path
+d="M23 42
+C27 37 30 47 34 42
+C38 37 41 47 45 42"
+fill="none"
+stroke="#38bdf8"
+stroke-width="3"
+/>
+
+</svg>
+
+
+</div>
+
+
+<h3>
+F FINE RICE 25 KG
+</h3>
+
+
+<div
+class="qty"
+id="rRice"
+>
+0
+</div>
+
+
+<div class="unit">
+BAGS
+</div>
+
+
+<div
+class="weight"
+id="rRiceWeight"
+>
+0 Kg
+</div>
+
+
+<div class="allotted">
+✓ OFFICIAL ALLOTMENT
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- =================================================
+     OFFICIAL STATUS
+================================================== -->
+
+<div class="official">
+
+✓ OFFICIAL SCM STATUS — SUCCESS
+&nbsp; | &nbsp;
+ALLOTTED QUANTITY ONLY
+
+</div>
+
+
+
+<!-- =================================================
+     ACTION BUTTONS
+================================================== -->
+
+<div class="actions">
+
+
+<button
+class="print"
+onclick="window.print()"
+>
+
+PRINT / PDF
+
+</button>
+
+
+
+<button
+class="reset"
+onclick="resetChecker()"
+>
+
+CHECK ANOTHER
+
+</button>
+
+
+</div>
+
+
+
+<div class="note">
+
+Data is displayed from the Andhra Pradesh SCM MDM system.
+TeachersBook.in is an independent information utility and
+is not an official Government of Andhra Pradesh website.
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
 <script>
 
+
 /* =====================================================
-   APPS SCRIPT BACKEND
+   APPS SCRIPT URL
 ===================================================== */
 
 const API =
 "https://script.google.com/macros/s/AKfycbw3OiS5VGG3J40uGoSsQJrnwqyKN5veUOCe3vdG0AoqsMlsm36Ny-E0FEd2fX6QGvVIVA/exec";
+
 
 
 /* =====================================================
@@ -741,407 +1756,540 @@ const report =
 document.getElementById("report");
 
 
+
 /* =====================================================
-   ONLY NUMBERS IN UDISE FIELD
+   ONLY NUMBERS IN UDISE
 ===================================================== */
 
 udise.addEventListener(
-  "input",
-  function(){
+"input",
+function(){
 
-    this.value =
-      this.value.replace(
-        /\D/g,
-        ""
-      ).slice(
-        0,
-        11
-      );
+this.value =
+this.value
+.replace(/\D/g,"")
+.slice(0,11);
 
-  }
+}
 );
 
 
+
 /* =====================================================
-   CHECK BUTTON
+   BUTTON
 ===================================================== */
 
 checkBtn.addEventListener(
-  "click",
-  searchMDM
+"click",
+searchMDM
 );
 
 
+
 /* =====================================================
-   SEARCH MDM
+   ENTER KEY
+===================================================== */
+
+udise.addEventListener(
+"keydown",
+function(e){
+
+if(e.key === "Enter"){
+
+searchMDM();
+
+}
+
+}
+);
+
+
+
+/* =====================================================
+   SEARCH
 ===================================================== */
 
 async function searchMDM(){
 
-  const schoolCode =
-    udise.value.trim();
 
-  const selectedMonth =
-    month.value;
-
-  const selectedYear =
-    year.value;
+const schoolCode =
+udise.value.trim();
 
 
-  /* VALIDATE UDISE */
-
-  if(
-    !/^\d{11}$/.test(
-      schoolCode
-    )
-  ){
-
-    showStatus(
-      "Please enter a valid 11-digit DISE / UDISE code.",
-      true
-    );
-
-    udise.focus();
-
-    return;
-
-  }
+const selectedMonth =
+month.value;
 
 
-  /* START LOADING */
-
-  checkBtn.disabled =
-    true;
-
-  loading.style.display =
-    "block";
-
-  statusBox.style.display =
-    "none";
-
-  report.style.display =
-    "none";
+const selectedYear =
+year.value;
 
 
-  try{
 
-    const url =
-      new URL(API);
+/* VALIDATION */
 
+if(
+!/^\d{11}$/.test(
+schoolCode
+)
+){
 
-    url.searchParams.set(
-      "action",
-      "search"
-    );
+showStatus(
+"Please enter a valid 11-digit DISE / UDISE code.",
+true
+);
 
+udise.focus();
 
-    url.searchParams.set(
-      "school",
-      schoolCode
-    );
-
-
-    url.searchParams.set(
-      "month",
-      selectedMonth
-    );
-
-
-    url.searchParams.set(
-      "year",
-      selectedYear
-    );
-
-
-    const response =
-      await fetch(
-        url.toString(),
-        {
-          method:"GET",
-          cache:"no-store"
-        }
-      );
-
-
-    if(!response.ok){
-
-      throw new Error(
-        "Server error: HTTP " +
-        response.status
-      );
-
-    }
-
-
-    const data =
-      await response.json();
-
-
-    /* ERROR FROM APPS SCRIPT */
-
-    if(
-      !data ||
-      data.status !== "SUCCESS"
-    ){
-
-      throw new Error(
-        data &&
-        data.message
-          ? data.message
-          : "MDM data not found."
-      );
-
-    }
-
-
-    /* SHOW REPORT */
-
-    showReport(
-      data
-    );
-
-
-    showStatus(
-      "MDM Data Found Successfully",
-      false
-    );
-
-
-  }catch(err){
-
-    showStatus(
-      err.message ||
-      "Unable to retrieve MDM data.",
-      true
-    );
-
-  }finally{
-
-    loading.style.display =
-      "none";
-
-    checkBtn.disabled =
-      false;
-
-  }
+return;
 
 }
+
+
+
+/* LOADING */
+
+checkBtn.disabled =
+true;
+
+loading.style.display =
+"block";
+
+statusBox.style.display =
+"none";
+
+report.style.display =
+"none";
+
+
+
+try{
+
+
+const url =
+new URL(API);
+
+
+
+url.searchParams.set(
+"action",
+"search"
+);
+
+
+url.searchParams.set(
+"school",
+schoolCode
+);
+
+
+url.searchParams.set(
+"month",
+selectedMonth
+);
+
+
+url.searchParams.set(
+"year",
+selectedYear
+);
+
+
+
+const response =
+await fetch(
+url.toString(),
+{
+method:"GET",
+cache:"no-store"
+}
+);
+
+
+
+if(!response.ok){
+
+throw new Error(
+"Server error: HTTP " +
+response.status
+);
+
+}
+
+
+
+const data =
+await response.json();
+
+
+
+if(
+!data ||
+data.status !== "SUCCESS"
+){
+
+throw new Error(
+
+data &&
+data.message
+
+?
+
+data.message
+
+:
+
+"MDM allotment data not found."
+
+);
+
+}
+
+
+
+/* SHOW REPORT */
+
+showReport(
+data
+);
+
+
+
+showStatus(
+"MDM allotment data found successfully.",
+false
+);
+
+
+
+}
+
+catch(err){
+
+
+showStatus(
+
+err.message ||
+
+"Unable to retrieve MDM data.",
+
+true
+
+);
+
+
+}
+
+finally{
+
+
+loading.style.display =
+"none";
+
+checkBtn.disabled =
+false;
+
+
+}
+
+}
+
 
 
 /* =====================================================
-   SHOW REPORT
+   DISPLAY REPORT
 ===================================================== */
 
-function showReport(
-  data
-){
-
-  document.getElementById(
-    "rSchool"
-  ).textContent =
-    data.school_name ||
-    "-";
+function showReport(data){
 
 
-  document.getElementById(
-    "rSchoolCode"
-  ).textContent =
-    data.school_code ||
-    "-";
+
+/* SCHOOL */
+
+document.getElementById(
+"rSchool"
+).textContent =
+
+data.school_name ||
+
+"-";
 
 
-  document.getElementById(
-    "rDistrict"
-  ).textContent =
-    data.district ||
-    "-";
+
+/* SCHOOL CODE */
+
+document.getElementById(
+"rSchoolCode"
+).textContent =
+
+data.school_code ||
+
+"-";
 
 
-  document.getElementById(
-    "rDistrictCode"
-  ).textContent =
-    data.district_code ||
-    "-";
+
+/* DISTRICT */
+
+document.getElementById(
+"rDistrict"
+).textContent =
+
+data.district ||
+
+"-";
 
 
-  document.getElementById(
-    "rMandal"
-  ).textContent =
-    data.depot ||
-    "-";
+
+/* DISTRICT CODE */
+
+document.getElementById(
+"rDistrictCode"
+).textContent =
+
+data.district_code ||
+
+"-";
 
 
-  document.getElementById(
-    "rDepotCode"
-  ).textContent =
-    data.depot_code ||
-    "-";
+
+/* DEPOT */
+
+document.getElementById(
+"rDepot"
+).textContent =
+
+data.depot ||
+
+"-";
 
 
-  document.getElementById(
-    "rMonth"
-  ).textContent =
-    getMonthName(
-      data.month
-    );
+
+/* DEPOT CODE */
+
+document.getElementById(
+"rDepotCode"
+).textContent =
+
+data.depot_code ||
+
+"-";
 
 
-  document.getElementById(
-    "rYear"
-  ).textContent =
-    data.year ||
-    "-";
+
+/* MONTH */
+
+document.getElementById(
+"rMonth"
+).textContent =
+
+getMonthName(
+data.month
+);
 
 
-  /* COMMODITIES */
 
-  const c =
-    data.commodities ||
-    {};
+/* YEAR */
 
+document.getElementById(
+"rYear"
+).textContent =
 
-  const jaggery =
-    c.jaggery ||
-    {};
+data.year ||
 
-
-  const ragi =
-    c.ragi ||
-    {};
+"-";
 
 
-  const rice =
-    c.rice ||
-    {};
+
+/* =================================================
+   OFFICIAL ALLOTMENT ONLY
+================================================= */
+
+const commodities =
+data.commodities || {};
 
 
-  const jaggeryPackets =
-    Number(
-      jaggery.packets || 0
-    );
+
+const jaggery =
+commodities.jaggery || {};
+
+const ragi =
+commodities.ragi || {};
+
+const rice =
+commodities.rice || {};
 
 
-  const ragiPackets =
-    Number(
-      ragi.packets || 0
-    );
+
+/* JAGGERY */
+
+const jaggeryPackets =
+Number(
+jaggery.packets || 0
+);
 
 
-  const riceBags =
-    Number(
-      rice.bags || 0
-    );
+
+/* RAGI */
+
+const ragiPackets =
+Number(
+ragi.packets || 0
+);
 
 
-  const riceKg =
-    Number(
-      rice.kg || 0
-    );
+
+/* RICE */
+
+const riceBags =
+Number(
+rice.bags || 0
+);
 
 
-  /* JAGGERY */
 
-  document.getElementById(
-    "rJaggery"
-  ).textContent =
-    jaggeryPackets;
+/* RICE KG */
 
-
-  document.getElementById(
-    "rJaggeryWeight"
-  ).textContent =
-    jaggeryPackets +
-    " Kg";
+const riceKg =
+Number(
+rice.kg ||
+riceBags * 25 ||
+0
+);
 
 
-  /* RAGI */
 
-  document.getElementById(
-    "rRagi"
-  ).textContent =
-    ragiPackets;
+/* =================================================
+   PUT VALUES INTO CARDS
+================================================= */
 
 
-  document.getElementById(
-    "rRagiWeight"
-  ).textContent =
-    ragiPackets +
-    " Kg";
+/* JAGGERY */
+
+document.getElementById(
+"rJaggery"
+).textContent =
+
+jaggeryPackets;
 
 
-  /* RICE */
 
-  document.getElementById(
-    "rRice"
-  ).textContent =
-    riceBags;
+document.getElementById(
+"rJaggeryWeight"
+).textContent =
 
-
-  document.getElementById(
-    "rRiceWeight"
-  ).textContent =
-    riceKg +
-    " Kg";
+jaggeryPackets +
+" Kg";
 
 
-  /* SHOW */
 
-  report.style.display =
-    "block";
+/* RAGI */
+
+document.getElementById(
+"rRagi"
+).textContent =
+
+ragiPackets;
 
 
-  report.scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
+
+document.getElementById(
+"rRagiWeight"
+).textContent =
+
+ragiPackets +
+" Kg";
+
+
+
+/* RICE */
+
+document.getElementById(
+"rRice"
+).textContent =
+
+riceBags;
+
+
+
+document.getElementById(
+"rRiceWeight"
+).textContent =
+
+riceKg +
+" Kg";
+
+
+
+/* SHOW */
+
+report.style.display =
+"block";
+
+
+
+report.scrollIntoView({
+
+behavior:"smooth",
+
+block:"start"
+
+});
+
 
 }
+
 
 
 /* =====================================================
    MONTH NAME
 ===================================================== */
 
-function getMonthName(
-  number
-){
+function getMonthName(number){
 
-  const names = [
+const names = [
 
-    "",
+"",
 
-    "January",
+"January",
 
-    "February",
+"February",
 
-    "March",
+"March",
 
-    "April",
+"April",
 
-    "May",
+"May",
 
-    "June",
+"June",
 
-    "July",
+"July",
 
-    "August",
+"August",
 
-    "September",
+"September",
 
-    "October",
+"October",
 
-    "November",
+"November",
 
-    "December"
+"December"
 
-  ];
+];
 
 
-  return names[
-    Number(number)
-  ] || "-";
+return (
+
+names[
+Number(number)
+]
+
+||
+
+"-"
+
+);
 
 }
+
 
 
 /* =====================================================
@@ -1149,27 +2297,37 @@ function getMonthName(
 ===================================================== */
 
 function showStatus(
-  message,
-  isError
+message,
+isError
 ){
 
-  statusBox.textContent =
-    message;
+statusBox.textContent =
+message;
 
 
-  statusBox.className =
-    "status " +
-    (
-      isError
-        ? "error"
-        : "success"
-    );
+statusBox.className =
+"status " +
+
+(
+
+isError
+
+?
+
+"error"
+
+:
+
+"success"
+
+);
 
 
-  statusBox.style.display =
-    "block";
+statusBox.style.display =
+"block";
 
 }
+
 
 
 /* =====================================================
@@ -1178,46 +2336,52 @@ function showStatus(
 
 function resetChecker(){
 
-  udise.value =
-    "";
 
-  month.value =
-    "10";
-
-  year.value =
-    "2026";
+udise.value =
+"";
 
 
-  report.style.display =
-    "none";
+month.value =
+"10";
 
 
-  statusBox.style.display =
-    "none";
+year.value =
+"2026";
 
 
-  loading.style.display =
-    "none";
+report.style.display =
+"none";
 
 
-  checkBtn.disabled =
-    false;
+statusBox.style.display =
+"none";
 
 
-  window.scrollTo({
-
-    top:0,
-
-    behavior:"smooth"
-
-  });
+loading.style.display =
+"none";
 
 
-  udise.focus();
+checkBtn.disabled =
+false;
+
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+
+udise.focus();
+
 
 }
 
 </script>
 
+
 </body>
+
 </html>
