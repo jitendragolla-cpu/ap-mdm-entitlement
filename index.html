@@ -67,7 +67,7 @@ body{
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:1.5fr 1fr 1fr;
   gap:10px;
 }
 
@@ -79,6 +79,7 @@ body{
   color:#475569;
 }
 
+input,
 select{
   width:100%;
   height:42px;
@@ -90,8 +91,10 @@ select{
   outline:none;
 }
 
+input:focus,
 select:focus{
   border-color:#075bff;
+  box-shadow:0 0 0 2px rgba(7,91,255,.08);
 }
 
 button{
@@ -283,7 +286,10 @@ button:disabled{
     font-size:18px;
   }
 
-  .grid,
+  .grid{
+    grid-template-columns:1fr;
+  }
+
   .info-grid{
     grid-template-columns:1fr;
   }
@@ -326,67 +332,121 @@ button:disabled{
 
 <div class="container">
 
+  <!-- HEADER -->
+
   <div class="header">
-    <div class="brand">TeachersBook.in</div>
-    <h1>AP SCM MDM – School Wise Data Checker</h1>
-    <p>Official SCM October 2026 Data</p>
+
+    <div class="brand">
+      TeachersBook.in
+    </div>
+
+    <h1>
+      AP SCM MDM – School Wise Data Checker
+    </h1>
+
+    <p>
+      Check school MDM data using DISE / UDISE Code
+    </p>
+
   </div>
 
 
-  <!-- SEARCH -->
+  <!-- SEARCH CARD -->
 
   <div class="card search-card">
 
-    <div class="title">School / UDISE Code</div>
+    <div class="title">
+      Enter School Details
+    </div>
 
     <div class="grid">
 
-      <div class="field">
-        <label>District</label>
+      <!-- UDISE -->
 
-        <select id="district">
-          <option value="">Loading districts...</option>
-        </select>
+      <div class="field">
+
+        <label>
+          DISE / UDISE Code
+        </label>
+
+        <input
+          type="text"
+          id="udise"
+          maxlength="11"
+          inputmode="numeric"
+          placeholder="Enter 11-digit UDISE code"
+          autocomplete="off"
+        >
+
       </div>
 
 
-      <div class="field">
-        <label>Mandal</label>
+      <!-- MONTH -->
 
-        <select id="mandal" disabled>
-          <option value="">Select District First</option>
+      <div class="field">
+
+        <label>
+          Month
+        </label>
+
+        <select id="month">
+
+          <option value="1">January</option>
+          <option value="2">February</option>
+          <option value="3">March</option>
+          <option value="4">April</option>
+          <option value="5">May</option>
+          <option value="6">June</option>
+          <option value="7">July</option>
+          <option value="8">August</option>
+          <option value="9">September</option>
+          <option value="10" selected>October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
+
         </select>
+
       </div>
 
 
-      <div class="field">
-        <label>School</label>
-
-        <select id="school" disabled>
-          <option value="">Select Mandal First</option>
-        </select>
-      </div>
-
+      <!-- YEAR -->
 
       <div class="field">
-        <label>Month / Year</label>
 
-        <select disabled>
-          <option>October 2026</option>
+        <label>
+          Year
+        </label>
+
+        <select id="year">
+
+          <option value="2026" selected>
+            2026
+          </option>
+
+          <option value="2027">
+            2027
+          </option>
+
+          <option value="2028">
+            2028
+          </option>
+
         </select>
+
       </div>
 
     </div>
 
 
-    <button id="checkBtn" disabled>
+    <button id="checkBtn">
       Check MDM Data
     </button>
 
 
     <div id="loading" class="loading">
-      Loading official SCM data...
+      Searching official SCM MDM data...
     </div>
+
 
     <div id="status" class="status"></div>
 
@@ -405,45 +465,128 @@ button:disabled{
     <div class="info-grid">
 
       <div class="info">
-        <div class="label">School Name</div>
-        <div class="value" id="rSchool">-</div>
+
+        <div class="label">
+          School Name
+        </div>
+
+        <div class="value" id="rSchool">
+          -
+        </div>
+
       </div>
 
-      <div class="info">
-        <div class="label">School Code</div>
-        <div class="value" id="rSchoolCode">-</div>
-      </div>
 
       <div class="info">
-        <div class="label">District</div>
-        <div class="value" id="rDistrict">-</div>
+
+        <div class="label">
+          School Code
+        </div>
+
+        <div class="value" id="rSchoolCode">
+          -
+        </div>
+
       </div>
 
-      <div class="info">
-        <div class="label">District Code</div>
-        <div class="value" id="rDistrictCode">-</div>
-      </div>
 
       <div class="info">
-        <div class="label">Mandal / Depot</div>
-        <div class="value" id="rMandal">-</div>
+
+        <div class="label">
+          District
+        </div>
+
+        <div class="value" id="rDistrict">
+          -
+        </div>
+
       </div>
 
+
       <div class="info">
-        <div class="label">Depot Code</div>
-        <div class="value" id="rDepotCode">-</div>
+
+        <div class="label">
+          District Code
+        </div>
+
+        <div class="value" id="rDistrictCode">
+          -
+        </div>
+
+      </div>
+
+
+      <div class="info">
+
+        <div class="label">
+          Mandal / Depot
+        </div>
+
+        <div class="value" id="rMandal">
+          -
+        </div>
+
+      </div>
+
+
+      <div class="info">
+
+        <div class="label">
+          Depot Code
+        </div>
+
+        <div class="value" id="rDepotCode">
+          -
+        </div>
+
+      </div>
+
+
+      <div class="info">
+
+        <div class="label">
+          Allotment Month
+        </div>
+
+        <div class="value" id="rMonth">
+          -
+        </div>
+
+      </div>
+
+
+      <div class="info">
+
+        <div class="label">
+          Allotment Year
+        </div>
+
+        <div class="value" id="rYear">
+          -
+        </div>
+
       </div>
 
     </div>
 
 
+    <!-- COMMODITIES -->
+
     <div class="commodities">
 
+
+      <!-- JAGGERY -->
+
       <div class="commodity">
 
-        <h3>JAGGERY</h3>
+        <h3>
+          JAGGERY
+        </h3>
 
-        <div class="quantity" id="rJaggery">
+        <div
+          class="quantity"
+          id="rJaggery"
+        >
           0
         </div>
 
@@ -451,18 +594,28 @@ button:disabled{
           Packets
         </div>
 
-        <div class="weight">
+        <div
+          class="weight"
+          id="rJaggeryWeight"
+        >
           0 Kg
         </div>
 
       </div>
 
 
+      <!-- RAGI -->
+
       <div class="commodity">
 
-        <h3>RAGI POWDER</h3>
+        <h3>
+          RAGI POWDER
+        </h3>
 
-        <div class="quantity" id="rRagi">
+        <div
+          class="quantity"
+          id="rRagi"
+        >
           0
         </div>
 
@@ -470,18 +623,28 @@ button:disabled{
           Packets
         </div>
 
-        <div class="weight">
+        <div
+          class="weight"
+          id="rRagiWeight"
+        >
           0 Kg
         </div>
 
       </div>
 
 
+      <!-- RICE -->
+
       <div class="commodity">
 
-        <h3>F FINE RICE</h3>
+        <h3>
+          F FINE RICE
+        </h3>
 
-        <div class="quantity" id="rRice">
+        <div
+          class="quantity"
+          id="rRice"
+        >
           0
         </div>
 
@@ -489,7 +652,10 @@ button:disabled{
           Bags
         </div>
 
-        <div class="weight">
+        <div
+          class="weight"
+          id="rRiceWeight"
+        >
           0 Kg
         </div>
 
@@ -498,18 +664,28 @@ button:disabled{
     </div>
 
 
+    <!-- OFFICIAL STATUS -->
+
     <div class="official">
       ✓ OFFICIAL SCM STATUS — SUCCESS
     </div>
 
 
+    <!-- ACTIONS -->
+
     <div class="actions">
 
-      <button class="print" onclick="window.print()">
+      <button
+        class="print"
+        onclick="window.print()"
+      >
         Print / PDF
       </button>
 
-      <button class="reset" onclick="resetChecker()">
+      <button
+        class="reset"
+        onclick="resetChecker()"
+      >
         Check Another
       </button>
 
@@ -517,9 +693,11 @@ button:disabled{
 
 
     <div class="note">
+
       Data displayed from the Andhra Pradesh SCM MDM system.
       This website is an independent information utility and is
       not an official Government of Andhra Pradesh website.
+
     </div>
 
   </div>
@@ -530,28 +708,25 @@ button:disabled{
 <script>
 
 /* =====================================================
-   CONFIGURATION
+   APPS SCRIPT BACKEND
 ===================================================== */
 
 const API =
 "https://script.google.com/macros/s/AKfycbw3OiS5VGG3J40uGoSsQJrnwqyKN5veUOCe3vdG0AoqsMlsm36Ny-E0FEd2fX6QGvVIVA/exec";
-
-const MONTH = 10;
-const YEAR = 2026;
 
 
 /* =====================================================
    ELEMENTS
 ===================================================== */
 
-const district =
-document.getElementById("district");
+const udise =
+document.getElementById("udise");
 
-const mandal =
-document.getElementById("mandal");
+const month =
+document.getElementById("month");
 
-const school =
-document.getElementById("school");
+const year =
+document.getElementById("year");
 
 const checkBtn =
 document.getElementById("checkBtn");
@@ -567,320 +742,21 @@ document.getElementById("report");
 
 
 /* =====================================================
-   INITIAL LOAD
+   ONLY NUMBERS IN UDISE FIELD
 ===================================================== */
 
-window.addEventListener(
-  "load",
-  loadDistricts
-);
-
-
-/* =====================================================
-   LOAD DISTRICTS
-===================================================== */
-
-async function loadDistricts(){
-
-  district.innerHTML =
-    '<option value="">Loading districts...</option>';
-
-  district.disabled = true;
-
-  try{
-
-    const data =
-      await api(
-        "districts"
-      );
-
-
-    if(
-      !data ||
-      data.status !== "SUCCESS"
-    ){
-
-      throw new Error(
-        data && data.message
-          ? data.message
-          : "Unable to load districts."
-      );
-
-    }
-
-
-    district.innerHTML =
-      '<option value="">Select District</option>';
-
-
-    data.districts.forEach(
-      function(item){
-
-        const option =
-          document.createElement("option");
-
-        option.value =
-          item.code;
-
-        option.textContent =
-          item.name;
-
-        district.appendChild(
-          option
-        );
-
-      }
-    );
-
-
-    district.disabled = false;
-
-
-  }catch(err){
-
-    district.innerHTML =
-      '<option value="">District loading failed</option>';
-
-    showStatus(
-      "Unable to load districts: " +
-      err.message,
-      true
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   DISTRICT CHANGE
-===================================================== */
-
-district.addEventListener(
-  "change",
-  async function(){
-
-    report.style.display =
-      "none";
-
-    checkBtn.disabled =
-      true;
-
-
-    mandal.disabled =
-      true;
-
-    school.disabled =
-      true;
-
-
-    mandal.innerHTML =
-      '<option value="">Loading mandals...</option>';
-
-    school.innerHTML =
-      '<option value="">Select Mandal First</option>';
-
-
-    if(!district.value){
-
-      mandal.innerHTML =
-        '<option value="">Select District First</option>';
-
-      school.innerHTML =
-        '<option value="">Select Mandal First</option>';
-
-      return;
-
-    }
-
-
-    try{
-
-      const data =
-        await api(
-          "mandals",
-          {
-            districtCode:
-              district.value
-          }
-        );
-
-
-      if(
-        !data ||
-        data.status !== "SUCCESS"
-      ){
-
-        throw new Error(
-          data && data.message
-            ? data.message
-            : "Unable to load mandals."
-        );
-
-      }
-
-
-      mandal.innerHTML =
-        '<option value="">Select Mandal</option>';
-
-
-      data.mandals.forEach(
-        function(item){
-
-          const option =
-            document.createElement("option");
-
-          option.value =
-            item.code;
-
-          option.textContent =
-            item.name;
-
-          mandal.appendChild(
-            option
-          );
-
-        }
-      );
-
-
-      mandal.disabled = false;
-
-
-    }catch(err){
-
-      mandal.innerHTML =
-        '<option value="">Mandal loading failed</option>';
-
-      showStatus(
-        "Unable to load mandals: " +
-        err.message,
-        true
-      );
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   MANDAL CHANGE
-===================================================== */
-
-mandal.addEventListener(
-  "change",
-  async function(){
-
-    report.style.display =
-      "none";
-
-    checkBtn.disabled =
-      true;
-
-    school.disabled =
-      true;
-
-
-    school.innerHTML =
-      '<option value="">Loading schools...</option>';
-
-
-    if(!mandal.value){
-
-      school.innerHTML =
-        '<option value="">Select Mandal First</option>';
-
-      return;
-
-    }
-
-
-    try{
-
-      const data =
-        await api(
-          "schools",
-          {
-            districtCode:
-              district.value,
-
-            depotCode:
-              mandal.value
-          }
-        );
-
-
-      if(
-        !data ||
-        data.status !== "SUCCESS"
-      ){
-
-        throw new Error(
-          data && data.message
-            ? data.message
-            : "Unable to load schools."
-        );
-
-      }
-
-
-      school.innerHTML =
-        '<option value="">Select School</option>';
-
-
-      data.schools.forEach(
-        function(item){
-
-          const option =
-            document.createElement("option");
-
-          option.value =
-            item.code;
-
-          option.textContent =
-            item.name +
-            " — " +
-            item.code;
-
-          school.appendChild(
-            option
-          );
-
-        }
-      );
-
-
-      school.disabled = false;
-
-
-    }catch(err){
-
-      school.innerHTML =
-        '<option value="">School loading failed</option>';
-
-      showStatus(
-        "Unable to load schools: " +
-        err.message,
-        true
-      );
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   SCHOOL CHANGE
-===================================================== */
-
-school.addEventListener(
-  "change",
+udise.addEventListener(
+  "input",
   function(){
 
-    checkBtn.disabled =
-      !school.value;
+    this.value =
+      this.value.replace(
+        /\D/g,
+        ""
+      ).slice(
+        0,
+        11
+      );
 
   }
 );
@@ -892,162 +768,162 @@ school.addEventListener(
 
 checkBtn.addEventListener(
   "click",
-  async function(){
-
-    if(
-      !district.value ||
-      !mandal.value ||
-      !school.value
-    ){
-
-      return;
-
-    }
-
-
-    checkBtn.disabled =
-      true;
-
-    loading.style.display =
-      "block";
-
-    statusBox.style.display =
-      "none";
-
-    report.style.display =
-      "none";
-
-
-    try{
-
-      const data =
-        await api(
-          "search",
-          {
-
-            districtCode:
-              district.value,
-
-            depotCode:
-              mandal.value,
-
-            schoolCode:
-              school.value
-
-          }
-        );
-
-
-      if(
-        !data ||
-        data.status !== "SUCCESS"
-      ){
-
-        throw new Error(
-          data && data.message
-            ? data.message
-            : "MDM data not found."
-        );
-
-      }
-
-
-      showReport(
-        data
-      );
-
-
-      showStatus(
-        "MDM Data Found Successfully",
-        false
-      );
-
-
-    }catch(err){
-
-      showStatus(
-        "Unable to get MDM data: " +
-        err.message,
-        true
-      );
-
-    }finally{
-
-      loading.style.display =
-        "none";
-
-      checkBtn.disabled =
-        false;
-
-    }
-
-  }
+  searchMDM
 );
 
 
 /* =====================================================
-   API HELPER
+   SEARCH MDM
 ===================================================== */
 
-async function api(
-  action,
-  params = {}
-){
+async function searchMDM(){
 
-  const url =
-    new URL(API);
+  const schoolCode =
+    udise.value.trim();
 
+  const selectedMonth =
+    month.value;
 
-  url.searchParams.set(
-    "action",
-    action
-  );
-
-  url.searchParams.set(
-    "month",
-    MONTH
-  );
-
-  url.searchParams.set(
-    "year",
-    YEAR
-  );
+  const selectedYear =
+    year.value;
 
 
-  Object.keys(params)
-    .forEach(
-      function(key){
+  /* VALIDATE UDISE */
 
-        url.searchParams.set(
-          key,
-          params[key]
-        );
+  if(
+    !/^\d{11}$/.test(
+      schoolCode
+    )
+  ){
 
-      }
+    showStatus(
+      "Please enter a valid 11-digit DISE / UDISE code.",
+      true
     );
 
+    udise.focus();
 
-  const response =
-    await fetch(
-      url.toString(),
-      {
-        method:"GET",
-        cache:"no-store"
-      }
-    );
-
-
-  if(!response.ok){
-
-    throw new Error(
-      "Server HTTP " +
-      response.status
-    );
+    return;
 
   }
 
 
-  return await response.json();
+  /* START LOADING */
+
+  checkBtn.disabled =
+    true;
+
+  loading.style.display =
+    "block";
+
+  statusBox.style.display =
+    "none";
+
+  report.style.display =
+    "none";
+
+
+  try{
+
+    const url =
+      new URL(API);
+
+
+    url.searchParams.set(
+      "action",
+      "search"
+    );
+
+
+    url.searchParams.set(
+      "school",
+      schoolCode
+    );
+
+
+    url.searchParams.set(
+      "month",
+      selectedMonth
+    );
+
+
+    url.searchParams.set(
+      "year",
+      selectedYear
+    );
+
+
+    const response =
+      await fetch(
+        url.toString(),
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Server error: HTTP " +
+        response.status
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    /* ERROR FROM APPS SCRIPT */
+
+    if(
+      !data ||
+      data.status !== "SUCCESS"
+    ){
+
+      throw new Error(
+        data &&
+        data.message
+          ? data.message
+          : "MDM data not found."
+      );
+
+    }
+
+
+    /* SHOW REPORT */
+
+    showReport(
+      data
+    );
+
+
+    showStatus(
+      "MDM Data Found Successfully",
+      false
+    );
+
+
+  }catch(err){
+
+    showStatus(
+      err.message ||
+      "Unable to retrieve MDM data.",
+      true
+    );
+
+  }finally{
+
+    loading.style.display =
+      "none";
+
+    checkBtn.disabled =
+      false;
+
+  }
 
 }
 
@@ -1060,123 +936,155 @@ function showReport(
   data
 ){
 
-  const schoolData =
-    data.school || {};
-
-  const districtName =
-    district.options[
-      district.selectedIndex
-    ]
-      ? district.options[
-          district.selectedIndex
-        ].text
-      : "-";
-
-
-  const mandalName =
-    mandal.options[
-      mandal.selectedIndex
-    ]
-      ? mandal.options[
-          mandal.selectedIndex
-        ].text
-      : "-";
-
-
   document.getElementById(
     "rSchool"
   ).textContent =
-    schoolData.name || "-";
+    data.school_name ||
+    "-";
 
 
   document.getElementById(
     "rSchoolCode"
   ).textContent =
-    schoolData.code || school.value;
+    data.school_code ||
+    "-";
 
 
   document.getElementById(
     "rDistrict"
   ).textContent =
-    districtName;
+    data.district ||
+    "-";
 
 
   document.getElementById(
     "rDistrictCode"
   ).textContent =
-    data.district
-      ? data.district.code
-      : district.value;
+    data.district_code ||
+    "-";
 
 
   document.getElementById(
     "rMandal"
   ).textContent =
-    mandalName;
+    data.depot ||
+    "-";
 
 
   document.getElementById(
     "rDepotCode"
   ).textContent =
-    data.depot
-      ? data.depot.code
-      : mandal.value;
+    data.depot_code ||
+    "-";
 
+
+  document.getElementById(
+    "rMonth"
+  ).textContent =
+    getMonthName(
+      data.month
+    );
+
+
+  document.getElementById(
+    "rYear"
+  ).textContent =
+    data.year ||
+    "-";
+
+
+  /* COMMODITIES */
 
   const c =
-    data.commodities || {};
+    data.commodities ||
+    {};
 
 
   const jaggery =
-    c.jaggery || {};
+    c.jaggery ||
+    {};
 
 
   const ragi =
-    c.ragi || {};
+    c.ragi ||
+    {};
 
 
   const rice =
-    c.rice || {};
+    c.rice ||
+    {};
 
+
+  const jaggeryPackets =
+    Number(
+      jaggery.packets || 0
+    );
+
+
+  const ragiPackets =
+    Number(
+      ragi.packets || 0
+    );
+
+
+  const riceBags =
+    Number(
+      rice.bags || 0
+    );
+
+
+  const riceKg =
+    Number(
+      rice.kg || 0
+    );
+
+
+  /* JAGGERY */
 
   document.getElementById(
     "rJaggery"
   ).textContent =
-    jaggery.packets || 0;
+    jaggeryPackets;
 
+
+  document.getElementById(
+    "rJaggeryWeight"
+  ).textContent =
+    jaggeryPackets +
+    " Kg";
+
+
+  /* RAGI */
 
   document.getElementById(
     "rRagi"
   ).textContent =
-    ragi.packets || 0;
+    ragiPackets;
 
+
+  document.getElementById(
+    "rRagiWeight"
+  ).textContent =
+    ragiPackets +
+    " Kg";
+
+
+  /* RICE */
 
   document.getElementById(
     "rRice"
   ).textContent =
-    rice.bags || 0;
+    riceBags;
 
 
-  document.querySelector(
-    "#rJaggery + .unit + .weight"
+  document.getElementById(
+    "rRiceWeight"
   ).textContent =
-    (jaggery.weightKg || 0) +
+    riceKg +
     " Kg";
 
 
-  document.querySelector(
-    "#rRagi + .unit + .weight"
-  ).textContent =
-    (ragi.weightKg || 0) +
-    " Kg";
-
-
-  document.querySelector(
-    "#rRice + .unit + .weight"
-  ).textContent =
-    (rice.weightKg || 0) +
-    " Kg";
-
+  /* SHOW */
 
   report.style.display =
     "block";
@@ -1186,6 +1094,52 @@ function showReport(
     behavior:"smooth",
     block:"start"
   });
+
+}
+
+
+/* =====================================================
+   MONTH NAME
+===================================================== */
+
+function getMonthName(
+  number
+){
+
+  const names = [
+
+    "",
+
+    "January",
+
+    "February",
+
+    "March",
+
+    "April",
+
+    "May",
+
+    "June",
+
+    "July",
+
+    "August",
+
+    "September",
+
+    "October",
+
+    "November",
+
+    "December"
+
+  ];
+
+
+  return names[
+    Number(number)
+  ] || "-";
 
 }
 
@@ -1202,11 +1156,18 @@ function showStatus(
   statusBox.textContent =
     message;
 
+
   statusBox.className =
     "status " +
-    (isError
-      ? "error"
-      : "success");
+    (
+      isError
+        ? "error"
+        : "success"
+    );
+
+
+  statusBox.style.display =
+    "block";
 
 }
 
@@ -1217,24 +1178,42 @@ function showStatus(
 
 function resetChecker(){
 
+  udise.value =
+    "";
+
+  month.value =
+    "10";
+
+  year.value =
+    "2026";
+
+
   report.style.display =
     "none";
+
 
   statusBox.style.display =
     "none";
 
 
-  school.value =
-    "";
+  loading.style.display =
+    "none";
+
 
   checkBtn.disabled =
-    true;
+    false;
 
 
   window.scrollTo({
+
     top:0,
+
     behavior:"smooth"
+
   });
+
+
+  udise.focus();
 
 }
 
