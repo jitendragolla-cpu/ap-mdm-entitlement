@@ -2,345 +2,454 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AP SCM MDM October 2026 School Wise Data Checker | TeachersBook.in</title>
-<meta name="description" content="Check AP School MDM SCM October 2026 school-wise jaggery, ragi and rice entitlement details using school code.">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AP SCM MDM School Wise Data Checker | TeachersBook.in</title>
+<meta name="description" content="AP SCM MDM October 2026 School Wise Data Checker">
 <style>
 *{box-sizing:border-box}
+html,body{margin:0;padding:0}
 body{
-  margin:0;
-  padding:18px 10px;
-  background:#fff;
+  background:#f7fbff;
   font-family:Arial,Helvetica,sans-serif;
-  color:#222;
+  color:#18345c;
+  padding:8px;
 }
-.tb-scm{
+.wrap{
   width:100%;
-  max-width:620px;
-  margin:0 auto;
-  border:2px solid #1f48ff;
-  border-radius:14px;
-  padding:14px;
+  max-width:900px;
+  margin:auto;
+}
+.header{
   background:#fff;
-  box-shadow:0 4px 16px rgba(31,72,255,.10);
-}
-.tb-head{
+  border:1px solid #c9e0ff;
+  border-top:4px solid;
+  border-image:linear-gradient(90deg,#ff4b4b,#315cff,#6a32e8) 1;
+  border-radius:0 0 16px 16px;
+  padding:10px 14px 9px;
   text-align:center;
-  margin-bottom:12px;
+  box-shadow:0 3px 12px rgba(50,90,150,.08);
 }
-.tb-head h1{
-  margin:0;
-  font-size:20px;
-  line-height:1.25;
-  font-weight:800;
-  background:linear-gradient(90deg,#ff1744,#1f48ff,#00a63c);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
+.brand{font-size:17px;font-weight:800;color:#1260d8}
+.title{
+  margin:3px 0 1px;
+  font-size:25px;
+  line-height:1.05;
+  font-weight:900;
+  color:#513ee8;
 }
-.tb-head p{
-  margin:5px 0 0;
+.subtitle{font-size:11px;color:#41648d;font-weight:600}
+.search{
+  margin-top:10px;
+  background:#fff;
+  border:1px solid #c9e0ff;
+  border-radius:12px;
+  padding:10px;
+  display:grid;
+  grid-template-columns:1.7fr .72fr .62fr .9fr;
+  gap:8px;
+  align-items:end;
+}
+.field label{
+  display:block;
   font-size:12px;
-  color:#555;
-  font-weight:600;
+  font-weight:800;
+  margin:0 0 5px;
+  color:#17477e;
 }
-.tb-form{
-  display:flex;
-  gap:7px;
-  margin:12px 0 10px;
-}
-#schoolCode{
-  flex:1;
-  min-width:0;
-  height:42px;
-  border:2px solid #1f48ff;
+input,select{
+  width:100%;
+  height:40px;
+  border:1px solid #b9d4f7;
   border-radius:8px;
-  padding:0 11px;
-  font-size:14px;
+  background:#fff;
+  padding:0 10px;
+  font-size:13px;
+  font-weight:600;
+  color:#173b68;
   outline:none;
 }
-#schoolCode:focus{box-shadow:0 0 0 3px rgba(31,72,255,.12)}
-.tb-btn{
+input:focus,select:focus{border-color:#3167ff;box-shadow:0 0 0 2px rgba(49,103,255,.12)}
+.check{
+  height:40px;
   border:0;
-  border-radius:8px;
-  padding:0 16px;
-  height:42px;
-  background:linear-gradient(90deg,#1f48ff,#00a63c);
-  color:#fff;
-  font-size:14px;
-  font-weight:800;
-  cursor:pointer;
-  white-space:nowrap;
-}
-.tb-btn:disabled{opacity:.65;cursor:wait}
-.tb-status{
-  display:none;
-  text-align:center;
-  padding:8px;
-  margin:8px 0;
-  border-radius:7px;
-  font-size:13px;
-  font-weight:700;
-}
-.tb-info{
-  display:none;
-  border:1px solid #ddd;
   border-radius:9px;
-  overflow:hidden;
+  background:linear-gradient(100deg,#087cff,#7b2ce8);
+  color:#fff;
+  font-size:13px;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 3px 8px rgba(49,91,230,.18);
+}
+.check:disabled{opacity:.65;cursor:wait}
+.status{
+  display:none;
   margin-top:10px;
+  border-radius:15px 15px 0 0;
+  color:#fff;
+  background:#07965d;
+  padding:10px 13px;
+  font-size:17px;
+  font-weight:900;
 }
-.tb-row{
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  padding:8px 10px;
-  border-bottom:1px solid #eee;
-  font-size:12px;
+.status span{
+  float:right;
+  border:1px solid rgba(255,255,255,.55);
+  border-radius:14px;
+  padding:4px 10px;
+  font-size:11px;
 }
-.tb-row:last-child{border-bottom:0}
-.tb-label{font-weight:700;color:#555}
-.tb-value{font-weight:800;text-align:right;color:#111}
-.tb-cards{
+.result{
+  display:none;
+  background:#fff;
+  border:1px solid #b9e2d1;
+  border-top:0;
+  border-radius:0 0 15px 15px;
+  padding:10px;
+  box-shadow:0 4px 15px rgba(40,100,80,.08);
+}
+.main{
+  display:grid;
+  grid-template-columns:1.35fr 2.65fr;
+  gap:8px;
+}
+.school{
+  border:1px solid #c8dfff;
+  border-radius:13px;
+  padding:10px 11px;
+  background:#fafdff;
+  min-height:166px;
+}
+.school h2{
+  margin:0 0 6px;
+  font-size:18px;
+  line-height:1.15;
+  color:#1163bf;
+}
+.info{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:5px 8px;
+  font-size:11px;
+}
+.info b{color:#42688e}
+.info strong{color:#17395f}
+.cards{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:8px;
-  margin-top:10px;
 }
-.tb-card{
-  border-radius:9px;
-  padding:10px 7px;
+.card{
+  min-height:166px;
+  border:1px solid;
+  border-radius:13px;
+  padding:9px 8px;
   text-align:center;
-  border:2px solid;
-  background:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
 }
-.tb-card h3{
-  margin:0 0 5px;
+.j{border-color:#ffc55b;background:#fffaf0}
+.r{border-color:#8ee0af;background:#f4fff8}
+.ri{border-color:#80c9f5;background:#f3fbff}
+.icon{
+  width:38px;height:38px;border-radius:50%;
+  margin:0 auto 4px;
+  display:flex;align-items:center;justify-content:center;
+  background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.10);
+  font-size:20px;
+}
+.card h3{margin:0;font-size:12px;font-weight:900}
+.card .desc{font-size:11px;font-weight:800;margin-top:1px}
+.j h3,.j .desc{color:#e58a00}
+.r h3,.r .desc{color:#008b48}
+.ri h3,.ri .desc{color:#0878cf}
+.amount{
+  display:inline-block;
+  margin:7px auto 5px;
+  padding:6px 11px;
+  border-radius:18px;
+  color:#fff;
   font-size:13px;
-}
-.tb-number{
-  font-size:18px;
   font-weight:900;
-  line-height:1.1;
 }
-.tb-sub{
-  margin-top:3px;
-  font-size:11px;
+.j .amount{background:#ef9400}
+.r .amount{background:#069a5b}
+.ri .amount{background:#087bdd}
+.weight{
+  background:rgba(255,255,255,.78);
+  border-radius:8px;
+  padding:6px;
+  font-size:10px;
   font-weight:700;
 }
-.jaggery{border-color:#f39c12}
-.jaggery h3{color:#c26d00}
-.ragi{border-color:#8e44ad}
-.ragi h3{color:#74358f}
-.rice{border-color:#00a63c}
-.rice h3{color:#08782e}
-.tb-actions{
+.weight b{display:block;font-size:14px;color:#17395f}
+.official{
+  margin-top:8px;
+  border:1px solid #d2e0f4;
+  border-radius:8px;
+  background:#f8fbff;
+  padding:7px 10px;
+  font-size:11px;
+  font-weight:800;
+  color:#526d8c;
+}
+.success{
+  float:right;
+  background:#069f5f;
+  color:#fff;
+  border-radius:13px;
+  padding:4px 10px;
+  font-size:10px;
+}
+.actions{
   display:flex;
   justify-content:center;
   gap:7px;
-  margin-top:11px;
+  margin-top:9px;
 }
-.tb-small{
-  border:1px solid #1f48ff;
-  background:#fff;
-  color:#1f48ff;
+.action{
+  border:0;
   border-radius:7px;
-  padding:6px 11px;
+  padding:7px 12px;
   font-size:11px;
-  font-weight:800;
+  font-weight:900;
   cursor:pointer;
 }
-.tb-disclaimer{
-  margin-top:11px;
-  padding-top:8px;
-  border-top:1px solid #eee;
+.print{background:#0879d8;color:#fff}
+.another{background:#64758b;color:#fff}
+.message{
+  display:none;
+  margin-top:8px;
+  padding:7px 10px;
   text-align:center;
-  font-size:10px;
-  line-height:1.4;
-  color:#777;
-}
-.tb-brand{
-  text-align:center;
-  margin-top:5px;
-  font-size:10px;
+  border-radius:7px;
+  font-size:12px;
   font-weight:800;
-  color:#1f48ff;
 }
-@media(max-width:480px){
-  body{padding:10px 6px}
-  .tb-scm{padding:11px;border-radius:11px}
-  .tb-head h1{font-size:18px}
-  .tb-form{gap:5px}
-  #schoolCode{height:40px;font-size:13px}
-  .tb-btn{height:40px;padding:0 12px;font-size:13px}
-  .tb-cards{gap:5px}
-  .tb-card{padding:9px 4px}
-  .tb-card h3{font-size:12px}
-  .tb-number{font-size:16px}
-  .tb-sub{font-size:10px}
+.error{background:#ffe9ed;color:#bd1734;border:1px solid #ffc0ca}
+.ok{background:#e7f8ee;color:#08783f;border:1px solid #a7dfbd}
+.footer{text-align:center;margin-top:7px;font-size:10px;color:#51708f}
+.footer b{color:#1764c4}
+@media(max-width:700px){
+  body{padding:5px}
+  .title{font-size:21px}
+  .search{grid-template-columns:1fr 1fr}
+  .field:first-child{grid-column:1/-1}
+  .main{grid-template-columns:1fr}
+  .school{min-height:auto}
+  .cards{grid-template-columns:repeat(3,1fr)}
+  .card{min-height:150px}
+}
+@media(max-width:430px){
+  .search{grid-template-columns:1fr}
+  .field:first-child{grid-column:auto}
+  .cards{gap:5px}
+  .card{padding:8px 4px;min-height:145px}
+  .card h3{font-size:11px}
+  .card .desc{font-size:10px}
+  .amount{font-size:11px;padding:5px 7px}
+  .weight b{font-size:12px}
+  .status{font-size:15px}
 }
 @media print{
-  body{padding:0}
-  .tb-scm{max-width:none;box-shadow:none;border:1px solid #aaa}
-  .tb-form,.tb-actions{display:none!important}
+  body{background:#fff;padding:0}
+  .header,.search,.message,.actions,.footer{display:none!important}
+  .wrap{max-width:none}
+  .status,.result{display:block!important}
+  .status{border-radius:8px 8px 0 0}
+  .result{border:1px solid #aaa;border-top:0;box-shadow:none}
 }
 </style>
 </head>
 <body>
+<div class="wrap">
 
-<div class="tb-scm" id="scmBox">
-  <div class="tb-head">
-    <h1>AP SCM MDM – October 2026</h1>
-    <p>School Wise MDM Entitlement Checker</p>
+  <div class="header">
+    <div class="brand">TeachersBook.in</div>
+    <div class="title">AP SCM MDM<br>School Wise Data Checker</div>
+    <div class="subtitle">Check monthly MDM allocation details for your school</div>
   </div>
 
-  <div class="tb-form">
-    <input id="schoolCode" type="text" inputmode="numeric"
-           maxlength="15" placeholder="Enter School / UDISE Code">
-    <button class="tb-btn" id="searchBtn" onclick="searchSchool()">CHECK</button>
+  <div class="search">
+    <div class="field">
+      <label>🏫 School / UDISE Code</label>
+      <input id="schoolCode" inputmode="numeric" maxlength="15" placeholder="Enter School / UDISE Code">
+    </div>
+    <div class="field">
+      <label>📅 Month</label>
+      <select id="month"><option value="10">October</option></select>
+    </div>
+    <div class="field">
+      <label>📆 Year</label>
+      <select id="year"><option value="2026">2026</option></select>
+    </div>
+    <button class="check" id="checkBtn" onclick="searchSchool()">🔎 Check MDM Data</button>
   </div>
 
-  <div id="status" class="tb-status"></div>
+  <div id="message" class="message"></div>
 
-  <div id="result" style="display:none;">
-    <div class="tb-info">
-      <div class="tb-row"><span class="tb-label">School Name</span><span class="tb-value" id="schoolName"></span></div>
-      <div class="tb-row"><span class="tb-label">School Code</span><span class="tb-value" id="schoolId"></span></div>
-      <div class="tb-row"><span class="tb-label">District</span><span class="tb-value" id="district"></span></div>
-      <div class="tb-row"><span class="tb-label">District Code</span><span class="tb-value" id="districtCode"></span></div>
-      <div class="tb-row"><span class="tb-label">Depot</span><span class="tb-value" id="depot"></span></div>
-      <div class="tb-row"><span class="tb-label">Depot Code</span><span class="tb-value" id="depotCode"></span></div>
+  <div id="status" class="status">
+    ✓ &nbsp;MDM Data Found
+    <span>October 2026</span>
+  </div>
+
+  <div id="result" class="result">
+    <div class="main">
+      <div class="school">
+        <h2 id="schoolName">-</h2>
+        <div class="info">
+          <b>School Code</b><strong id="schoolId">-</strong>
+          <b>District</b><strong id="district">-</strong>
+          <b>District Code</b><strong id="districtCode">-</strong>
+          <b>Depot</b><strong id="depot">-</strong>
+          <b>Depot Code</b><strong id="depotCode">-</strong>
+        </div>
+      </div>
+
+      <div class="cards">
+        <div class="card j">
+          <div>
+            <div class="icon">🍯</div>
+            <h3>Jaggery</h3>
+            <div class="desc">1 Kg</div>
+            <div class="amount" id="jPackets">0 Packets</div>
+          </div>
+          <div class="weight">Total Weight<b id="jKg">0 KG</b></div>
+        </div>
+
+        <div class="card r">
+          <div>
+            <div class="icon">🥣</div>
+            <h3>Ragi Powder</h3>
+            <div class="desc">1 Kg</div>
+            <div class="amount" id="rPackets">0 Packets</div>
+          </div>
+          <div class="weight">Total Weight<b id="rKg">0 KG</b></div>
+        </div>
+
+        <div class="card ri">
+          <div>
+            <div class="icon">🍚</div>
+            <h3>F Fine Rice</h3>
+            <div class="desc">25 Kg</div>
+            <div class="amount" id="riceBags">0 Bags</div>
+          </div>
+          <div class="weight">Total Weight<b id="riceKg">0 KG</b></div>
+        </div>
+      </div>
     </div>
 
-    <div class="tb-cards">
-      <div class="tb-card jaggery">
-        <h3>Jaggery</h3>
-        <div class="tb-number" id="jaggeryPackets">0</div>
-        <div class="tb-sub" id="jaggeryKg">0 KG</div>
-      </div>
-      <div class="tb-card ragi">
-        <h3>Ragi</h3>
-        <div class="tb-number" id="ragiPackets">0</div>
-        <div class="tb-sub" id="ragiKg">0 KG</div>
-      </div>
-      <div class="tb-card rice">
-        <h3>Rice</h3>
-        <div class="tb-number" id="riceBags">0</div>
-        <div class="tb-sub" id="riceKg">0 KG</div>
-      </div>
+    <div class="official">
+      Official SCM Status
+      <span class="success">SUCCESS</span>
     </div>
 
-    <div class="tb-actions">
-      <button class="tb-small" onclick="window.print()">🖨 Print / PDF</button>
-      <button class="tb-small" onclick="resetChecker()">↻ Check Another</button>
+    <div class="actions">
+      <button class="action print" onclick="window.print()">🖨 Print / PDF</button>
+      <button class="action another" onclick="resetChecker()">↻ Check Another</button>
     </div>
   </div>
 
-  <div class="tb-disclaimer">
-    Disclaimer: This tool displays October 2026 SCM MDM school-wise data retrieved from the official AP SCM system.
-    TeachersBook.in is not a government website. Please verify important information with the official department portal.
+  <div class="footer">
+    <b>AP SCM MDM • TeachersBook.in</b><br>
+    Data is displayed from the official SCM system. Availability may vary depending on the selected month.
   </div>
-  <div class="tb-brand">TeachersBook.in • Reliable Updates</div>
 </div>
 
 <script>
-const API_URL = "https://script.google.com/macros/s/AKfycbw3OiS5VGG3J40uGoSsQJrnwqyKN5veUOCe3vdG0AoqsMlsm36Ny-E0FEd2fX6QGvVIVA/exec";
+const API_URL="https://script.google.com/macros/s/AKfycbw3OiS5VGG3J40uGoSsQJrnwqyKN5veUOCe3vdG0AoqsMlsm36Ny-E0FEd2fX6QGvVIVA/exec";
 
-const $ = id => document.getElementById(id);
+const $=id=>document.getElementById(id);
 
-function showStatus(message, type){
-  const s = $("status");
-  s.textContent = message;
-  s.style.display = "block";
-  s.style.background = type === "error" ? "#ffe8ec" : "#e9f8ef";
-  s.style.color = type === "error" ? "#c1122f" : "#08782e";
-  s.style.border = "1px solid " + (type === "error" ? "#ffb6c2" : "#9bd8ad");
+function text(id,value){
+  $(id).textContent=(value===undefined||value===null||value==="")?"-":value;
 }
 
-function clearStatus(){
-  $("status").style.display = "none";
-  $("status").textContent = "";
-}
-
-function setText(id,value){
-  $(id).textContent = value == null || value === "" ? "-" : value;
+function msg(t,type){
+  const m=$("message");
+  m.textContent=t;
+  m.className="message "+(type==="error"?"error":"ok");
+  m.style.display="block";
 }
 
 function searchSchool(){
-  const code = $("schoolCode").value.trim();
-
-  clearStatus();
-  $("result").style.display = "none";
+  const code=$("schoolCode").value.trim();
+  $("message").style.display="none";
+  $("status").style.display="none";
+  $("result").style.display="none";
 
   if(!code){
-    showStatus("Please enter the School / UDISE Code.", "error");
+    msg("Please enter the School / UDISE Code.","error");
     $("schoolCode").focus();
     return;
   }
 
-  const btn = $("searchBtn");
-  btn.disabled = true;
-  btn.textContent = "CHECKING...";
+  const btn=$("checkBtn");
+  btn.disabled=true;
+  btn.textContent="⏳ Checking...";
 
-  const url = API_URL + "?action=search&school=" + encodeURIComponent(code);
+  const url=API_URL+"?action=search&school="+encodeURIComponent(code);
 
-  fetch(url, {method:"GET", cache:"no-store"})
-    .then(r => {
-      if(!r.ok) throw new Error("Network error");
-      return r.json();
-    })
-    .then(data => {
-      if(!data || data.status !== "SUCCESS"){
-        throw new Error(data && data.message ? data.message : "School data not found.");
-      }
+  fetch(url,{method:"GET",cache:"no-store"})
+  .then(r=>{
+    if(!r.ok) throw new Error("Unable to connect to the data service.");
+    return r.json();
+  })
+  .then(data=>{
+    if(!data || data.status!=="SUCCESS"){
+      throw new Error(data && data.message ? data.message : "School data not found.");
+    }
 
-      setText("schoolName", data.school_name);
-      setText("schoolId", data.school_code);
-      setText("district", data.district);
-      setText("districtCode", data.district_code);
-      setText("depot", data.depot);
-      setText("depotCode", data.depot_code);
+    text("schoolName",data.school_name);
+    text("schoolId",data.school_code);
+    text("district",data.district);
+    text("districtCode",data.district_code);
+    text("depot",data.depot);
+    text("depotCode",data.depot_code);
 
-      const j = data.commodities && data.commodities.jaggery ? data.commodities.jaggery : {};
-      const r = data.commodities && data.commodities.ragi ? data.commodities.ragi : {};
-      const rice = data.commodities && data.commodities.rice ? data.commodities.rice : {};
+    const j=(data.commodities&&data.commodities.jaggery)||{};
+    const r=(data.commodities&&data.commodities.ragi)||{};
+    const rice=(data.commodities&&data.commodities.rice)||{};
 
-      const jp = Number(j.packets || 0);
-      const rp = Number(r.packets || 0);
-      const rb = Number(rice.bags || 0);
-      const rkg = Number(rice.kg || rb * 25);
+    const jp=Number(j.packets||0);
+    const rp=Number(r.packets||0);
+    const rb=Number(rice.bags||0);
+    const jkg=jp;
+    const rkg=rp;
+    const kg=Number(rice.kg||rb*25);
 
-      $("jaggeryPackets").textContent = jp + (jp === 1 ? " Packet" : " Packets");
-      $("jaggeryKg").textContent = jp + " KG";
+    $("jPackets").textContent=jp+" "+(jp===1?"Packet":"Packets");
+    $("rPackets").textContent=rp+" "+(rp===1?"Packet":"Packets");
+    $("riceBags").textContent=rb+" "+(rb===1?"Bag":"Bags");
 
-      $("ragiPackets").textContent = rp + (rp === 1 ? " Packet" : " Packets");
-      $("ragiKg").textContent = rp + " KG";
+    $("jKg").textContent=jkg+" KG";
+    $("rKg").textContent=rkg+" KG";
+    $("riceKg").textContent=kg+" KG";
 
-      $("riceBags").textContent = rb + (rb === 1 ? " Bag" : " Bags");
-      $("riceKg").textContent = rkg + " KG";
-
-      $("result").style.display = "block";
-      showStatus("October 2026 data found successfully.", "success");
-    })
-    .catch(err => {
-      showStatus(err.message || "Unable to retrieve school data.", "error");
-    })
-    .finally(() => {
-      btn.disabled = false;
-      btn.textContent = "CHECK";
-    });
+    $("status").style.display="block";
+    $("result").style.display="block";
+    msg("October 2026 data found successfully.","ok");
+  })
+  .catch(e=>{
+    msg(e.message||"Unable to retrieve school data.","error");
+  })
+  .finally(()=>{
+    btn.disabled=false;
+    btn.textContent="🔎 Check MDM Data";
+  });
 }
 
 function resetChecker(){
-  $("schoolCode").value = "";
-  $("result").style.display = "none";
-  clearStatus();
+  $("schoolCode").value="";
+  $("message").style.display="none";
+  $("status").style.display="none";
+  $("result").style.display="none";
   $("schoolCode").focus();
 }
 
-$("schoolCode").addEventListener("keydown", function(e){
-  if(e.key === "Enter") searchSchool();
+$("schoolCode").addEventListener("keydown",e=>{
+  if(e.key==="Enter") searchSchool();
 });
 </script>
-
 </body>
 </html>
