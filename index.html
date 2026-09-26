@@ -2,1273 +2,211 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AP SCM MDM School Wise Data Checker | TeachersBook.in</title>
-
-<meta name="description"
-      content="Check AP SCM MDM school-wise monthly allocation details including Rice, Jaggery and Ragi.">
+<meta name="description" content="Check AP SCM MDM school-wise monthly allocation details for Rice, Jaggery and Ragi.">
 
 <style>
-
-/* =========================================================
-   MAIN
-========================================================= */
-
-*{
-  box-sizing:border-box;
-}
-
+*{box-sizing:border-box}
 body{
   margin:0;
-  padding:20px 10px;
-  background:
-    radial-gradient(circle at top left,#e8f5ff 0,#ffffff 35%),
-    linear-gradient(135deg,#ffffff,#f5fbff);
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
-  color:#12305a;
+  padding:14px 8px;
+  background:linear-gradient(135deg,#f5fbff,#fff);
+  font-family:Arial,Helvetica,sans-serif;
+  color:#173b62;
 }
-
-
-/* =========================================================
-   MAIN CONTAINER
-========================================================= */
-
-.wrapper{
-
-  width:100%;
-  max-width:1050px;
-
-  margin:0 auto;
-
-}
-
-
-/* =========================================================
-   HEADER
-========================================================= */
+.wrapper{width:100%;max-width:900px;margin:auto}
 
 .header{
-
+  background:#fff;
+  border:1.5px solid #d4e7f8;
+  border-radius:16px;
+  padding:13px 16px 12px;
+  box-shadow:0 5px 18px rgba(20,80,150,.08);
   position:relative;
-
-  background:#ffffff;
-
-  border:2px solid #d7eaff;
-
-  border-radius:22px;
-
-  padding:18px 22px 15px;
-
-  box-shadow:
-    0 8px 28px rgba(20,80,150,.10);
-
   overflow:hidden;
-
 }
-
 .header:before{
-
-  content:"";
-
-  position:absolute;
-
-  top:0;
-  left:0;
-  right:0;
-
-  height:6px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #ff3b30,
-      #ffb000,
-      #16c172,
-      #168cff,
-      #7b42ff
-    );
-
+  content:"";position:absolute;left:0;right:0;top:0;height:4px;
+  background:linear-gradient(90deg,#ff3030,#ffae00,#10b967,#168cff,#7540e8);
 }
-
-.brand{
-
-  text-align:center;
-
-  font-size:17px;
-
-  font-weight:800;
-
-  letter-spacing:.3px;
-
-  color:#1464d2;
-
-}
-
+.brand{text-align:center;font-size:15px;font-weight:900;color:#1464d2}
 .title{
-
-  text-align:center;
-
-  margin:6px 0 4px;
-
-  font-size:27px;
-
-  font-weight:900;
-
-  line-height:1.15;
-
-  background:
-    linear-gradient(
-      90deg,
-      #075fd5,
-      #6937e8,
-      #087adf
-    );
-
-  -webkit-background-clip:text;
-  background-clip:text;
-
-  color:transparent;
-
+  text-align:center;margin:4px 0 3px;font-size:23px;font-weight:900;
+  background:linear-gradient(90deg,#075fd5,#6937e8,#087adf);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
 }
-
-.subtitle{
-
-  text-align:center;
-
-  font-size:13px;
-
-  font-weight:700;
-
-  color:#607895;
-
-}
-
-
-/* =========================================================
-   SEARCH PANEL
-========================================================= */
+.subtitle{text-align:center;font-size:11px;font-weight:700;color:#6b8199}
 
 .search-panel{
-
-  margin-top:15px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #f0f9ff,
-      #ffffff
-    );
-
-  border:1px solid #b8ddff;
-
-  border-radius:18px;
-
-  padding:15px;
-
+  margin-top:10px;padding:11px;
+  background:#f5fbff;border:1px solid #c9e3f8;border-radius:13px;
 }
-
 .search-grid{
-
   display:grid;
-
-  grid-template-columns:
-    1.5fr
-    .8fr
-    .65fr
-    1.05fr;
-
-  gap:12px;
-
-  align-items:end;
-
+  grid-template-columns:1.8fr .75fr .65fr .9fr;
+  gap:8px;align-items:end;
 }
-
-.field label{
-
-  display:block;
-
-  font-size:12px;
-
-  font-weight:800;
-
-  margin-bottom:6px;
-
-  color:#24548c;
-
-}
-
-input,
-select{
-
-  width:100%;
-
-  height:44px;
-
-  border:1.5px solid #c6d9ee;
-
-  border-radius:11px;
-
-  background:#ffffff;
-
-  padding:0 12px;
-
-  font-size:14px;
-
-  font-weight:700;
-
-  color:#183a63;
-
+.field label{display:block;font-size:11px;font-weight:800;color:#315b86;margin-bottom:4px}
+input,select{
+  width:100%;height:40px;border:1.3px solid #c7d9eb;border-radius:9px;
+  background:#fff;padding:0 10px;font-size:13px;font-weight:700;color:#183a63;
   outline:none;
-
-  transition:.2s;
-
 }
-
-input:focus,
-select:focus{
-
-  border-color:#2186ee;
-
-  box-shadow:
-    0 0 0 3px rgba(33,134,238,.10);
-
-}
-
+input:focus,select:focus{border-color:#2186ee;box-shadow:0 0 0 3px rgba(33,134,238,.09)}
 .search-btn{
-
-  height:44px;
-
-  border:0;
-
-  border-radius:11px;
-
-  cursor:pointer;
-
-  color:#ffffff;
-
-  font-size:14px;
-
-  font-weight:900;
-
-  background:
-    linear-gradient(
-      100deg,
-      #008cff,
-      #5645ef,
-      #8b32e9
-    );
-
-  box-shadow:
-    0 7px 17px rgba(69,76,230,.23);
-
-  transition:.2s;
-
+  height:40px;border:0;border-radius:9px;cursor:pointer;color:#fff;
+  font-size:13px;font-weight:900;
+  background:linear-gradient(100deg,#008cff,#5645ef,#8b32e9);
+  box-shadow:0 5px 13px rgba(69,76,230,.2);
 }
+.search-btn:disabled{opacity:.65;cursor:wait}
 
-.search-btn:hover{
-
-  transform:translateY(-2px);
-
-  box-shadow:
-    0 10px 22px rgba(69,76,230,.30);
-
+.loading,.message{
+  display:none;margin-top:10px;padding:10px;border-radius:10px;text-align:center;
+  font-size:12px;font-weight:800;
 }
-
-.search-btn:active{
-
-  transform:scale(.98);
-
-}
-
-
-/* =========================================================
-   LOADING
-========================================================= */
-
-.loading{
-
-  display:none;
-
-  margin:14px 0;
-
-  padding:11px;
-
-  text-align:center;
-
-  border-radius:12px;
-
-  background:#eef7ff;
-
-  color:#1769c2;
-
-  font-size:13px;
-
-  font-weight:800;
-
-}
-
+.loading{background:#eef7ff;color:#1769c2}
+.message.error{background:#fff1f1;border:1px solid #ffcaca;color:#b42323}
+.message.nodata{background:#fff8e7;border:1px solid #ffd77b;color:#865600}
 .spinner{
-
-  display:inline-block;
-
-  width:16px;
-  height:16px;
-
-  border:3px solid #b9dfff;
-
-  border-top-color:#1678dc;
-
-  border-radius:50%;
-
-  vertical-align:middle;
-
-  margin-right:7px;
-
+  display:inline-block;width:14px;height:14px;border:2.5px solid #b9dfff;
+  border-top-color:#1678dc;border-radius:50%;vertical-align:-3px;margin-right:6px;
   animation:spin .8s linear infinite;
-
 }
-
-@keyframes spin{
-
-  to{
-    transform:rotate(360deg);
-  }
-
-}
-
-
-/* =========================================================
-   ERROR / INFO
-========================================================= */
-
-.message{
-
-  display:none;
-
-  margin-top:14px;
-
-  padding:15px;
-
-  border-radius:14px;
-
-  text-align:center;
-
-  font-size:13px;
-
-  font-weight:700;
-
-}
-
-.message.error{
-
-  background:#fff1f1;
-
-  border:1px solid #ffcaca;
-
-  color:#b42323;
-
-}
-
-.message.nodata{
-
-  background:#fff8e7;
-
-  border:1px solid #ffd77b;
-
-  color:#865600;
-
-}
-
-
-/* =========================================================
-   RESULT
-========================================================= */
+@keyframes spin{to{transform:rotate(360deg)}}
 
 .result{
-
-  display:none;
-
-  margin-top:17px;
-
-  background:#ffffff;
-
-  border:1.5px solid #c9e8dc;
-
-  border-radius:22px;
-
-  overflow:hidden;
-
-  box-shadow:
-    0 10px 30px rgba(28,105,83,.10);
-
+  display:none;margin-top:11px;background:#fff;border:1.5px solid #c9e8dc;
+  border-radius:16px;overflow:hidden;box-shadow:0 7px 22px rgba(28,105,83,.09);
 }
-
-
-/* =========================================================
-   RESULT HEADER
-========================================================= */
-
 .result-head{
-
-  position:relative;
-
-  padding:14px 17px;
-
-  background:
-    linear-gradient(
-      105deg,
-      #087f5b,
-      #12a76e
-    );
-
-  color:#ffffff;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  gap:10px;
-
+  padding:10px 13px;background:linear-gradient(105deg,#087f5b,#12a76e);
+  color:#fff;display:flex;align-items:center;justify-content:space-between;gap:8px;
 }
-
-.result-head-left{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:10px;
-
-}
-
+.result-head-left{display:flex;align-items:center;gap:8px}
 .success-icon{
-
-  width:38px;
-  height:38px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  border-radius:50%;
-
-  background:#ffffff;
-
-  color:#0b9b67;
-
-  font-size:23px;
-
-  font-weight:900;
-
+  width:31px;height:31px;display:flex;align-items:center;justify-content:center;
+  border-radius:50%;background:#fff;color:#0b9b67;font-size:19px;font-weight:900;
 }
-
-.result-title{
-
-  font-size:21px;
-
-  font-weight:900;
-
-}
-
+.result-title{font-size:17px;font-weight:900}
 .result-date{
-
-  padding:8px 12px;
-
-  border-radius:20px;
-
-  background:rgba(255,255,255,.16);
-
-  border:1px solid rgba(255,255,255,.35);
-
-  font-size:12px;
-
-  font-weight:900;
-
+  padding:6px 9px;border-radius:16px;background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.35);font-size:11px;font-weight:900;
 }
-
-
-/* =========================================================
-   RESULT BODY
-========================================================= */
-
-.result-body{
-
-  padding:15px;
-
-}
-
-
-/* =========================================================
-   SCHOOL + COMMODITIES
-========================================================= */
+.result-body{padding:11px}
 
 .top-results{
-
-  display:grid;
-
-  grid-template-columns:
-    1.2fr
-    .85fr
-    .85fr
-    .85fr;
-
-  gap:11px;
-
+  display:grid;grid-template-columns:1.45fr .8fr .8fr .8fr;gap:8px;
 }
-
-
-/* =========================================================
-   SCHOOL CARD
-========================================================= */
-
+.school-card,.commodity{
+  min-height:145px;border-radius:13px;padding:11px;
+}
 .school-card{
-
-  min-height:178px;
-
-  border-radius:16px;
-
-  padding:15px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #eef8ff,
-      #ffffff
-    );
-
+  background:linear-gradient(145deg,#eef8ff,#fff);
   border:1px solid #c9e6ff;
-
 }
-
-.school-name{
-
-  font-size:20px;
-
-  font-weight:900;
-
-  color:#1459ad;
-
-  margin-bottom:12px;
-
-  line-height:1.15;
-
-}
-
+.school-name{font-size:17px;font-weight:900;color:#1459ad;margin-bottom:8px;line-height:1.15}
 .school-line{
-
-  display:grid;
-
-  grid-template-columns:95px 10px 1fr;
-
-  gap:3px;
-
-  margin:7px 0;
-
-  font-size:12px;
-
+  display:grid;grid-template-columns:78px 7px 1fr;gap:2px;margin:5px 0;font-size:11px;
 }
+.school-line b{color:#54718f}
+.school-line span{color:#183b62;font-weight:800;word-break:break-word}
 
-.school-line b{
-
-  color:#54718f;
-
-}
-
-.school-line span{
-
-  color:#183b62;
-
-  font-weight:800;
-
-  word-break:break-word;
-
-}
-
-
-/* =========================================================
-   COMMODITY CARDS
-========================================================= */
-
-.commodity{
-
-  min-height:178px;
-
-  border-radius:16px;
-
-  padding:13px;
-
-  text-align:center;
-
-  position:relative;
-
-  overflow:hidden;
-
-}
-
-.commodity:after{
-
-  content:"";
-
-  position:absolute;
-
-  width:90px;
-  height:90px;
-
-  right:-45px;
-  bottom:-45px;
-
-  border-radius:50%;
-
-  opacity:.10;
-
-}
-
-.jaggery{
-
-  background:
-    linear-gradient(
-      145deg,
-      #fff9e8,
-      #fff3c7
-    );
-
-  border:1px solid #ffd36a;
-
-}
-
-.jaggery:after{
-  background:#ff9d00;
-}
-
-.ragi{
-
-  background:
-    linear-gradient(
-      145deg,
-      #effff4,
-      #dcfae7
-    );
-
-  border:1px solid #8ce0aa;
-
-}
-
-.ragi:after{
-  background:#11a95c;
-}
-
-.rice{
-
-  background:
-    linear-gradient(
-      145deg,
-      #eef8ff,
-      #dff4ff
-    );
-
-  border:1px solid #81d3f7;
-
-}
-
-.rice:after{
-  background:#087ff0;
-}
-
+.commodity{text-align:center;position:relative;overflow:hidden}
+.jaggery{background:linear-gradient(145deg,#fff9e8,#fff3c7);border:1px solid #ffd36a}
+.ragi{background:linear-gradient(145deg,#effff4,#dcfae7);border:1px solid #8ce0aa}
+.rice{background:linear-gradient(145deg,#eef8ff,#dff4ff);border:1px solid #81d3f7}
 .commodity-icon{
-
-  width:48px;
-  height:48px;
-
-  margin:0 auto 8px;
-
-  border-radius:50%;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  font-size:24px;
-
-  background:#ffffff;
-
-  box-shadow:
-    0 4px 12px rgba(0,0,0,.08);
-
+  width:40px;height:40px;margin:0 auto 7px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:21px;
+  background:#fff;box-shadow:0 3px 9px rgba(0,0,0,.07);
 }
-
-.commodity-name{
-
-  font-size:13px;
-
-  font-weight:900;
-
-  line-height:1.2;
-
-}
-
-.jaggery .commodity-name{
-  color:#d87a00;
-}
-
-.ragi .commodity-name{
-  color:#087f3e;
-}
-
-.rice .commodity-name{
-  color:#0866d6;
-}
-
+.commodity-name{font-size:12px;font-weight:900;line-height:1.2}
+.jaggery .commodity-name{color:#d87a00}
+.ragi .commodity-name{color:#087f3e}
+.rice .commodity-name{color:#0866d6}
 .quantity{
-
-  display:inline-block;
-
-  margin-top:9px;
-
-  padding:7px 12px;
-
-  border-radius:20px;
-
-  color:#ffffff;
-
-  font-size:14px;
-
-  font-weight:900;
-
+  display:inline-block;margin-top:8px;padding:6px 9px;border-radius:18px;
+  color:#fff;font-size:12px;font-weight:900;
 }
-
-.jaggery .quantity{
-  background:#f39800;
-}
-
-.ragi .quantity{
-  background:#0ca653;
-}
-
-.rice .quantity{
-  background:#0878e8;
-}
-
+.jaggery .quantity{background:#f39800}
+.ragi .quantity{background:#0ca653}
+.rice .quantity{background:#0878e8}
 .weight{
-
-  margin-top:8px;
-
-  padding:7px;
-
-  border-radius:9px;
-
-  background:rgba(255,255,255,.65);
-
-  font-size:11px;
-
-  font-weight:800;
-
-  color:#48647e;
-
+  margin-top:7px;padding:5px;border-radius:8px;background:rgba(255,255,255,.65);
+  font-size:10px;font-weight:800;color:#48647e;
 }
-
-.weight strong{
-
-  display:block;
-
-  font-size:16px;
-
-  color:#173d67;
-
-  margin-top:2px;
-
-}
-
-
-/* =========================================================
-   STATUS
-========================================================= */
+.weight strong{display:block;font-size:14px;color:#173d67;margin-top:1px}
 
 .status-card{
-
-  margin-top:12px;
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  padding:10px 13px;
-
-  background:#f6f9ff;
-
-  border:1px solid #dbe6f5;
-
-  border-radius:12px;
-
-  font-size:12px;
-
-}
-
-.status-left{
-
-  color:#526b86;
-
-  font-weight:800;
-
-}
-
-.status-right{
-
-  color:#ffffff;
-
-  background:#09a968;
-
-  padding:5px 12px;
-
-  border-radius:20px;
-
-  font-weight:900;
-
-}
-
-
-/* =========================================================
-   TABLE
-========================================================= */
-
-.table-wrap{
-
-  margin-top:13px;
-
-  overflow-x:auto;
-
-  border-radius:14px;
-
-  border:1px solid #cfe0ef;
-
-}
-
-table{
-
-  width:100%;
-
-  min-width:620px;
-
-  border-collapse:collapse;
-
-  font-size:12px;
-
-}
-
-thead th{
-
-  background:
-    linear-gradient(
-      100deg,
-      #1265c9,
-      #247fe0
-    );
-
-  color:#ffffff;
-
-  padding:10px 8px;
-
-  text-align:center;
-
-  font-weight:900;
-
-}
-
-tbody td{
-
-  padding:9px 8px;
-
-  border-bottom:1px solid #e1ebf5;
-
-  text-align:center;
-
-  font-weight:800;
-
-  color:#20466d;
-
-}
-
-tbody tr:last-child td{
-
-  border-bottom:0;
-
-}
-
-tbody td:first-child{
-
-  text-align:left;
-
-}
-
-tbody tr:nth-child(1){
-
-  background:#fffaf0;
-
-}
-
-tbody tr:nth-child(2){
-
-  background:#f2fff6;
-
-}
-
-tbody tr:nth-child(3){
-
-  background:#f1f9ff;
-
-}
-
-
-/* =========================================================
-   BUTTONS
-========================================================= */
-
-.actions{
-
-  display:flex;
-
-  justify-content:center;
-
-  gap:9px;
-
-  margin-top:14px;
-
-  flex-wrap:wrap;
-
-}
-
-.action-btn{
-
-  border:0;
-
-  border-radius:9px;
-
-  padding:9px 15px;
-
-  font-size:12px;
-
-  font-weight:900;
-
-  cursor:pointer;
-
-  transition:.2s;
-
-}
-
-.print-btn{
-
-  color:#ffffff;
-
-  background:#146dcc;
-
-}
-
-.again-btn{
-
-  color:#ffffff;
-
-  background:#69798d;
-
-}
-
-.action-btn:hover{
-
-  transform:translateY(-1px);
-
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-.footer{
-
-  text-align:center;
-
-  margin:15px 0 5px;
-
-  color:#70849a;
-
+  margin-top:9px;display:flex;justify-content:space-between;align-items:center;
+  padding:8px 10px;background:#f6f9ff;border:1px solid #dbe6f5;border-radius:10px;
   font-size:11px;
-
-  line-height:1.5;
-
 }
+.status-left{color:#526b86;font-weight:800}
+.status-right{color:#fff;background:#09a968;padding:4px 9px;border-radius:16px;font-weight:900}
 
-.footer strong{
-
-  color:#1766c5;
-
+.actions{display:flex;justify-content:center;gap:7px;margin-top:10px;flex-wrap:wrap}
+.action-btn{
+  border:0;border-radius:8px;padding:7px 12px;font-size:11px;font-weight:900;
+  cursor:pointer;color:#fff;
 }
+.print-btn{background:#146dcc}.again-btn{background:#69798d}
+.action-btn:hover{transform:translateY(-1px)}
 
-.disclaimer{
+.footer{text-align:center;margin:10px 0 3px;color:#70849a;font-size:10px;line-height:1.4}
+.footer strong{color:#1766c5}
+.disclaimer{margin-top:3px;font-size:9px;color:#8494a5}
 
-  margin-top:5px;
-
-  font-size:10px;
-
-  color:#8494a5;
-
+@media(max-width:720px){
+  .search-grid{grid-template-columns:1fr 1fr}
+  .search-grid .field:first-child{grid-column:1/-1}
+  .search-grid .search-btn{grid-column:1/-1}
+  .top-results{grid-template-columns:1fr 1fr}
+  .school-card{grid-column:1/-1}
 }
-
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media(max-width:850px){
-
-  .search-grid{
-
-    grid-template-columns:
-      1fr 1fr;
-
-  }
-
-  .search-grid .field:first-child{
-
-    grid-column:1 / -1;
-
-  }
-
-  .search-grid .search-btn{
-
-    grid-column:1 / -1;
-
-  }
-
-  .top-results{
-
-    grid-template-columns:
-      1fr 1fr;
-
-  }
-
-  .school-card{
-
-    grid-column:1 / -1;
-
-  }
-
+@media(max-width:480px){
+  body{padding:7px 5px}
+  .header{padding:12px 10px}
+  .title{font-size:19px}
+  .search-grid{grid-template-columns:1fr}
+  .search-grid .field:first-child,.search-grid .search-btn{grid-column:auto}
+  .top-results{grid-template-columns:1fr}
+  .school-card{grid-column:auto}
+  .result-head{align-items:flex-start;flex-direction:column}
+  .result-date{margin-left:39px}
 }
-
-@media(max-width:560px){
-
-  body{
-
-    padding:9px 6px;
-
-  }
-
-  .header{
-
-    padding:15px 12px 13px;
-
-    border-radius:17px;
-
-  }
-
-  .brand{
-
-    font-size:14px;
-
-  }
-
-  .title{
-
-    font-size:21px;
-
-  }
-
-  .subtitle{
-
-    font-size:11px;
-
-  }
-
-  .search-panel{
-
-    padding:11px;
-
-    border-radius:15px;
-
-  }
-
-  .search-grid{
-
-    grid-template-columns:1fr;
-
-    gap:9px;
-
-  }
-
-  .search-grid .field:first-child{
-
-    grid-column:auto;
-
-  }
-
-  .search-grid .search-btn{
-
-    grid-column:auto;
-
-  }
-
-  .top-results{
-
-    grid-template-columns:1fr;
-
-  }
-
-  .school-card{
-
-    grid-column:auto;
-
-  }
-
-  .result-head{
-
-    align-items:flex-start;
-
-    flex-direction:column;
-
-  }
-
-  .result-date{
-
-    margin-left:48px;
-
-  }
-
-  .result-title{
-
-    font-size:18px;
-
-  }
-
-  .result-body{
-
-    padding:10px;
-
-  }
-
-}
-
-
-/* =========================================================
-   PRINT
-========================================================= */
 
 @media print{
-
-  body{
-
-    background:#ffffff;
-
-    padding:0;
-
-  }
-
-  .header,
-  .search-panel,
-  .loading,
-  .message,
-  .actions,
-  .footer{
-
-    display:none !important;
-
-  }
-
-  .wrapper{
-
-    max-width:none;
-
-  }
-
-  .result{
-
-    display:block !important;
-
-    margin:0;
-
-    border:1px solid #aaa;
-
-    box-shadow:none;
-
-  }
-
+  body{background:#fff;padding:0}
+  .header,.search-panel,.loading,.message,.actions,.footer{display:none!important}
+  .wrapper{max-width:none}
+  .result{display:block!important;margin:0;border:1px solid #aaa;box-shadow:none}
 }
-
 </style>
 </head>
 
-
 <body>
-
 <div class="wrapper">
 
-  <!-- HEADER -->
-
   <div class="header">
-
-    <div class="brand">
-      TeachersBook.in
-    </div>
-
-    <div class="title">
-      AP SCM MDM
-      <br>
-      School Wise Data Checker
-    </div>
-
-    <div class="subtitle">
-      Check monthly MDM allocation details for your school
-    </div>
-
+    <div class="brand">TeachersBook.in</div>
+    <div class="title">AP SCM MDM<br>School Wise Data Checker</div>
+    <div class="subtitle">Check monthly MDM allocation details for your school</div>
   </div>
 
-
-  <!-- SEARCH -->
-
   <div class="search-panel">
-
     <div class="search-grid">
 
       <div class="field">
-
         <label>🏫 School / UDISE Code</label>
-
-        <input
-          type="text"
-          id="school"
-          placeholder="Enter school code"
-          inputmode="numeric"
-        >
-
+        <input type="text" id="school" placeholder="Enter school code" inputmode="numeric">
       </div>
 
-
       <div class="field">
-
         <label>📅 Month</label>
-
         <select id="month">
-
           <option value="1">January</option>
           <option value="2">February</option>
           <option value="3">March</option>
@@ -1276,1060 +214,315 @@ tbody tr:nth-child(3){
           <option value="5">May</option>
           <option value="6">June</option>
           <option value="7">July</option>
-
-          <option value="8" selected>
-            August
-          </option>
-
-          <option value="9">
-            September
-          </option>
-
-          <option value="10">
-            October
-          </option>
-
-          <option value="11">
-            November
-          </option>
-
-          <option value="12">
-            December
-          </option>
-
+          <option value="8">August</option>
+          <option value="9" selected>September</option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
         </select>
-
       </div>
-
 
       <div class="field">
-
         <label>📆 Year</label>
-
         <select id="year">
-
-          <option value="2026" selected>
-            2026
-          </option>
-
-          <option value="2025">
-            2025
-          </option>
-
+          <option value="2026" selected>2026</option>
+          <option value="2025">2025</option>
         </select>
-
       </div>
 
-
-      <button
-        class="search-btn"
-        id="searchBtn"
-        onclick="searchData()"
-      >
-        🔎 Check MDM Data
-      </button>
+      <button class="search-btn" id="searchBtn" onclick="searchData()">🔎 Check MDM Data</button>
 
     </div>
-
   </div>
 
-
-  <!-- LOADING -->
-
-  <div
-    class="loading"
-    id="loading"
-  >
-
-    <span class="spinner"></span>
-
-    Checking official SCM data...
-
+  <div class="loading" id="loading">
+    <span class="spinner"></span> Checking official SCM data...
   </div>
 
+  <div class="message error" id="errorBox"></div>
+  <div class="message nodata" id="noDataBox"></div>
 
-  <!-- MESSAGE -->
-
-  <div
-    class="message error"
-    id="errorBox"
-  ></div>
-
-
-  <div
-    class="message nodata"
-    id="noDataBox"
-  ></div>
-
-
-  <!-- RESULT -->
-
-  <div
-    class="result"
-    id="result"
-  >
+  <div class="result" id="result">
 
     <div class="result-head">
-
       <div class="result-head-left">
-
-        <div class="success-icon">
-          ✓
-        </div>
-
-        <div class="result-title">
-          Data Found!
-        </div>
-
+        <div class="success-icon">✓</div>
+        <div class="result-title">MDM Data Found</div>
       </div>
-
-      <div
-        class="result-date"
-        id="resultDate"
-      >
-        —
-      </div>
-
+      <div class="result-date" id="resultDate">—</div>
     </div>
-
 
     <div class="result-body">
 
-
-      <!-- TOP RESULT CARDS -->
-
       <div class="top-results">
 
-
-        <!-- SCHOOL -->
-
         <div class="school-card">
-
-          <div
-            class="school-name"
-            id="schoolName"
-          >
-            —
-          </div>
+          <div class="school-name" id="schoolName">—</div>
 
           <div class="school-line">
-
-            <b>School Code</b>
-            <span>:</span>
-            <span id="schoolCode">—</span>
-
+            <b>School Code</b><span>:</span><span id="schoolCode">—</span>
           </div>
-
           <div class="school-line">
-
-            <b>District</b>
-            <span>:</span>
-            <span id="district">—</span>
-
+            <b>District</b><span>:</span><span id="district">—</span>
           </div>
-
           <div class="school-line">
-
-            <b>District Code</b>
-            <span>:</span>
-            <span id="districtCode">—</span>
-
+            <b>District Code</b><span>:</span><span id="districtCode">—</span>
           </div>
-
           <div class="school-line">
-
-            <b>Depot</b>
-            <span>:</span>
-            <span id="depot">—</span>
-
+            <b>Depot</b><span>:</span><span id="depot">—</span>
           </div>
-
           <div class="school-line">
-
-            <b>Depot Code</b>
-            <span>:</span>
-            <span id="depotCode">—</span>
-
+            <b>Depot Code</b><span>:</span><span id="depotCode">—</span>
           </div>
-
         </div>
-
-
-        <!-- JAGGERY -->
 
         <div class="commodity jaggery">
-
-          <div class="commodity-icon">
-            🍯
-          </div>
-
-          <div class="commodity-name">
-            Jaggery<br>
-            1 Kg
-          </div>
-
-          <div
-            class="quantity"
-            id="jaggeryQty"
-          >
-            0 Packets
-          </div>
-
-          <div class="weight">
-
-            Total Weight
-
-            <strong
-              id="jaggeryWeight"
-            >
-              0 KG
-            </strong>
-
-          </div>
-
+          <div class="commodity-icon">🍯</div>
+          <div class="commodity-name">Jaggery<br>1 Kg</div>
+          <div class="quantity" id="jaggeryQty">0 Packets</div>
+          <div class="weight">Total Weight<strong id="jaggeryWeight">0 KG</strong></div>
         </div>
-
-
-        <!-- RAGI -->
 
         <div class="commodity ragi">
-
-          <div class="commodity-icon">
-            🥣
-          </div>
-
-          <div class="commodity-name">
-            Ragi Powder<br>
-            1 Kg
-          </div>
-
-          <div
-            class="quantity"
-            id="ragiQty"
-          >
-            0 Packets
-          </div>
-
-          <div class="weight">
-
-            Total Weight
-
-            <strong
-              id="ragiWeight"
-            >
-              0 KG
-            </strong>
-
-          </div>
-
+          <div class="commodity-icon">🥣</div>
+          <div class="commodity-name">Ragi Powder<br>1 Kg</div>
+          <div class="quantity" id="ragiQty">0 Packets</div>
+          <div class="weight">Total Weight<strong id="ragiWeight">0 KG</strong></div>
         </div>
-
-
-        <!-- RICE -->
 
         <div class="commodity rice">
-
-          <div class="commodity-icon">
-            🍚
-          </div>
-
-          <div class="commodity-name">
-            F Fine Rice<br>
-            25 Kg
-          </div>
-
-          <div
-            class="quantity"
-            id="riceQty"
-          >
-            0 Bags
-          </div>
-
-          <div class="weight">
-
-            Total Weight
-
-            <strong
-              id="riceWeight"
-            >
-              0 KG
-            </strong>
-
-          </div>
-
+          <div class="commodity-icon">🍚</div>
+          <div class="commodity-name">F Fine Rice<br>25 Kg</div>
+          <div class="quantity" id="riceQty">0 Bags</div>
+          <div class="weight">Total Weight<strong id="riceWeight">0 KG</strong></div>
         </div>
 
-
       </div>
-
-
-      <!-- STATUS -->
 
       <div class="status-card">
-
-        <div class="status-left">
-
-          Official SCM Status
-
-        </div>
-
-        <div
-          class="status-right"
-          id="status"
-        >
-          SUCCESS
-        </div>
-
+        <div class="status-left">Official SCM Status</div>
+        <div class="status-right" id="status">SUCCESS</div>
       </div>
-
-
-      <!-- TABLE -->
-
-      <div class="table-wrap">
-
-        <table>
-
-          <thead>
-
-            <tr>
-
-              <th>
-                Commodity
-              </th>
-
-              <th>
-                Allotted Qty
-              </th>
-
-              <th>
-                RO Qty
-              </th>
-
-              <th>
-                Dispatched Qty
-              </th>
-
-              <th>
-                Issued Qty
-              </th>
-
-            </tr>
-
-          </thead>
-
-
-          <tbody>
-
-            <tr>
-
-              <td>
-                🍯 Jaggery 1 Kg
-              </td>
-
-              <td id="aqJ">
-                0
-              </td>
-
-              <td id="roJ">
-                0
-              </td>
-
-              <td id="dispJ">
-                0
-              </td>
-
-              <td id="issuedJ">
-                0
-              </td>
-
-            </tr>
-
-
-            <tr>
-
-              <td>
-                🥣 Ragi Powder 1 Kg
-              </td>
-
-              <td id="aqR">
-                0
-              </td>
-
-              <td id="roR">
-                0
-              </td>
-
-              <td id="dispR">
-                0
-              </td>
-
-              <td id="issuedR">
-                0
-              </td>
-
-            </tr>
-
-
-            <tr>
-
-              <td>
-                🍚 F Fine Rice 25 Kg
-              </td>
-
-              <td id="aqRice">
-                0
-              </td>
-
-              <td id="roRice">
-                0
-              </td>
-
-              <td id="dispRice">
-                0
-              </td>
-
-              <td id="issuedRice">
-                0
-              </td>
-
-            </tr>
-
-          </tbody>
-
-        </table>
-
-      </div>
-
-
-      <!-- ACTIONS -->
 
       <div class="actions">
-
-        <button
-          class="action-btn print-btn"
-          onclick="window.print()"
-        >
-          🖨️ Print / PDF
-        </button>
-
-        <button
-          class="action-btn again-btn"
-          onclick="checkAnother()"
-        >
-          ↻ Check Another
-        </button>
-
+        <button class="action-btn print-btn" onclick="window.print()">🖨️ Print / PDF</button>
+        <button class="action-btn again-btn" onclick="checkAnother()">↻ Check Another</button>
       </div>
 
     </div>
-
   </div>
 
-
-  <!-- FOOTER -->
-
   <div class="footer">
-
-    <strong>AP SCM MDM</strong>
-    &nbsp;•&nbsp;
-    <strong>TeachersBook.in</strong>
-
+    <strong>AP SCM MDM</strong> • <strong>TeachersBook.in</strong>
     <div class="disclaimer">
-
-      Data is displayed from the official SCM system.
-      Availability may vary depending on the selected month.
-
+      Data is displayed from the official SCM system. Availability may vary depending on the selected month.
     </div>
-
   </div>
 
 </div>
 
-
 <script>
-
-/* =========================================================
-   APPS SCRIPT BACKEND
-========================================================= */
-
 const API_URL =
 "https://script.google.com/macros/s/AKfycbw3OiS5VGG3J40uGoSsQJrnwqyKN5veUOCe3vdG0AoqsMlsm36Ny-E0FEd2fX6QGvVIVA/exec";
 
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
 async function searchData(){
 
-  const school =
-    document.getElementById("school")
-      .value
-      .trim();
-
-  const month =
-    document.getElementById("month")
-      .value;
-
-  const year =
-    document.getElementById("year")
-      .value;
-
+  const school = document.getElementById("school").value.trim();
+  const month = document.getElementById("month").value;
+  const year = document.getElementById("year").value;
 
   hideMessages();
 
-
   if(!school){
-
-    showError(
-      "Please enter your School / UDISE Code."
-    );
-
+    showError("Please enter your School / UDISE Code.");
     return;
-
   }
 
+  if(!/^\d+$/.test(school)){
+    showError("Please enter a valid School / UDISE Code.");
+    return;
+  }
 
   showLoading(true);
 
-
   try{
 
-    const params =
-      new URLSearchParams({
+    const params = new URLSearchParams({
+      action:"search",
+      school:school,
+      month:month,
+      year:year
+    });
 
-        action:"search",
+    const response = await fetch(API_URL + "?" + params.toString(), {
+      method:"GET",
+      cache:"no-store"
+    });
 
-        school:school,
-
-        month:month,
-
-        year:year
-
-      });
-
-
-    const url =
-      API_URL +
-      "?" +
-      params.toString();
-
-
-    const response =
-      await fetch(url,{
-        method:"GET",
-        cache:"no-store"
-      });
-
-
-    const text =
-      await response.text();
-
+    const text = await response.text();
 
     let data;
 
-
     try{
-
-      data =
-        JSON.parse(text);
-
+      data = JSON.parse(text);
     }catch(e){
-
-      throw new Error(
-        "Invalid response received from the official SCM backend."
-      );
-
+      throw new Error("Invalid response received from the SCM backend.");
     }
-
 
     showLoading(false);
 
-
-    /* =====================================================
-       SUCCESS
-    ===================================================== */
-
     if(data.status === "SUCCESS"){
-
       displayResult(data);
-
       return;
-
     }
-
-
-    /* =====================================================
-       NO DATA
-    ===================================================== */
 
     if(data.status === "NO_DATA"){
-
-      document.getElementById(
-        "result"
-      ).style.display="none";
-
-
       showNoData(
-        "🟠 MDM data is not currently available in the official SCM system for " +
-        monthName(month) +
-        " " +
-        year +
-        ". Please check again later."
+        "🟠 MDM data is not currently available for " +
+        monthName(month) + " " + year + "."
       );
-
       return;
-
     }
 
-
-    /* =====================================================
-       NOT FOUND
-    ===================================================== */
-
-    if(data.status === "NOT_FOUND"){
-
-      document.getElementById(
-        "result"
-      ).style.display="none";
-
-
-      showError(
-        "School " +
-        school +
-        " was not found in the official SCM data for " +
-        monthName(month) +
-        " " +
-        year +
-        "."
-      );
-
-      return;
-
-    }
-
-
-    /* =====================================================
-       OTHER ERROR
-    ===================================================== */
-
-    showError(
-      data.message ||
-      "Unable to retrieve MDM data."
-    );
-
+    showError(data.message || "Unable to retrieve MDM data.");
 
   }catch(error){
 
     showLoading(false);
-
-    showError(
-      error.message ||
-      "Unable to connect to the SCM backend."
-    );
+    showError(error.message || "Unable to connect to the SCM backend.");
 
   }
-
 }
-
-
-/* =========================================================
-   DISPLAY RESULT
-========================================================= */
 
 function displayResult(data){
 
-  const allotment =
-    data.allotment || {};
+  const commodities = data.commodities || {};
 
+  document.getElementById("schoolName").textContent =
+    data.school_name || "School";
 
-  const commodities =
-    data.commodities || {};
+  document.getElementById("schoolCode").textContent =
+    data.school_code || "—";
 
+  document.getElementById("district").textContent =
+    data.district || "—";
 
-  /* School */
+  document.getElementById("districtCode").textContent =
+    data.district_code || "—";
 
-  document.getElementById(
-    "schoolName"
-  ).textContent =
-    data.school_name ||
-    "School";
+  document.getElementById("depot").textContent =
+    data.depot || "—";
 
+  document.getElementById("depotCode").textContent =
+    data.depot_code || "—";
 
-  document.getElementById(
-    "schoolCode"
-  ).textContent =
-    data.school_code ||
-    "—";
+  document.getElementById("resultDate").textContent =
+    monthName(data.month) + " " + data.year;
 
+  document.getElementById("status").textContent =
+    data.status || "SUCCESS";
 
-  document.getElementById(
-    "district"
-  ).textContent =
-    data.district ||
-    "—";
-
-
-  document.getElementById(
-    "districtCode"
-  ).textContent =
-    data.district_code ||
-    "—";
-
-
-  document.getElementById(
-    "depot"
-  ).textContent =
-    data.depot ||
-    "—";
-
-
-  document.getElementById(
-    "depotCode"
-  ).textContent =
-    data.depot_code ||
-    "—";
-
-
-  /* Date */
-
-  document.getElementById(
-    "resultDate"
-  ).textContent =
-    monthName(data.month) +
-    " " +
-    data.year;
-
-
-  /* Status */
-
-  document.getElementById(
-    "status"
-  ).textContent =
-    data.status ||
-    "SUCCESS";
-
-
-  /* =====================================================
-     COMMODITIES
-  ===================================================== */
-
-  const jaggery =
-    Number(
-      commodities.jaggery?.packets || 0
-    );
-
-
-  const ragi =
-    Number(
-      commodities.ragi?.packets || 0
-    );
-
-
-  const riceBags =
-    Number(
-      commodities.rice?.bags || 0
-    );
-
-
-  const riceKg =
-    Number(
-      commodities.rice?.kg ||
-      riceBags * 25
-    );
-
-
-  document.getElementById(
-    "jaggeryQty"
-  ).textContent =
-    jaggery +
-    " Packets";
-
-
-  document.getElementById(
-    "jaggeryWeight"
-  ).textContent =
-    jaggery +
-    " KG";
-
-
-  document.getElementById(
-    "ragiQty"
-  ).textContent =
-    ragi +
-    " Packets";
-
-
-  document.getElementById(
-    "ragiWeight"
-  ).textContent =
-    ragi +
-    " KG";
-
-
-  document.getElementById(
-    "riceQty"
-  ).textContent =
-    riceBags +
-    " Bags";
-
-
-  document.getElementById(
-    "riceWeight"
-  ).textContent =
-    riceKg +
-    " KG";
-
-
-  /* =====================================================
-     TABLE
-  ===================================================== */
-
-  setText(
-    "aqJ",
-    allotment.aq_181
+  const jaggery = Number(
+    commodities.jaggery?.packets || 0
   );
 
-  setText(
-    "roJ",
-    allotment.ro_181
+  const ragi = Number(
+    commodities.ragi?.packets || 0
   );
 
-  setText(
-    "dispJ",
-    allotment.disp_181
+  const riceBags = Number(
+    commodities.rice?.bags || 0
   );
 
-  setText(
-    "issuedJ",
-    allotment.rec_inst_181
+  const riceKg = Number(
+    commodities.rice?.kg || riceBags * 25
   );
 
+  document.getElementById("jaggeryQty").textContent =
+    jaggery + " Packets";
 
-  setText(
-    "aqR",
-    allotment.aq_301
-  );
+  document.getElementById("jaggeryWeight").textContent =
+    jaggery + " KG";
 
-  setText(
-    "roR",
-    allotment.ro_301
-  );
+  document.getElementById("ragiQty").textContent =
+    ragi + " Packets";
 
-  setText(
-    "dispR",
-    allotment.disp_301
-  );
+  document.getElementById("ragiWeight").textContent =
+    ragi + " KG";
 
-  setText(
-    "issuedR",
-    allotment.rec_inst_301
-  );
+  document.getElementById("riceQty").textContent =
+    riceBags + " Bags";
 
+  document.getElementById("riceWeight").textContent =
+    riceKg + " KG";
 
-  setText(
-    "aqRice",
-    allotment.aq_3825
-  );
+  document.getElementById("result").style.display = "block";
 
-  setText(
-    "roRice",
-    allotment.ro_3825
-  );
-
-  setText(
-    "dispRice",
-    allotment.disp_3825
-  );
-
-  setText(
-    "issuedRice",
-    allotment.rec_inst_3825
-  );
-
-
-  /* Show */
-
-  document.getElementById(
-    "result"
-  ).style.display="block";
-
-
-  document.getElementById(
-    "result"
-  ).scrollIntoView({
+  document.getElementById("result").scrollIntoView({
     behavior:"smooth",
     block:"start"
   });
-
 }
-
-
-/* =========================================================
-   HELPER
-========================================================= */
-
-function setText(id,value){
-
-  document.getElementById(id)
-    .textContent =
-    value !== undefined &&
-    value !== null
-      ? value
-      : 0;
-
-}
-
-
-/* =========================================================
-   MONTH NAME
-========================================================= */
 
 function monthName(month){
 
   const months = [
-
     "",
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-
+    "January","February","March","April","May","June",
+    "July","August","September","October","November","December"
   ];
 
-  return months[
-    Number(month)
-  ] || "";
-
+  return months[Number(month)] || "";
 }
-
-
-/* =========================================================
-   LOADING
-========================================================= */
 
 function showLoading(show){
 
-  document.getElementById(
-    "loading"
-  ).style.display =
+  document.getElementById("loading").style.display =
     show ? "block" : "none";
 
+  document.getElementById("searchBtn").disabled = show;
 }
-
-
-/* =========================================================
-   ERROR
-========================================================= */
 
 function showError(message){
 
-  const box =
-    document.getElementById(
-      "errorBox"
-    );
-
-  box.textContent =
-    "⚠️ " + message;
-
-  box.style.display="block";
-
+  const box = document.getElementById("errorBox");
+  box.textContent = "⚠️ " + message;
+  box.style.display = "block";
 }
-
-
-/* =========================================================
-   NO DATA
-========================================================= */
 
 function showNoData(message){
 
-  const box =
-    document.getElementById(
-      "noDataBox"
-    );
-
-  box.textContent =
-    message;
-
-  box.style.display="block";
-
+  const box = document.getElementById("noDataBox");
+  box.textContent = message;
+  box.style.display = "block";
 }
-
-
-/* =========================================================
-   HIDE MESSAGES
-========================================================= */
 
 function hideMessages(){
 
-  document.getElementById(
-    "errorBox"
-  ).style.display="none";
-
-
-  document.getElementById(
-    "noDataBox"
-  ).style.display="none";
-
-
-  document.getElementById(
-    "result"
-  ).style.display="none";
-
+  document.getElementById("errorBox").style.display = "none";
+  document.getElementById("noDataBox").style.display = "none";
+  document.getElementById("result").style.display = "none";
 }
-
-
-/* =========================================================
-   CHECK ANOTHER
-========================================================= */
 
 function checkAnother(){
 
-  document.getElementById(
-    "result"
-  ).style.display="none";
-
-
-  document.getElementById(
-    "school"
-  ).focus();
-
+  document.getElementById("result").style.display = "none";
+  document.getElementById("school").value = "";
+  document.getElementById("school").focus();
 
   window.scrollTo({
     top:0,
     behavior:"smooth"
   });
-
 }
 
+document.getElementById("school").addEventListener("keydown", function(event){
 
-/* =========================================================
-   ENTER KEY
-========================================================= */
-
-document.getElementById(
-  "school"
-).addEventListener(
-  "keydown",
-  function(event){
-
-    if(event.key === "Enter"){
-
-      searchData();
-
-    }
-
+  if(event.key === "Enter"){
+    searchData();
   }
-);
 
+});
 </script>
 
 </body>
